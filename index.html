@@ -748,21 +748,27 @@ function filterVideos() {
       (activeVType === 'แมลงปอ'  && type.includes('แมลงปอ'));
     return matchQ && matchT;
   }).sort(() => Math.random() - 0.5);
-  const total = filtered.length;
-  const shown = filtered.slice(0, 9);
-  document.getElementById('video-count').textContent = `แสดง ${shown.length} จาก ${total} วิดีโอ`;
-  renderVideos(shown);
+  const total = allVideoRows.length;
+
+  // pick 1 random from each type
+  function pickRandom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+  const free = allVideoRows.filter(r => { const t = (r['ใครดูได้บ้าง (สมาชิกระดับไหน / ฟรี)']||r['type']||'').toLowerCase(); return !t || t.includes('free') || t.includes('ฟรี'); });
+  const butterfly = allVideoRows.filter(r => { const t = r['ใครดูได้บ้าง (สมาชิกระดับไหน / ฟรี)']||r['type']||''; return t.includes('ผีเสื้อ') && !t.includes('แมลงปอ'); });
+  const dragonfly = allVideoRows.filter(r => { const t = r['ใครดูได้บ้าง (สมาชิกระดับไหน / ฟรี)']||r['type']||''; return t.includes('แมลงปอ'); });
+
+  const picks = [free.length ? pickRandom(free) : null, butterfly.length ? pickRandom(butterfly) : null, dragonfly.length ? pickRandom(dragonfly) : null].filter(Boolean);
+
+  document.getElementById('video-count').textContent = `ตัวอย่างวิดีโอ · ฟรี · ผีเสื้อ · แมลงปอ`;
+  renderVideos(picks);
 
   // see all link
   const existing = document.getElementById('see-all-link');
   if (existing) existing.remove();
-  if (total > 9) {
-    const link = document.createElement('div');
-    link.id = 'see-all-link';
-    link.style.cssText = 'text-align:center;padding:1.5rem 0 0';
-    link.innerHTML = `<a href="videos.html" style="font-size:13px;font-weight:500;color:#fb2a7b;text-decoration:none;border-bottom:0.5px solid #fb2a7b;padding-bottom:1px">ดูวิดีโอทั้งหมด ${total} คลิป ↗</a>`;
-    document.getElementById('video-gallery').after(link);
-  }
+  const link = document.createElement('div');
+  link.id = 'see-all-link';
+  link.style.cssText = 'text-align:center;padding:1.5rem 0 0';
+  link.innerHTML = `<a href="videos.html" style="font-size:13px;font-weight:500;color:#fb2a7b;text-decoration:none;border-bottom:0.5px solid #fb2a7b;padding-bottom:1px">ดูวิดีโอทั้งหมด ${total} คลิป ↗</a>`;
+  document.getElementById('video-gallery').after(link);
 }
 
 async function loadVideos() {
