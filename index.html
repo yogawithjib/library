@@ -30,7 +30,7 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:#fff;color:#0d0d0d;m
 
 /* ── HEADER ── */
 header{border-bottom:1.5px solid #0d0d0d;padding:1.25rem 1.5rem 1rem}
-.header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:1rem}
+.header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
 .site-label{font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:none;color:#fb2a7b;margin-bottom:5px}
 .site-title{font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1}
 .pink-bar{display:flex;align-items:center;gap:6px;margin-top:8px}
@@ -171,6 +171,19 @@ footer a:hover{text-decoration:underline}
   header .header-inner{flex-direction:column;align-items:flex-start}
   .site-meta{text-align:left}
 }
+
+/* easter egg */
+.egg-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center;flex-direction:column;gap:16px}
+.egg-overlay.show{display:flex}
+.egg-box{background:#fff;border-radius:4px;padding:2.5rem 2rem;text-align:center;max-width:320px;position:relative}
+.egg-title{font-size:22px;font-weight:600;letter-spacing:-.02em;margin-bottom:8px}
+.egg-sub{font-size:13px;font-weight:300;color:#888;line-height:1.75}
+.egg-close{margin-top:20px;padding:10px 28px;font-size:12px;font-weight:600;font-family:'IBM Plex Sans Thai',sans-serif;border:1px solid #0d0d0d;border-radius:2px;cursor:pointer;background:#0d0d0d;color:#fff;transition:all .12s}
+.egg-close:hover{background:#333}
+@keyframes monkey-bounce{0%{transform:translateY(0) rotate(-10deg)}100%{transform:translateY(-16px) rotate(10deg)}}
+@keyframes monkey-fly{0%{transform:translateX(0)}100%{transform:translateX(110vw)}}
+.egg-counter{position:fixed;bottom:1rem;right:1rem;font-size:10px;color:transparent;pointer-events:none}
+
 </style>
 </head>
 <body>
@@ -183,7 +196,7 @@ footer a:hover{text-decoration:underline}
       <div class="pink-bar"><span class="bar-long"></span><span class="bar-short"></span></div>
     </div>
     <div class="site-meta">
-      <span class="brand-name">Yoga with Jib</span>
+      <span class="brand-name" id="brand-name" onclick="easterEgg()" style="cursor:default;user-select:none">Yoga with Jib</span>
       community-sourced · living and evolving<br>
       <a href="https://youtube.com/yogawithjib" target="_blank">youtube.com/yogawithjib ↗</a>
     </div>
@@ -336,6 +349,16 @@ footer a:hover{text-decoration:underline}
       <div style="font-size:11px;font-weight:300;color:#999">แชทสดกับคอมมูนิตี้บน LINE</div>
       <div style="font-size:11px;color:#fb2a7b;margin-top:10px;font-weight:500">เข้าร่วม ↗</div>
     </a>
+  </div>
+</div>
+
+
+<div class="egg-overlay" id="egg-overlay" onclick="closeEgg()">
+  <div class="egg-box" onclick="event.stopPropagation()">
+    <div id="monkey-wrap" style="font-size:48px;margin-bottom:8px;display:flex;justify-content:center;gap:4px"></div>
+    <div class="egg-title">ซนเหมือนกันนะเรา</div>
+
+    <button class="egg-close" onclick="closeEgg()">ปิด</button>
   </div>
 </div>
 
@@ -551,6 +574,40 @@ function renderVotes() {
       </div>
     </div>`;
   }).join('');
+}
+
+/* ── EASTER EGG ── */
+let eggCount = 0, eggTimer = null;
+function easterEgg() {
+  eggCount++;
+  clearTimeout(eggTimer);
+  eggTimer = setTimeout(()=>{ eggCount = 0; }, 2000);
+  if (eggCount >= 7) {
+    eggCount = 0;
+    launchConfetti();
+    document.getElementById('egg-overlay').classList.add('show');
+  }
+}
+function closeEgg() {
+  document.getElementById('egg-overlay').classList.remove('show');
+}
+function launchConfetti() {
+  // 1 bouncing monkey in box
+  const wrap = document.getElementById('monkey-wrap');
+  wrap.innerHTML = '<span style="display:inline-block;font-size:52px;animation:monkey-bounce 0.4s ease-in-out infinite alternate">🐒</span>';
+  // 4 flying monkeys across screen
+  for (let i = 0; i < 10; i++) {
+    setTimeout(()=>{
+      const el = document.createElement('div');
+      const top = 10 + Math.random()*75;
+      const dur = 1.8 + Math.random()*1.4;
+      const size = 28 + Math.random()*16;
+      el.style.cssText = `position:fixed;font-size:${size}px;pointer-events:none;z-index:1001;top:${top}vh;left:-60px;animation:monkey-fly ${dur}s linear forwards`;
+      el.textContent = '🐒';
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(), (dur+0.5)*1000);
+    }, i * 250);
+  }
 }
 
 render();
