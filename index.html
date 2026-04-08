@@ -101,6 +101,9 @@ main{max-width:1100px;margin:0 auto;padding:1.25rem 1.5rem 1rem}
 .video-link:hover .play-icon{fill:#fb2a7b}
 
 .empty{grid-column:1/-1;padding:3rem;text-align:center;color:#ccc;font-size:14px;font-weight:300;background:#fff}
+.vf-btn{padding:5px 13px;font-size:12px;font-weight:500;font-family:'IBM Plex Sans Thai',sans-serif;letter-spacing:.03em;border:1px solid #d0d0d0;border-radius:2px;cursor:pointer;background:#fff;color:#666;transition:all .12s;user-select:none}
+.vf-btn:hover{border-color:#fb2a7b;color:#fb2a7b}
+.vf-btn.active{background:#fb2a7b;border-color:#fb2a7b;color:#fff}
 
 /* ── VOTE SECTION ── */
 .vote-section{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem 1rem}
@@ -180,14 +183,37 @@ footer a:hover{text-decoration:underline}
   <div class="gallery"   id="gallery"></div>
 </main>
 
-<div style="max-width:1100px;margin:0 auto;padding:2rem 1.5rem 0">
-  <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:1.1rem">
-    <div style="font-size:11px;color:#aaa;letter-spacing:.06em" id="video-count"></div>
-    <div style="flex:1;height:0.5px;background:#e8e8e8"></div>
+<div style="background:#fafafa;border-top:1.5px solid #0d0d0d;border-bottom:1.5px solid #0d0d0d;margin:2rem 0">
+  <div style="max-width:1100px;margin:0 auto;padding:2rem 1.5rem">
+
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem">
+      <div>
+        <div style="font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fb2a7b;margin-bottom:6px">Yoga with Jib</div>
+        <div style="font-size:20px;font-weight:600;letter-spacing:-.02em;line-height:1">วิดีโอ</div>
+      </div>
+      <a href="https://youtube.com/yogawithjib" target="_blank"
+         style="font-size:11px;font-weight:500;color:#fb2a7b;text-decoration:none;border:1px solid #fb2a7b;border-radius:2px;padding:5px 14px;white-space:nowrap;transition:all .12s"
+         onmouseover="this.style.background='#fb2a7b';this.style.color='#fff'"
+         onmouseout="this.style.background='transparent';this.style.color='#fb2a7b'">
+        ดูช่อง YouTube ↗
+      </a>
+    </div>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:1.25rem">
+      <input type="text" id="video-search" placeholder="ค้นหาวิดีโอ..."
+        oninput="filterVideos()"
+        style="flex:1;min-width:160px;padding:7px 12px;font-size:13px;font-family:'IBM Plex Sans Thai',sans-serif;border:1px solid #d0d0d0;border-radius:2px;background:#fff;color:#0d0d0d;outline:none">
+      <div style="display:flex;gap:5px;flex-wrap:wrap" id="video-filters">
+        <button class="vf-btn active" data-type="all"      onclick="setVFilter(this)">ทั้งหมด</button>
+        <button class="vf-btn"        data-type="ฟรี"      onclick="setVFilter(this)">ฟรี</button>
+        <button class="vf-btn"        data-type="ผีเสื้อ"  onclick="setVFilter(this)">ผีเสื้อ</button>
+        <button class="vf-btn"        data-type="แมลงปอ"   onclick="setVFilter(this)">แมลงปอ</button>
+      </div>
+    </div>
+
+    <div style="font-size:11px;color:#aaa;letter-spacing:.06em;margin-bottom:1rem" id="video-count"></div>
+    <div class="gallery" id="video-gallery"></div>
   </div>
-  <div style="font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fb2a7b;margin-bottom:6px">วิดีโอ</div>
-  <div style="font-size:16px;font-weight:600;letter-spacing:-.01em;margin-bottom:1.25rem">วิดีโอจาก Yoga with Jib</div>
-  <div class="gallery" id="video-gallery"></div>
 </div>
 
 <div class="vote-section">
@@ -531,18 +557,46 @@ function getYTId(url) {
 
 function toggleV(i) { document.getElementById('vc' + i).classList.toggle('open'); }
 
+let allVideoRows = [];
+let activeVType = 'all';
+
+function setVFilter(el) {
+  document.querySelectorAll('.vf-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  activeVType = el.dataset.type;
+  filterVideos();
+}
+
+function filterVideos() {
+  const q = (document.getElementById('video-search')?.value || '').toLowerCase().trim();
+  const filtered = allVideoRows.filter(r => {
+    const title = (r._title || '').toLowerCase();
+    const desc  = (r['description'] || '').toLowerCase();
+    const tags  = (r['tags'] || '').toLowerCase();
+    const type  = r['ใครดูได้บ้าง (สมาชิกระดับไหน / ฟรี)'] || r['type'] || '';
+    const matchQ = !q || title.includes(q) || desc.includes(q) || tags.includes(q);
+    const matchT = activeVType === 'all' ||
+      (activeVType === 'ฟรี'     && (!type || type.toLowerCase().includes('free') || type.includes('ฟรี'))) ||
+      (activeVType === 'ผีเสื้อ' && type.includes('ผีเสื้อ') && !type.includes('แมลงปอ')) ||
+      (activeVType === 'แมลงปอ'  && type.includes('แมลงปอ'));
+    return matchQ && matchT;
+  });
+  document.getElementById('video-count').textContent = filtered.length + ' วิดีโอ';
+  renderVideos(filtered);
+}
+
 async function loadVideos() {
   const wrap = document.getElementById('video-gallery');
   wrap.innerHTML = '<p style="color:#bbb;font-size:13px;padding:1rem 0">กำลังโหลดวิดีโอ...</p>';
   try {
     const res = await fetch(SHEET_URL);
     const text = await res.text();
-    const rows = parseCSV(text);
-    if (!rows.length) {
+    allVideoRows = parseCSV(text);
+    if (!allVideoRows.length) {
       wrap.innerHTML = '<p style="color:#bbb;font-size:13px;padding:1rem 0">ยังไม่มีวิดีโอในขณะนี้</p>';
       return;
     }
-    renderVideos(rows);
+    filterVideos();
   } catch(e) {
     wrap.innerHTML = '<p style="color:#bbb;font-size:13px;padding:1rem 0">ไม่สามารถโหลดวิดีโอได้ — <a href="https://youtube.com/yogawithjib" target="_blank" style="color:#fb2a7b">ดูบน YouTube แทน ↗</a></p>';
   }
