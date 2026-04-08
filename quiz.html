@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คุณเป็นครูโยคะแบบไหน? — Yoga with Jib</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧘</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px}
+body{font-family:'IBM Plex Sans Thai',sans-serif;background:#fff;color:#0d0d0d;min-height:100vh;-webkit-font-smoothing:antialiased}
+.back{position:fixed;top:1.25rem;left:1.25rem;font-size:11px;font-weight:500;color:#bbb;text-decoration:none;letter-spacing:.04em;transition:color .12s;z-index:10}
+.back:hover{color:#0d0d0d}
+
+/* progress */
+.progress-wrap{position:fixed;top:0;left:0;right:0;height:3px;background:#f0f0f0;z-index:20}
+.progress-fill{height:100%;background:#fb2a7b;transition:width .4s ease;width:0%}
+
+.container{max-width:600px;margin:0 auto;padding:4rem 1.5rem 5rem}
+
+/* welcome */
+#screen-welcome{text-align:center}
+.welcome-emoji{font-size:56px;margin-bottom:1.5rem;display:block}
+.eyebrow{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fb2a7b;margin-bottom:10px}
+.main-title{font-size:26px;font-weight:600;letter-spacing:-.02em;line-height:1.3;margin-bottom:12px}
+.main-sub{font-size:14px;font-weight:300;color:#888;line-height:1.8;margin-bottom:2rem}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:2rem}
+.tag{font-size:11px;padding:3px 10px;border:0.5px solid #e0e0e0;border-radius:20px;color:#888}
+
+/* quiz */
+#screen-quiz{display:none}
+.q-num{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fb2a7b;margin-bottom:12px}
+.q-text{font-size:19px;font-weight:600;letter-spacing:-.02em;line-height:1.45;margin-bottom:1.75rem}
+.options{display:flex;flex-direction:column;gap:10px}
+.option{
+  padding:16px 18px;
+  border:0.5px solid #e0e0e0;
+  border-radius:4px;
+  cursor:pointer;
+  font-size:13px;font-weight:400;color:#444;
+  line-height:1.55;
+  transition:all .12s;
+  text-align:left;
+  font-family:'IBM Plex Sans Thai',sans-serif;
+  background:#fff;
+}
+.option:hover{border-color:#fb2a7b;color:#0d0d0d;background:#fff8fb}
+.option.selected{border-color:#fb2a7b;background:#fff8fb;color:#0d0d0d;font-weight:500}
+.q-nav{margin-top:1.5rem;display:flex;gap:10px}
+.btn-prev{padding:11px 20px;font-size:13px;font-weight:500;font-family:'IBM Plex Sans Thai',sans-serif;border:0.5px solid #d0d0d0;border-radius:2px;cursor:pointer;background:#fff;color:#888;transition:all .12s}
+.btn-prev:hover{border-color:#0d0d0d;color:#0d0d0d}
+.btn-next{flex:1;padding:11px 20px;font-size:13px;font-weight:600;font-family:'IBM Plex Sans Thai',sans-serif;border:1px solid #d0d0d0;border-radius:2px;cursor:pointer;background:#f5f5f5;color:#bbb;transition:all .12s}
+.btn-next.ready{background:#0d0d0d;border-color:#0d0d0d;color:#fff;cursor:pointer}
+.btn-next.ready:hover{background:#333}
+
+/* result */
+#screen-result{display:none}
+.result-type-num{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fb2a7b;margin-bottom:8px}
+.result-emoji{font-size:52px;margin-bottom:12px;display:block}
+.result-title{font-size:24px;font-weight:600;letter-spacing:-.02em;margin-bottom:6px}
+.result-en{font-size:13px;font-weight:300;color:#bbb;margin-bottom:20px}
+.result-desc{font-size:14px;font-weight:300;color:#444;line-height:1.85;margin-bottom:1.5rem}
+.result-strengths{background:#fafafa;border-radius:4px;padding:16px;margin-bottom:1rem}
+.strengths-label{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#bbb;margin-bottom:10px}
+.strength-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;font-size:13px;font-weight:300;color:#555;line-height:1.6}
+.strength-item:last-child{margin-bottom:0}
+.s-dot{width:5px;height:5px;border-radius:50%;background:#fb2a7b;flex-shrink:0;margin-top:6px}
+.result-shadow{background:#fff8fb;border:0.5px solid #faa8c8;border-radius:4px;padding:16px;margin-bottom:1.5rem}
+.shadow-label{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#fb2a7b;margin-bottom:6px}
+.shadow-text{font-size:13px;font-weight:300;color:#555;line-height:1.7}
+.enneagram-note{font-size:11px;font-weight:300;color:#bbb;line-height:1.7;padding-top:16px;border-top:0.5px solid #f0f0f0;margin-bottom:1.5rem}
+.btn-retry{width:100%;padding:12px;font-size:13px;font-weight:600;font-family:'IBM Plex Sans Thai',sans-serif;border:0.5px solid #d0d0d0;border-radius:2px;cursor:pointer;background:#fff;color:#888;transition:all .12s;margin-bottom:10px}
+.btn-retry:hover{border-color:#0d0d0d;color:#0d0d0d}
+.btn-share-back{display:block;text-align:center;font-size:13px;font-weight:500;color:#fb2a7b;text-decoration:none;border-bottom:0.5px solid #fb2a7b;width:fit-content;margin:0 auto}
+
+/* start btn */
+.btn-start{display:block;width:100%;padding:14px;font-size:14px;font-weight:600;font-family:'IBM Plex Sans Thai',sans-serif;border:1px solid #0d0d0d;border-radius:2px;cursor:pointer;background:#0d0d0d;color:#fff;transition:all .12s;margin-bottom:12px}
+.btn-start:hover{background:#333}
+</style>
+</head>
+<body>
+
+<a class="back" href="index.html">← ห้องสมุด</a>
+<div class="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
+
+<div class="container">
+
+<!-- WELCOME -->
+<div id="screen-welcome">
+  <span class="welcome-emoji">🧘‍♀️</span>
+  <div class="eyebrow">Yoga Teacher Personality</div>
+  <h1 class="main-title">คุณเป็นครูโยคะแบบไหน?</h1>
+  <p class="main-sub">quiz 10 ข้อที่ออกแบบมาจากแนวคิด Enneagram<br>เพื่อช่วยให้รู้จักตัวเองในฐานะครูโยคะมากขึ้น</p>
+  <div class="tag-row">
+    <span class="tag">10 คำถาม</span>
+    <span class="tag">9 ประเภท</span>
+    <span class="tag">ใช้เวลา ~3 นาที</span>
+  </div>
+  <button class="btn-start" onclick="startQuiz()">เริ่ม quiz</button>
+  <a class="btn-share-back" href="index.html">กลับหน้าหลัก</a>
+</div>
+
+<!-- QUIZ -->
+<div id="screen-quiz">
+  <div class="q-num" id="q-num">คำถามที่ 1 / 10</div>
+  <div class="q-text" id="q-text"></div>
+  <div class="options" id="q-options"></div>
+  <div class="q-nav">
+    <button class="btn-prev" id="btn-prev" onclick="prevQ()">← ย้อนกลับ</button>
+    <button class="btn-next" id="btn-next" onclick="nextQ()">ถัดไป →</button>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div id="screen-result">
+  <div class="result-type-num" id="r-typenum"></div>
+  <span class="result-emoji" id="r-emoji"></span>
+  <div class="result-title" id="r-title"></div>
+  <div class="result-en" id="r-en"></div>
+  <div class="result-desc" id="r-desc"></div>
+  <div class="result-strengths">
+    <div class="strengths-label">จุดแข็งของคุณ</div>
+    <div id="r-strengths"></div>
+  </div>
+  <div class="result-shadow">
+    <div class="shadow-label">จุดที่ควรระวัง</div>
+    <div class="shadow-text" id="r-shadow"></div>
+  </div>
+  <div class="enneagram-note" id="r-ennagram"></div>
+  <button class="btn-retry" onclick="retryQuiz()">ทำใหม่อีกครั้ง</button>
+  <p style="font-size:12px;font-weight:300;color:#bbb;line-height:1.8;text-align:center;margin-bottom:16px">ไม่มีครูแบบไหนดีที่สุด<br>แต่ครูที่ดี คือครูที่รู้จักตัวเอง<br>แล้วพัฒนาให้สมดุลระหว่างจุดแข็งและพื้นที่เติบโต ✨</p>
+  <a class="btn-share-back" href="index.html">กลับห้องสมุด</a>
+</div>
+
+</div>
+
+<script>
+const TYPES = {
+  1: { emoji:'📐', title:'ครูเจ้าระเบียบ', en:'The Perfectionist', num:'ประเภทที่ 1',
+    desc:'ทุกองศาต้องถูกต้อง นิ้วมือต้องเท่ากัน สะโพกต้องขนานพื้น รายละเอียดสำคัญมาก นักเรียนที่ชอบความละเอียดจะรักมาก แต่คนที่ไม่ชอบความเป๊ะอาจรู้สึกกดดัน',
+    strengths:['สอนละเอียด ปลอดภัย','นักเรียนมีพื้นฐานแน่น','มาตรฐานการสอนสูง'],
+    shadow:'นักเรียนอาจรู้สึกกดดัน และอาจรู้สึกว่าไม่มีพื้นที่สำหรับความไม่สมบูรณ์แบบ',
+    ennagram:'Enneagram Type 1 — The Reformer สไตล์ประโยค: "ขยับเท้าขวาไปทางซ้ายอีก 2 มิลลิเมตรค่ะ"' },
+  2: { emoji:'💗', title:'ครูสาย Support', en:'The Nurturer', num:'ประเภทที่ 2',
+    desc:'ชอบเดินรอบห้อง ช่วยจัดท่า จำชื่อนักเรียนได้ คลาสอบอุ่น ใส่ใจ บางครั้งมีการช่วยคลายคอ บ่า ไหล่ ทำให้นักเรียนรู้สึกได้รับการดูแล',
+    strengths:['สร้างบรรยากาศอบอุ่น','สร้างคอมมิวนิตี้ที่ดี','นักเรียนรู้สึกปลอดภัยและสบายใจ'],
+    shadow:'ใช้พลังงานมากเกินไป และอาจเอาใจนักเรียนจนละเลยตัวเอง',
+    ennagram:'Enneagram Type 2 — The Helper สไตล์ประโยค: "ไหวมั้ยคะ? อย่าฝืนนะ วันนี้ทำดีมากแล้วค่ะ"' },
+  3: { emoji:'🏆', title:'ครูสายท้าทาย', en:'The Challenger', num:'ประเภทที่ 3',
+    desc:'ชอบท้าทายตัวเองและนักเรียน พาไปท่าที่ยาก สนุก และเห็นพัฒนาการเร็ว สร้างแรงบันดาลใจและผลักดันนักเรียนไปสู่ศักยภาพใหม่',
+    strengths:['สร้างแรงบันดาลใจ','ผลักดันนักเรียนไปสู่ศักยภาพใหม่','เห็นพัฒนาการชัดเจน'],
+    shadow:'เสี่ยงบาดเจ็บหากเร่งเกินไป อย่าลืมว่าความปลอดภัยสำคัญที่สุด',
+    ennagram:'Enneagram Type 3 — The Achiever สไตล์ประโยค: "อีกนิดเดียวครับ! เชื่อมั่นในตัวเอง เราไปต่อได้มากกว่าที่คิด"' },
+  4: { emoji:'🎨', title:'ครูสายศิลปิน', en:'The Artist', num:'ประเภทที่ 4',
+    desc:'ใช้ความรู้สึกนำ คลาสมีความลึกซึ้ง มีเพลย์ลิสต์เฉพาะตัว เชื่อมโยงโยคะกับชีวิต นักเรียนรู้สึกว่าคลาสมีความหมาย',
+    strengths:['คลาสมีเอกลักษณ์','เชื่อมโยงโยคะกับชีวิตได้ลึก','นักเรียนรู้สึกมีความหมาย'],
+    shadow:'อาจจมกับอารมณ์ตัวเองมากเกินไป และลืมความต้องการของนักเรียน',
+    ennagram:'Enneagram Type 4 — The Individualist สไตล์ประโยค: "ปล่อยให้ลมหายใจบอกเล่าเรื่องราวในใจคุณออกมานะคะ"' },
+  5: { emoji:'📚', title:'ครูสายวิชาการ', en:'The Scholar', num:'ประเภทที่ 5',
+    desc:'เข้าใจกล้ามเนื้อ ระบบร่างกาย ประวัติศาสตร์โยคะ อธิบายเหตุผลได้ชัดเจน นักเรียนเข้าใจร่างกายลึก มีข้อมูลรองรับ',
+    strengths:['นักเรียนเข้าใจร่างกายลึก','มีข้อมูลรองรับ','อัปเดตความรู้เสมอ'],
+    shadow:'อธิบายมากเกินไป ทำให้นักเรียนอยู่กับสมองมากกว่าร่างกาย',
+    ennagram:'Enneagram Type 5 — The Investigator สไตล์ประโยค: "สัมผัสความรู้สึกที่กล้ามเนื้อ Popliteus"' },
+  6: { emoji:'🌿', title:'ครูสายปลอดภัยไว้ก่อน', en:'The Traditionalist', num:'ประเภทที่ 6',
+    desc:'ยึดตามตำราและครูบาอาจารย์ เน้นความปลอดภัย ไม่สอนท่าเสี่ยง คลาสมั่นคง นักเรียนไว้วางใจ สร้างคอมมิวนิตี้ระยะยาว',
+    strengths:['คลาสมั่นคง','นักเรียนไว้วางใจ','สร้างคอมมิวนิตี้ระยะยาว'],
+    shadow:'กลัวความเปลี่ยนแปลง และอาจพลาดโอกาสพัฒนา',
+    ennagram:'Enneagram Type 6 — The Loyalist สไตล์ประโยค: "เราจะเริ่มจากพื้นฐานให้แน่นก่อนนะครับ ความปลอดภัยคือสิ่งสำคัญที่สุด"' },
+  7: { emoji:'✨', title:'ครูสายปาร์ตี้', en:'The Entertainer', num:'ประเภทที่ 7',
+    desc:'คลาสเต็มไปด้วยเสียงหัวเราะ สนุก มีท่าใหม่ๆ ตลอด พลังงานสูง ดึงดูดนักเรียนใหม่ ปรับตัวเก่ง',
+    strengths:['พลังงานสูง','ดึงดูดนักเรียนใหม่','ปรับตัวเก่ง'],
+    shadow:'เปลี่ยนมากเกินไปจนอาจสับสน และขาดความลึกซึ้ง',
+    ennagram:'Enneagram Type 7 — The Enthusiast สไตล์ประโยค: "มาลองเล่นท่านี้กันดูครับ สนุกมาก! ล้มได้ มันโอเค"' },
+  8: { emoji:'🔥', title:'ครูสายโหด', en:'The Drill Master', num:'ประเภทที่ 8',
+    desc:'น้ำเสียงเข้ม มีอำนาจ คลาสเข้มข้น เช่น Power Yoga หรือ Ashtanga สร้างความแข็งแรง ฝึกความอดทน ผลักดันนักเรียนได้ดี',
+    strengths:['สร้างความแข็งแรง','ฝึกความอดทน','ผลักดันนักเรียนได้ดี'],
+    shadow:'อาจกดดันนักเรียนเกินไป และลืมความอ่อนโยน',
+    ennagram:'Enneagram Type 8 — The Challenger สไตล์ประโยค: "ห้ามวางเข่า! ค้างไว้ อีก 5 ลมหายใจ! กัดฟันสู้หน่อย!"' },
+  9: { emoji:'🌙', title:'ครูสายสงบ', en:'The Zen Teacher', num:'ประเภทที่ 9',
+    desc:'นิ่ง สงบ เน้นหายใจ สมาธิ Yin Yoga พลังงานห้องเย็นสบาย สร้างพื้นที่ปลอดภัย นักเรียนผ่อนคลาย เหมาะกับการฟื้นฟู',
+    strengths:['สร้างพื้นที่ปลอดภัย','นักเรียนผ่อนคลาย','เหมาะกับการฟื้นฟู'],
+    shadow:'อาจหลีกเลี่ยงความท้าทาย และอาจขาดการพัฒนาในบางมิติ',
+    ennagram:'Enneagram Type 9 — The Peacemaker สไตล์ประโยค: "ค่อยๆ ผ่อนคลายทุกส่วนของร่างกาย... ปล่อยวางทุกความกังวลทิ้งไป..."' },
+};
+
+const QUESTIONS = [
+  { q:'ก่อนสอนคลาส คุณมักคิดถึงอะไรมากที่สุด?',
+    opts:[
+      {t:'ทุกท่าต้องถูกต้องและปลอดภัยไหม', types:[1,1,1]},
+      {t:'นักเรียนแต่ละคนต้องการอะไรพิเศษวันนี้', types:[2,2,2]},
+      {t:'คลาสนี้จะสร้าง impact อะไรให้นักเรียน', types:[3,3]},
+      {t:'มีอะไรใหม่ที่จะทำให้คลาสนี้น่าจดจำ', types:[4,7]},
+    ]},
+  { q:'นักเรียนทำท่าผิด คุณมักตอบสนองอย่างไร?',
+    opts:[
+      {t:'รีบแก้ทันที อธิบายสาเหตุและวิธีที่ถูกต้อง', types:[1,1]},
+      {t:'ค่อยๆ เดินไปหา ถามว่ารู้สึกยังไง', types:[2,2]},
+      {t:'แก้ cue ให้ทั้งคลาสโดยไม่ระบุชื่อ', types:[5,6,9]},
+      {t:'ขึ้นอยู่กับว่าเสี่ยงบาดเจ็บไหม ถ้าไม่ก็ปล่อย', types:[7,8,4]},
+    ]},
+  { q:'ถ้ามีคนถามว่า "ครูสอนโยคะสายไหน?" คุณตอบว่า?',
+    opts:[
+      {t:'บอกสาย lineage ชัดเจน เช่น Iyengar, Ashtanga', types:[1,6,6]},
+      {t:'สายที่เน้นนักเรียนเป็นหลัก ปรับตามแต่ละคน', types:[2,9,9]},
+      {t:'สายที่ผสมหลายอย่าง เพราะแต่ละคนต้องการต่างกัน', types:[7,4,3]},
+      {t:'ยังอยู่ระหว่างค้นหา แต่สนใจ anatomy มาก', types:[5,5]},
+    ]},
+  { q:'หลังสอนจบ คุณรู้สึกพอใจที่สุดเมื่อ?',
+    opts:[
+      {t:'ทุกท่าไหลลื่น ไม่มีอะไรผิดพลาด', types:[1,1]},
+      {t:'นักเรียนบอกว่ารู้สึกดีขึ้น ทั้งกายและใจ', types:[2,2,9]},
+      {t:'คลาสนี้ดีกว่าครั้งที่แล้วอย่างชัดเจน', types:[3,3,1]},
+      {t:'เกิดช่วง moment ที่ทั้งห้องนิ่งและสงบพร้อมกัน', types:[9,4,8]},
+    ]},
+  { q:'ถ้ามีเวลาว่าง 2 ชั่วโมง คุณมักใช้มันอย่างไร?',
+    opts:[
+      {t:'อ่านงานวิจัยหรือ anatomy ใหม่ๆ', types:[5,5,1]},
+      {t:'วางแผน sequence สำหรับคลาสถัดไป', types:[1,3,4]},
+      {t:'ออกไปลองคลาสของครูคนอื่น', types:[7,6,2]},
+      {t:'ฝึก self-practice เงียบๆ คนเดียว', types:[9,4,5]},
+    ]},
+  { q:'นักเรียนบอกว่าอยากหยุดพักในท่าที่คุณวางแผนไว้ว่าจะยาก คุณ?',
+    opts:[
+      {t:'แก้ไข sequence ทันที ความสะดวกของนักเรียนสำคัญกว่า', types:[2,9]},
+      {t:'ให้หยุดพัก แต่อธิบายว่าท่าต่อไปจะ challenge อะไร', types:[3,8]},
+      {t:'เคารพการตัดสินใจ ทุกคนรู้ร่างกายตัวเองดีที่สุด', types:[9,2,4]},
+      {t:'ดูว่าเพราะอะไร อาจต้องปรับ modification', types:[1,5,6]},
+    ]},
+  { q:'คุณรู้สึกว่าครูโยคะที่ดีคือ?',
+    opts:[
+      {t:'คนที่สอนได้ถูกต้องและปลอดภัยทุกครั้ง', types:[1,6]},
+      {t:'คนที่ทำให้นักเรียนรู้สึกว่าตัวเองมีค่า', types:[2,9]},
+      {t:'คนที่พาให้นักเรียนค้นพบตัวเองได้', types:[4,5,7]},
+      {t:'คนที่นักเรียนกลับมาเรียนด้วยซ้ำแล้วซ้ำเล่า', types:[3,2,8]},
+    ]},
+  { q:'เมื่อมีครูโยคะคนอื่นสอนแตกต่างจากคุณมาก คุณรู้สึกอย่างไร?',
+    opts:[
+      {t:'กังวลว่านักเรียนจะได้รับ information ที่ขัดแย้ง', types:[1,6]},
+      {t:'สนใจ อยากไปลองเรียนดูสักครั้ง', types:[7,5]},
+      {t:'ไม่ได้คิดมาก ทุกสไตล์มีคนที่เหมาะ', types:[9,4]},
+      {t:'มองว่าเป็นโอกาสให้นักเรียนเลือกสิ่งที่ใช่สำหรับตัวเอง', types:[2,3,8]},
+    ]},
+  { q:'ถ้าคลาสไม่เป็นไปตามที่วางแผน คุณตอบสนองอย่างไร?',
+    opts:[
+      {t:'วิเคราะห์ว่าผิดพลาดตรงไหน จะแก้ครั้งหน้า', types:[1,1,3]},
+      {t:'ดูว่านักเรียนรู้สึกอย่างไร ถ้าเขาโอเค ก็โอเค', types:[2,9]},
+      {t:'ปรับ on the spot ไม่ได้ยึดติดกับ plan', types:[7,4,8]},
+      {t:'ทบทวนว่าสิ่งที่ไม่ได้แผนนั้นสอนอะไรเราได้บ้าง', types:[5,9,4]},
+    ]},
+  { q:'สิ่งที่คุณอยากให้นักเรียนจำได้จากคุณมากที่สุดคือ?',
+    opts:[
+      {t:'วิธีทำท่าที่ถูกต้องและปลอดภัย', types:[1,6]},
+      {t:'ความรู้สึกว่าตัวเองได้รับการดูแล', types:[2,9]},
+      {t:'ว่าตัวเองทำได้มากกว่าที่คิด', types:[3,8]},
+      {t:'ช่วง moment ที่ใจนิ่งสงบจริงๆ', types:[9,4,5]},
+    ]},
+];
+
+let answers = new Array(QUESTIONS.length).fill(null);
+let current = 0;
+
+function startQuiz() {
+  document.getElementById('screen-welcome').style.display = 'none';
+  document.getElementById('screen-quiz').style.display = 'block';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[current];
+  document.getElementById('q-num').textContent = `คำถามที่ ${current+1} / ${QUESTIONS.length}`;
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('progress-fill').style.width = ((current)/QUESTIONS.length*100) + '%';
+
+  const opts = document.getElementById('q-options');
+  opts.innerHTML = q.opts.map((o,i) => `
+    <button class="option${answers[current]===i?' selected':''}" onclick="selectOpt(${i})">${o.t}</button>
+  `).join('');
+
+  const btnNext = document.getElementById('btn-next');
+  btnNext.classList.toggle('ready', answers[current] !== null);
+  btnNext.textContent = current === QUESTIONS.length-1 ? 'ดูผลลัพธ์ →' : 'ถัดไป →';
+  document.getElementById('btn-prev').style.display = current === 0 ? 'none' : '';
+}
+
+function selectOpt(i) {
+  answers[current] = i;
+  document.querySelectorAll('.option').forEach((el,idx)=>el.classList.toggle('selected',idx===i));
+  document.getElementById('btn-next').classList.add('ready');
+}
+
+function nextQ() {
+  if (answers[current] === null) return;
+  if (current < QUESTIONS.length-1) { current++; renderQuestion(); }
+  else showResult();
+}
+
+function prevQ() {
+  if (current > 0) { current--; renderQuestion(); }
+}
+
+function showResult() {
+  document.getElementById('progress-fill').style.width = '100%';
+  document.getElementById('screen-quiz').style.display = 'none';
+  document.getElementById('screen-result').style.display = 'block';
+
+  // tally scores
+  const score = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0};
+  QUESTIONS.forEach((q,qi) => {
+    if (answers[qi] === null) return;
+    const types = q.opts[answers[qi]].types;
+    types.forEach(t => { score[t] = (score[t]||0) + 1; });
+  });
+
+  const winner = Object.entries(score).sort((a,b)=>b[1]-a[1])[0][0];
+  const t = TYPES[winner];
+
+  document.getElementById('r-typenum').textContent  = t.num;
+  document.getElementById('r-emoji').textContent    = t.emoji;
+  document.getElementById('r-title').textContent    = t.title;
+  document.getElementById('r-en').textContent       = t.en;
+  document.getElementById('r-desc').textContent     = t.desc;
+  document.getElementById('r-shadow').textContent   = t.shadow;
+  document.getElementById('r-ennagram').textContent = t.ennagram;
+  document.getElementById('r-strengths').innerHTML  = t.strengths.map(s=>`<div class="strength-item"><span class="s-dot"></span><span>${s}</span></div>`).join('');
+}
+
+function retryQuiz() {
+  answers = new Array(QUESTIONS.length).fill(null);
+  current = 0;
+  document.getElementById('screen-result').style.display = 'none';
+  document.getElementById('screen-quiz').style.display = 'block';
+  renderQuestion();
+}
+</script>
+</body>
+</html>
