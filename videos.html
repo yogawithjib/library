@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>วิดีโอทั้งหมด — Yoga with Jib</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'FabfeltScript';src:url('fonts/FabfeltScript-Bold.woff2') format('woff2'),url('fonts/FabfeltScript-Bold.woff') format('woff');font-weight:bold;font-style:normal;font-display:swap}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px}
+body{font-family:'IBM Plex Sans Thai',sans-serif;background:#fff;color:#0d0d0d;min-height:100vh;-webkit-font-smoothing:antialiased}
+header{border-bottom:1.5px solid #0d0d0d;padding:1.25rem 1.5rem 1rem}
+.header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:1rem}
+.site-label{font-size:10px;font-weight:500;letter-spacing:.14em;color:#fb2a7b;margin-bottom:5px}
+.site-title{font-size:20px;font-weight:600;letter-spacing:-.02em;line-height:1}
+.pink-bar{display:flex;align-items:center;gap:6px;margin-top:8px}
+.pink-bar span{display:block;height:2px;background:#fb2a7b}
+.bar-long{width:36px}.bar-short{width:12px;opacity:.4}
+.brand-name{display:block;font-family:'FabfeltScript','Dancing Script',cursive;font-weight:bold;font-size:26px;color:#0d0d0d;line-height:1.1;margin-bottom:4px}
+.site-meta{font-size:11px;color:#999;text-align:right;line-height:1.7}
+.site-meta a{color:#fb2a7b;text-decoration:none;font-weight:500}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:#bbb;text-decoration:none;letter-spacing:.04em;transition:color .12s;margin-bottom:4px}
+.back-link:hover{color:#0d0d0d}
+
+/* toolbar */
+.toolbar{max-width:1100px;margin:0 auto;padding:1.25rem 1.5rem 1rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:0.5px solid #e0e0e0}
+.search-wrap{flex:1;min-width:160px}
+.search-wrap input{width:100%;padding:7px 12px;font-size:13px;font-family:'IBM Plex Sans Thai',sans-serif;border:1px solid #d0d0d0;border-radius:2px;background:#fff;color:#0d0d0d;outline:none;transition:border-color .12s}
+.search-wrap input:focus{border-color:#fb2a7b;box-shadow:0 0 0 2px rgba(251,42,123,.08)}
+.search-wrap input::placeholder{color:#bbb}
+.vf-btn{padding:5px 13px;font-size:12px;font-weight:500;font-family:'IBM Plex Sans Thai',sans-serif;letter-spacing:.03em;border:1px solid #d0d0d0;border-radius:2px;cursor:pointer;background:#fff;color:#666;transition:all .12s;user-select:none}
+.vf-btn:hover{border-color:#fb2a7b;color:#fb2a7b}
+.vf-btn.active{background:#fb2a7b;border-color:#fb2a7b;color:#fff}
+
+/* main */
+main{max-width:1100px;margin:0 auto;padding:1.25rem 1.5rem 4rem}
+.count-bar{font-size:11px;color:#aaa;letter-spacing:.06em;margin-bottom:1.1rem;display:flex;align-items:center;gap:8px}
+.count-bar::after{content:'';flex:1;height:0.5px;background:#e8e8e8}
+
+/* gallery grid */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid #0d0d0d;background:#0d0d0d}
+@media(max-width:740px){.gallery{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.gallery{grid-template-columns:1fr}}
+
+/* video card */
+.vcard{display:flex;flex-direction:column;background:#fff;text-decoration:none;color:#0d0d0d;transition:background .1s;border-top:3px solid transparent}
+.vcard:hover{border-top-color:#fb2a7b;background:#fff8fb}
+.vcard-thumb{position:relative;aspect-ratio:16/9;background:#f0f0f0;overflow:hidden;flex-shrink:0}
+.vcard-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.vcard-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.1)}
+.vcard-badge{position:absolute;top:8px;right:8px}
+.vcard-body{padding:14px 16px;flex:1;display:flex;flex-direction:column;gap:6px}
+.vcard-date{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#bbb}
+.vcard-title{font-size:14px;font-weight:600;line-height:1.4;color:#0d0d0d;letter-spacing:-.01em;overflow-wrap:break-word;word-break:break-word}
+.vcard-sub{font-size:12px;font-weight:300;color:#777;line-height:1.5;overflow-wrap:break-word}
+.vcard-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:auto;padding-top:6px}
+.tag{font-size:10px;padding:2px 7px;border:0.5px solid #e0e0e0;border-radius:2px;color:#999}
+.free-badge{font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#999;border:0.5px solid #ccc;border-radius:2px;padding:2px 8px;background:#fff}
+.butterfly-badge{font-size:9px;font-weight:600;letter-spacing:.06em;color:#fb2a7b;background:#fff;border:0.5px solid #fb2a7b;border-radius:2px;padding:2px 8px}
+.dragonfly-badge{font-size:9px;font-weight:600;letter-spacing:.06em;color:#fff;background:#fb2a7b;border:0.5px solid #fb2a7b;border-radius:2px;padding:2px 8px}
+.dur-tag{font-size:10px;padding:2px 7px;border:0.5px solid #e0e0e0;border-radius:2px;color:#999}
+.empty{grid-column:1/-1;padding:3rem;text-align:center;color:#ccc;font-size:14px;font-weight:300;background:#fff}
+
+/* footer */
+.footer-wrap{border-top:1.5px solid #0d0d0d}
+footer{max-width:1100px;margin:0 auto;padding:1.1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;font-size:11px;color:#aaa;flex-wrap:wrap}
+footer a{color:#fb2a7b;text-decoration:none;font-weight:500}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <a class="back-link" href="index.html">← ห้องสมุดเพื่อนโยคะ</a>
+      <div class="site-label">วิดีโอทั้งหมด</div>
+      <div class="site-title">วิดีโอจาก Yoga with Jib</div>
+      <div class="pink-bar"><span class="bar-long"></span><span class="bar-short"></span></div>
+    </div>
+    <div class="site-meta">
+      <span class="brand-name">Yoga with Jib</span>
+      <a href="https://youtube.com/yogawithjib" target="_blank">youtube.com/yogawithjib ↗</a>
+    </div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <input type="text" id="video-search" placeholder="ค้นหาวิดีโอ..." oninput="filterVideos()">
+  </div>
+  <div style="display:flex;gap:5px;flex-wrap:wrap">
+    <button class="vf-btn active" data-type="all"     onclick="setVFilter(this)">ทั้งหมด</button>
+    <button class="vf-btn"        data-type="ฟรี"     onclick="setVFilter(this)">ฟรี</button>
+    <button class="vf-btn"        data-type="ผีเสื้อ" onclick="setVFilter(this)">ผีเสื้อ</button>
+    <button class="vf-btn"        data-type="แมลงปอ"  onclick="setVFilter(this)">แมลงปอ</button>
+  </div>
+</div>
+
+<main>
+  <div class="count-bar" id="video-count">กำลังโหลด...</div>
+  <div class="gallery" id="video-gallery"></div>
+</main>
+
+<div class="footer-wrap">
+  <footer>
+    <span>Yoga with Jib · community-sourced · living and evolving</span>
+    <a href="https://youtube.com/yogawithjib" target="_blank">YouTube ↗</a>
+  </footer>
+</div>
+
+<script>
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwWvPWlOE49u8tCUzflc-djPAG579QPlJNaU8WIej6TpVGAo_KrZdAdlvOV2ewvynAPXA/exec';
+let allVideoRows = [];
+let activeVType = 'all';
+
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  const rawHeaders = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g,'').replace(/\uFEFF/g,''));
+  return lines.slice(1).filter(l => l.trim()).map(line => {
+    const vals = []; let cur = '', inQ = false;
+    for (let ch of line) {
+      if (ch === '"') { inQ = !inQ; }
+      else if (ch === ',' && !inQ) { vals.push(cur.trim()); cur = ''; }
+      else { cur += ch; }
+    }
+    vals.push(cur.trim());
+    const obj = {};
+    rawHeaders.forEach((h, i) => obj[h] = (vals[i]||'').replace(/^"|"$/g,'').trim());
+    const titleKey = rawHeaders.find(h => h.toLowerCase().includes('title')) || '';
+    obj._title = obj[titleKey] || '';
+    return obj;
+  }).filter(r => r._title);
+}
+
+function getYTId(url) {
+  if (!url) return null;
+  const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|v\/))([\w-]{11})/);
+  return m ? m[1] : null;
+}
+
+function thumbImg(ytId, customThumb) {
+  if (customThumb) return `<img src="${customThumb}" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy" onerror="this.src='https://img.youtube.com/vi/${ytId||''}/hqdefault.jpg'">`;
+  if (!ytId) return '';
+  return `<img src="https://img.youtube.com/vi/${ytId}/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy"
+    onerror="var q=['sddefault','hqdefault','mqdefault','default'];var qi=this.dataset.qi?parseInt(this.dataset.qi):0;if(qi<q.length){this.dataset.qi=qi+1;this.src='https://img.youtube.com/vi/${ytId}/'+q[qi]+'.jpg';}else{this.style.display='none';}">`;
+}
+
+function badgeHtml(type) {
+  const t = (type||'').trim();
+  if (!t || t.toLowerCase().includes('free') || t.includes('ฟรี')) return `<span class="free-badge">ฟรี</span>`;
+  if (t.includes('แมลงปอ')) return `<span class="dragonfly-badge">แมลงปอ</span>`;
+  if (t.includes('ผีเสื้อ')) return `<span class="butterfly-badge">ผีเสื้อ</span>`;
+  return `<span class="free-badge">${t}</span>`;
+}
+
+function setVFilter(el) {
+  document.querySelectorAll('.vf-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  activeVType = el.dataset.type;
+  filterVideos();
+}
+
+function filterVideos() {
+  const q = (document.getElementById('video-search')?.value||'').toLowerCase().trim();
+  const filtered = allVideoRows.filter(r => {
+    const title = (r._title||'').toLowerCase();
+    const desc  = (r['description']||'').toLowerCase();
+    const tags  = (r['tags']||'').toLowerCase();
+    const type  = r['ใครดูได้บ้าง (สมาชิกระดับไหน / ฟรี)'] || r['type'] || '';
+    const matchQ = !q || title.includes(q) || desc.includes(q) || tags.includes(q);
+    const matchT = activeVType === 'all' ||
+      (activeVType === 'ฟรี'     && (!type || type.toLowerCase().includes('free') || type.includes('ฟรี'))) ||
+      (activeVType === 'ผีเสื้อ' && type.includes('ผีเสื้อ') && !type.includes('แมลงปอ')) ||
+      (activeVType === 'แมลงปอ'  && type.includes('แมลงปอ'));
+    return matchQ && matchT;
+  }).sort(() => Math.random() - 0.5);
+
+  document.getElementById('video-count').textContent = filtered.length + ' วิดีโอ';
+  const wrap = document.getElementById('video-gallery');
+
+  if (!filtered.length) { wrap.innerHTML = '<div class="empty">ไม่พบวิดีโอที่ตรงกัน</div>'; return; }
+
+  wrap.innerHTML = filtered.map(r => {
+    const title  = r._title || '';
+    const sub    = r['description'] || '';
+    const type   = r['ใครดูได้บ้าง (สมาชิกระดับไหน / ฟรี)'] || r['type'] || '';
+    const dur    = r['duration (mins)'] || r['duration'] || '';
+    const url    = r['url'] || '';
+    const level  = r['level (ระดับผู้เรียน)'] || '';
+    const date   = r['date'] || '';
+    const rawTags = r['tags'] || '';
+    const customThumb = r['Thumbnail'] || r['thumbnail'] || '';
+    const ytId   = getYTId(url);
+    const tags   = rawTags.split(',').map(t => t.trim()).filter(t => t).map(t => `<span class="tag">${t}</span>`).join('');
+    const levelHtml = level ? `<span class="tag">${level}</span>` : '';
+    const durHtml   = dur   ? `<span class="dur-tag">${dur} นาที</span>` : '';
+    return `<a href="${url}" target="_blank" rel="noopener" class="vcard">
+      <div class="vcard-thumb">
+        ${thumbImg(ytId, customThumb)}
+        <div class="vcard-play">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="20" fill="rgba(251,42,123,.8)"/>
+            <path d="M17 13l11 7-11 7V13z" fill="#fff"/>
+          </svg>
+        </div>
+        <div class="vcard-badge">${badgeHtml(type)}</div>
+      </div>
+      <div class="vcard-body">
+        <div class="vcard-date">${date}</div>
+        <div class="vcard-title">${title}</div>
+        ${sub ? `<div class="vcard-sub">${sub}</div>` : ''}
+        <div class="vcard-tags">${tags}${levelHtml}${durHtml}</div>
+      </div>
+    </a>`;
+  }).join('');
+}
+
+async function loadVideos() {
+  try {
+    const res = await fetch(SHEET_URL);
+    const text = await res.text();
+    allVideoRows = parseCSV(text);
+    filterVideos();
+  } catch(e) {
+    document.getElementById('video-gallery').innerHTML = '<div class="empty">ไม่สามารถโหลดวิดีโอได้ — <a href="https://youtube.com/yogawithjib" target="_blank" style="color:#fb2a7b">ดูบน YouTube ↗</a></div>';
+  }
+}
+
+loadVideos();
+</script>
+</body>
+</html>
