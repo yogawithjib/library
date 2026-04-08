@@ -64,7 +64,7 @@ main{max-width:1100px;margin:0 auto;padding:1.25rem 1.5rem 1rem}
 /* ── GALLERY ── */
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid #0d0d0d;background:#0d0d0d}
 @media(max-width:740px){.gallery{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:440px){.gallery{grid-template-columns:1fr}}
+@media(max-width:600px){.gallery{grid-template-columns:1fr}}
 
 /* ── CARD ── */
 .card{background:#fff;padding:18px 18px 14px;cursor:pointer;display:flex;flex-direction:column;gap:9px;position:relative;transition:background .1s;border-top:3px solid transparent}
@@ -73,8 +73,8 @@ main{max-width:1100px;margin:0 auto;padding:1.25rem 1.5rem 1rem}
 .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
 .card-num{font-size:10px;font-weight:300;color:#ddd;letter-spacing:.06em;flex-shrink:0;margin-top:2px}
 .cat-label{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#bbb;margin-bottom:4px}
-.card-title{font-size:14px;font-weight:600;line-height:1.4;color:#0d0d0d;letter-spacing:-.01em}
-.card-sub{font-size:12px;font-weight:300;color:#777;line-height:1.55;margin-top:2px}
+.card-title{font-size:14px;font-weight:600;line-height:1.4;color:#0d0d0d;letter-spacing:-.01em;overflow-wrap:break-word;word-break:break-word}
+.card-sub{font-size:12px;font-weight:300;color:#777;line-height:1.55;margin-top:2px;overflow-wrap:break-word;word-break:break-word}
 .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:auto;padding-top:4px}
 .tag{font-size:10px;font-weight:500;letter-spacing:.03em;padding:2px 7px;border:0.5px solid #e0e0e0;border-radius:2px;color:#999;transition:all .1s}
 .card:hover .tag,.card.open .tag{border-color:#faa8c8;color:#fb2a7b}
@@ -123,7 +123,7 @@ main{max-width:1100px;margin:0 auto;padding:1.25rem 1.5rem 1rem}
 .vote-rank{width:52px;flex-shrink:0;text-align:center;font-size:18px;font-weight:300;color:#e0e0e0;letter-spacing:-.02em;padding:14px 0;border-right:0.5px solid #e8e8e8}
 .vote-body{flex:1;padding:14px 16px;min-width:0}
 .vote-cat{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#ccc;margin-bottom:3px}
-.vote-title{font-size:13px;font-weight:600;color:#0d0d0d;line-height:1.4;letter-spacing:-.01em}
+.vote-title{font-size:13px;font-weight:600;color:#0d0d0d;line-height:1.4;letter-spacing:-.01em;overflow-wrap:break-word;word-break:break-word}
 .vote-desc{font-size:12px;font-weight:300;color:#999;line-height:1.7;margin-top:5px;max-width:480px}
 .vote-bar-wrap{flex-shrink:0;width:150px;padding:14px 16px 14px 0;display:flex;flex-direction:column;gap:6px;align-items:flex-end}
 .vote-bar-track{width:100%;height:4px;background:#f0f0f0;border-radius:2px;overflow:hidden}
@@ -154,6 +154,15 @@ footer a:hover{text-decoration:underline}
 /* share button */
 .share-btn{display:inline-flex;align-items:center;gap:5px;margin-top:12px;padding:5px 12px;font-size:11px;font-weight:500;font-family:'IBM Plex Sans Thai',sans-serif;border:1px solid #e0e0e0;border-radius:2px;cursor:pointer;background:#fff;color:#555;text-decoration:none;transition:all .12s}
 .share-btn:hover{border-color:#1877f2;color:#1877f2}
+
+@media(max-width:600px){
+  .card-top{gap:6px}
+  .vote-row{flex-wrap:wrap}
+  .vote-bar-wrap{width:100%;padding:0 16px 14px;border-top:0.5px solid #f0f0f0;margin-top:4px}
+  .tip-bar{flex-wrap:wrap;gap:8px}
+  header .header-inner{flex-direction:column;align-items:flex-start}
+  .site-meta{text-align:left}
+}
 </style>
 </head>
 <body>
