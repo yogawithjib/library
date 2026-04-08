@@ -180,6 +180,16 @@ footer a:hover{text-decoration:underline}
   <div class="gallery"   id="gallery"></div>
 </main>
 
+<div style="max-width:1100px;margin:0 auto;padding:2rem 1.5rem 0">
+  <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:1.1rem">
+    <div style="font-size:11px;color:#aaa;letter-spacing:.06em" id="video-count"></div>
+    <div style="flex:1;height:0.5px;background:#e8e8e8"></div>
+  </div>
+  <div style="font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fb2a7b;margin-bottom:6px">วิดีโอ</div>
+  <div style="font-size:16px;font-weight:600;letter-spacing:-.01em;margin-bottom:1.25rem">วิดีโอจาก Yoga with Jib</div>
+  <div class="gallery" id="video-gallery"></div>
+</div>
+
 <div class="vote-section">
   <div class="vote-eyebrow">ร่วม vote</div>
   <div class="vote-heading">อยากคุยเรื่องอะไรในการพบกันครั้งถัดไป?</div>
@@ -274,15 +284,7 @@ const TOPICS = [
     source: 'รวบรวมจาก comment ใน Facebook คอมมูนิตี้ · <a href="https://www.facebook.com/share/p/1AZTjPUi31/" target="_blank" rel="noopener" style="color:#fb2a7b;text-decoration:none;border-bottom:0.5px solid #fb2a7b">ดูโพสต์ต้นฉบับ ↗</a> · <a href="https://www.facebook.com/share/p/1BSNpyUCvd/" target="_blank" rel="noopener" style="color:#fb2a7b;text-decoration:none;border-bottom:0.5px solid #fb2a7b">โพสต์เพิ่มเติม ↗</a>',
   },
 
-  {
-    cat: 'video',
-    title: 'วิดีโอจาก Yoga with Jib',
-    sub: 'คลิปฟรีและสำหรับสมาชิก — รายการกำลังจะมา',
-    tags: ['YouTube', 'ฟรี', 'สมาชิก'],
-    isVideoTopic: true,
-  },
-
-  /* ── เพิ่มหัวข้อที่มีเนื้อหาแล้วที่นี่ ── */
+  /* วิดีโอโหลดจาก Google Sheets อัตโนมัติ */
 
 ];
 
@@ -425,6 +427,116 @@ function renderVotes() {
 
 render();
 renderVotes();
+
+/* ── VIDEOS FROM GOOGLE SHEETS ── */
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSOt-dH97iM6e76OmBADe-t_eh5st50z5DNhsWxo9mQMJBcCSB6NinsU80Uimb-vYchwT2Q2nxVrF-t/pub?output=csv';
+const PROXY = 'https://corsproxy.io/?';
+
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  const rawHeaders = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').replace(/\uFEFF/g, ''));
+  return lines.slice(1).filter(l => l.trim()).map(line => {
+    const vals = [];
+    let cur = '', inQ = false;
+    for (let ch of line) {
+      if (ch === '"') { inQ = !inQ; }
+      else if (ch === ',' && !inQ) { vals.push(cur.trim()); cur = ''; }
+      else { cur += ch; }
+    }
+    vals.push(cur.trim());
+    const obj = {};
+    rawHeaders.forEach((h, i) => obj[h] = (vals[i] || '').replace(/^"|"$/g, '').trim());
+    // Find title from any column containing 'title' (case-insensitive)
+    const titleKey = rawHeaders.find(h => h.toLowerCase().includes('title')) || '';
+    obj._title = obj[titleKey] || '';
+    return obj;
+  }).filter(r => r._title);
+}
+
+function badgeHtml(type) {
+  const t = (type || '').trim();
+  if (!t || t.toLowerCase() === 'free' || t === 'ฟรี')
+    return `<span class="free-badge">ฟรี</span>`;
+  if (t === 'ผีเสื้อ' || t.includes('ผีเสื้อ'))
+    return `<span class="butterfly-badge">ผีเสื้อ</span>`;
+  if (t === 'แมลงปอ' || t.includes('แมลงปอ'))
+    return `<span class="dragonfly-badge">แมลงปอ</span>`;
+  return `<span class="free-badge">${t}</span>`;
+}
+
+function renderVideos(rows) {
+  const wrap = document.getElementById('video-gallery');
+  if (!rows.length) {
+    wrap.innerHTML = '<p style="color:#bbb;font-size:13px;padding:1rem 0">ยังไม่มีวิดีโอในขณะนี้</p>';
+    return;
+  }
+  wrap.innerHTML = rows.map((r, i) => {
+    const title = r._title || r['Full title'] || r['title'] || '';
+    const sub = r['description'] || '';
+    const type = r['ใครดูได้บ้าง (สมาชิกระดับไหน / ฟรี)'] || r['type'] || '';
+    const dur = r['duration (mins)'] || r['duration'] || '';
+    const url = r['url'] || '';
+    const intro = r['description'] || '';
+    const level = r['level (ระดับผู้เรียน)'] || '';
+    const date = r['date'] || '';
+    const rawTags = r['tags'] || '';
+    const tags = rawTags.split(',').map(t => `<span class="tag">${t.trim()}</span>`).join('');
+    const durHtml = dur ? `<span style="font-size:10px;color:#bbb;margin-left:4px">${dur} นาที</span>` : '';
+    const levelHtml = level ? `<span class="tag">${level}</span>` : '';
+    const dateHtml = date ? `<span style="font-size:10px;font-weight:300;color:#bbb">${date}</span>` : '';
+    return `
+    <div class="card" id="vc${i}" onclick="toggleV(${i})">
+      <div class="card-top">
+        <div style="flex:1;min-width:0">
+          <div class="cat-label">วิดีโอ ${dateHtml}</div>
+          <div class="card-title">${title}</div>
+          <div class="card-sub">${sub}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0">
+          <span class="card-num">${String(i+1).padStart(2,'0')}</span>
+          <svg class="chev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5l4 4 4-4"/></svg>
+        </div>
+      </div>
+      <div class="tags">${tags}${levelHtml}</div>
+      <div class="card-body">
+        <a class="video-link" href="${url}" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x=".5" y=".5" width="12" height="12" rx="2" stroke="#ddd"/><path class="play-icon" d="M5 3.8l4 2.7-4 2.7V3.8z" fill="#0d0d0d"/></svg>
+          ดูบน YouTube ${durHtml}
+          ${badgeHtml(type)}
+        </a>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleV(i) { document.getElementById('vc' + i).classList.toggle('open'); }
+
+async function loadVideos() {
+  const wrap = document.getElementById('video-gallery');
+  wrap.innerHTML = '<p style="color:#bbb;font-size:13px;padding:1rem 0">กำลังโหลดวิดีโอ...</p>';
+  let text = '';
+  try {
+    const res = await fetch(PROXY + encodeURIComponent(SHEET_URL));
+    text = await res.text();
+  } catch(e) {
+    try {
+      const res2 = await fetch(SHEET_URL);
+      text = await res2.text();
+    } catch(e2) {
+      wrap.innerHTML = '<p style="color:#bbb;font-size:13px;padding:1rem 0">ไม่สามารถโหลดวิดีโอได้ — <a href="https://youtube.com/yogawithjib" target="_blank" style="color:#fb2a7b">ดูบน YouTube แทน ↗</a></p>';
+      return;
+    }
+  }
+  const rows = parseCSV(text);
+  const headers = text.split('\n')[0].split(',').map(h => h.trim().replace(/^"|"$/g,'').replace(/\uFEFF/g,''));
+  if (!rows.length) {
+    wrap.innerHTML = '<p style="color:#999;font-size:12px;padding:1rem 0">ไม่พบข้อมูล — คอลัมน์ที่พบ: ' + headers.join(' | ') + '</p>';
+    return;
+  }
+  renderVideos(rows);
+}
+
+loadVideos();
 </script>
 </body>
 </html>
