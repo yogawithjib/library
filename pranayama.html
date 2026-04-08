@@ -8,113 +8,50 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:'IBM Plex Sans Thai',sans-serif;
-  background:#fff;
-  color:#0d0d0d;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  padding:2rem 1rem;
-  -webkit-font-smoothing:antialiased;
-}
-
-/* header */
+body{font-family:'IBM Plex Sans Thai',sans-serif;background:#fff;color:#0d0d0d;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1rem;-webkit-font-smoothing:antialiased}
 .header{text-align:center;margin-bottom:2.5rem}
 .eyebrow{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fb2a7b;margin-bottom:6px}
 h1{font-size:22px;font-weight:600;letter-spacing:-.02em;margin-bottom:8px}
 .subtitle{font-size:13px;font-weight:300;color:#888;line-height:1.7;max-width:320px;margin:0 auto}
-
-/* settings */
 .settings{display:flex;align-items:center;gap:12px;margin-bottom:2.5rem;flex-wrap:wrap;justify-content:center}
 .setting-label{font-size:11px;font-weight:500;color:#aaa;letter-spacing:.06em;text-transform:uppercase}
 .count-btns{display:flex;align-items:center;gap:8px}
 .count-btn{width:28px;height:28px;border:0.5px solid #d0d0d0;border-radius:2px;background:#fff;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#0d0d0d;transition:all .12s}
 .count-btn:hover{border-color:#fb2a7b;color:#fb2a7b}
 .count-val{font-size:15px;font-weight:600;min-width:20px;text-align:center}
-
-/* box container */
 .box-wrap{position:relative;width:260px;height:260px;margin:0 auto 2.5rem}
-
-/* box sides */
 .box-svg{position:absolute;inset:0;width:100%;height:100%}
-
-/* phase label in center */
-.center-info{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
-  pointer-events:none;
-}
+.center-info{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;pointer-events:none}
 .phase-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#bbb;transition:color .3s}
 .phase-label.active{color:#fb2a7b}
-.phase-count{font-size:52px;font-weight:300;color:#0d0d0d;letter-spacing:-.04em;line-height:1;min-width:50px;text-align:center;transition:opacity .2s}
+.phase-count{font-size:52px;font-weight:300;color:#0d0d0d;letter-spacing:-.04em;line-height:1;min-width:50px;text-align:center}
 .phase-name{font-size:13px;font-weight:400;color:#555}
-
-/* round counter */
 .round-info{font-size:12px;font-weight:300;color:#bbb;text-align:center;margin-bottom:2rem;letter-spacing:.04em}
-
-/* controls */
 .controls{display:flex;gap:10px;align-items:center}
-.btn-main{
-  padding:12px 32px;
-  font-size:13px;font-weight:600;
-  font-family:'IBM Plex Sans Thai',sans-serif;
-  letter-spacing:.04em;
-  border:1px solid #0d0d0d;
-  border-radius:2px;
-  cursor:pointer;
-  background:#0d0d0d;
-  color:#fff;
-  transition:all .12s;
-}
+.btn-main{padding:12px 32px;font-size:13px;font-weight:600;font-family:'IBM Plex Sans Thai',sans-serif;letter-spacing:.04em;border:1px solid #0d0d0d;border-radius:2px;cursor:pointer;background:#0d0d0d;color:#fff;transition:all .12s}
 .btn-main:hover{background:#333;border-color:#333}
 .btn-main.running{background:#fff;color:#fb2a7b;border-color:#fb2a7b}
 .btn-main.running:hover{background:#fff5f9}
-.btn-reset{
-  padding:12px 20px;
-  font-size:13px;font-weight:500;
-  font-family:'IBM Plex Sans Thai',sans-serif;
-  border:0.5px solid #d0d0d0;
-  border-radius:2px;
-  cursor:pointer;
-  background:#fff;
-  color:#888;
-  transition:all .12s;
-}
+.btn-reset{padding:12px 20px;font-size:13px;font-weight:500;font-family:'IBM Plex Sans Thai',sans-serif;border:0.5px solid #d0d0d0;border-radius:2px;cursor:pointer;background:#fff;color:#888;transition:all .12s}
 .btn-reset:hover{border-color:#0d0d0d;color:#0d0d0d}
-
-/* phase indicators (corners) */
-.corner-label{
-  position:absolute;
-  font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-  color:#ddd;transition:color .3s;
-  white-space:nowrap;
-}
+.corner-label{position:absolute;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#ddd;transition:color .3s;white-space:nowrap}
 .corner-label.active{color:#fb2a7b}
-.tl{top:0;left:0}
-.tr{top:0;right:0;text-align:right}
-.br{bottom:0;right:0;text-align:right}
-.bl{bottom:0;left:0}
-
-/* done message */
-.done-msg{
-  position:fixed;inset:0;background:rgba(255,255,255,.95);
-  display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;
-  z-index:10;
-}
-.done-msg.show{display:flex}
-.done-title{font-size:22px;font-weight:600;letter-spacing:-.02em}
-.done-sub{font-size:13px;font-weight:300;color:#888}
-
-/* back link */
-.back{
-  position:fixed;top:1.25rem;left:1.25rem;
-  font-size:11px;font-weight:500;color:#bbb;
-  text-decoration:none;letter-spacing:.04em;
-  transition:color .12s;
-}
+.tl{top:0;left:0}.tr{top:0;right:0;text-align:right}.br{bottom:0;right:0;text-align:right}.bl{bottom:0;left:0}
+.done-overlay{display:none;position:fixed;inset:0;background:rgba(255,255,255,.97);z-index:20;align-items:center;justify-content:center;flex-direction:column;padding:2rem}
+.done-overlay.show{display:flex}
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;width:100%;max-width:320px;margin-bottom:16px}
+.stat-box{background:#fafafa;border-radius:4px;padding:16px;text-align:center}
+.stat-box.highlight{background:#fff8fb;border:0.5px solid #faa8c8}
+.stat-lbl{font-size:10px;font-weight:500;color:#bbb;letter-spacing:.06em;margin-bottom:6px}
+.stat-num{font-size:32px;font-weight:300;color:#0d0d0d;letter-spacing:-.03em;line-height:1}
+.stat-box.highlight .stat-lbl{color:#fb2a7b}
+.stat-box.highlight .stat-num{color:#fb2a7b}
+.stat-unit{font-size:11px;color:#bbb;margin-top:2px}
+.stat-box.highlight .stat-unit{color:#faa8c8}
+.benefit-box{background:#f5f5f5;border-radius:4px;padding:12px 16px;width:100%;max-width:320px;margin-bottom:20px;text-align:left}
+.benefit-lbl{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#bbb;margin-bottom:6px}
+.benefit-text{font-size:12px;font-weight:300;color:#555;line-height:1.8}
+.back{position:fixed;top:1.25rem;left:1.25rem;font-size:11px;font-weight:500;color:#bbb;text-decoration:none;letter-spacing:.04em;transition:color .12s}
 .back:hover{color:#0d0d0d}
 </style>
 </head>
@@ -125,7 +62,7 @@ h1{font-size:22px;font-weight:600;letter-spacing:-.02em;margin-bottom:8px}
 <div class="header">
   <div class="eyebrow">Pranayama · Box Breathing</div>
   <h1>หายใจรูปกล่อง</h1>
-  <p class="subtitle">หายใจเข้า — กลั้น — หายใจออก — กลั้น แต่ละด้านเท่ากัน ช่วยสงบระบบประสาท ลดความเครียด</p>
+  <p class="subtitle">เทคนิคนี้เรียกว่า Sama Vritti หรือ Square Breathing ครับ หายใจสี่จังหวะด้วยสัดส่วนที่เท่ากัน เพื่อปรับสมดุลระบบประสาทและลดความว้าวุ่นในใจ</p>
 </div>
 
 <div class="settings">
@@ -144,42 +81,63 @@ h1{font-size:22px;font-weight:600;letter-spacing:-.02em;margin-bottom:8px}
 </div>
 
 <div class="box-wrap">
-  <!-- Corner labels -->
   <div class="corner-label bl" id="lbl-in">หายใจเข้า</div>
   <div class="corner-label tl" id="lbl-hold1">กลั้น</div>
   <div class="corner-label tr" id="lbl-out">หายใจออก</div>
   <div class="corner-label br" id="lbl-hold2">กลั้น</div>
 
   <svg class="box-svg" viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- static box outline -->
     <rect x="30" y="30" width="200" height="200" rx="4" stroke="#f0f0f0" stroke-width="1.5"/>
-    <!-- animated sides: top, right, bottom, left -->
+    <line id="side-left"   x1="30"  y1="230" x2="30"  y2="30"  stroke="#fb2a7b" stroke-width="3" stroke-linecap="round" stroke-dasharray="200" stroke-dashoffset="200"/>
     <line id="side-top"    x1="30"  y1="30"  x2="230" y2="30"  stroke="#fb2a7b" stroke-width="3" stroke-linecap="round" stroke-dasharray="200" stroke-dashoffset="200"/>
     <line id="side-right"  x1="230" y1="30"  x2="230" y2="230" stroke="#fb2a7b" stroke-width="3" stroke-linecap="round" stroke-dasharray="200" stroke-dashoffset="200"/>
     <line id="side-bottom" x1="230" y1="230" x2="30"  y2="230" stroke="#fb2a7b" stroke-width="3" stroke-linecap="round" stroke-dasharray="200" stroke-dashoffset="200"/>
-    <line id="side-left"   x1="30"  y1="230" x2="30"  y2="30"  stroke="#fb2a7b" stroke-width="3" stroke-linecap="round" stroke-dasharray="200" stroke-dashoffset="200"/>
-    <!-- dot that travels along the box -->
-    <circle id="dot" cx="30" cy="30" r="6" fill="#fb2a7b" opacity="0"/>
+    <circle id="dot" cx="30" cy="230" r="6" fill="#fb2a7b" opacity="0"/>
   </svg>
 
   <div class="center-info">
     <div class="phase-label" id="phase-label">พร้อมเริ่ม</div>
     <div class="phase-count" id="phase-count">—</div>
-    <div class="phase-name" id="phase-name"></div>
+    <div class="phase-name"  id="phase-name"></div>
   </div>
 </div>
 
 <div class="round-info" id="round-info">— / — รอบ</div>
-
 <div class="controls">
   <button class="btn-main" id="btn-start">เริ่ม</button>
   <button class="btn-reset" id="btn-reset">reset</button>
 </div>
 
-<div class="done-msg" id="done-msg">
-  <div class="done-title">เสร็จแล้ว</div>
-  <div class="done-sub" id="done-sub"></div>
-  <button class="btn-main" id="btn-again" style="margin-top:8px">ทำอีกครั้ง</button>
+<!-- Done overlay -->
+<div class="done-overlay" id="done-overlay">
+  <div style="font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fb2a7b;margin-bottom:20px">เสร็จแล้ว</div>
+  <div class="stat-grid">
+    <div class="stat-box">
+      <div class="stat-lbl">รอบที่ทำ</div>
+      <div class="stat-num" id="stat-rounds">—</div>
+      <div class="stat-unit">รอบ</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-lbl">เวลารวม</div>
+      <div class="stat-num" id="stat-time">—</div>
+      <div class="stat-unit">นาที</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-lbl">ลมหายใจ</div>
+      <div class="stat-num" id="stat-breaths">—</div>
+      <div class="stat-unit">ครั้ง</div>
+    </div>
+    <div class="stat-box highlight">
+      <div class="stat-lbl">วินาทีต่อด้าน</div>
+      <div class="stat-num" id="stat-secs">—</div>
+      <div class="stat-unit">วินาที</div>
+    </div>
+  </div>
+  <div class="benefit-box">
+    <div class="benefit-lbl">ผลลัพธ์</div>
+    <div class="benefit-text" id="stat-benefit">—</div>
+  </div>
+  <button class="btn-main" id="btn-again">ทำอีกครั้ง</button>
 </div>
 
 <script>
@@ -189,43 +147,41 @@ const PHASES = [
   { key:'out',   label:'หายใจออก', side:'right',  lbl:'lbl-out'   },
   { key:'hold2', label:'กลั้น',     side:'bottom', lbl:'lbl-hold2' },
 ];
-
-// dot path corners
 const CORNERS = [
-  {x:30,  y:230},  // BL → start of left (inhale goes up)
-  {x:30,  y:30 },  // TL → start of top (hold)
-  {x:230, y:30 },  // TR → start of right (exhale goes down)
-  {x:230, y:230},  // BR → start of bottom (hold)
+  {x:30,  y:230},
+  {x:30,  y:30 },
+  {x:230, y:30 },
+  {x:230, y:230},
 ];
+const PHASE_NAMES = ['หายใจเข้า ช้าๆ','กลั้นลมหายใจ','หายใจออก ช้าๆ','กลั้นลมหายใจ'];
 
-let secs     = 4;
-let totalRounds = 4;
-let running  = false;
-let phase    = 0;
-let round    = 0;
-let ticker   = null;
-let countdown = 0;
-let animFrame = null;
+let secs = 4, totalRounds = 4, running = false, curPhase = 0, curRound = 0;
+let ticker = null, animFrame = null;
 
-const elLabel  = document.getElementById('phase-label');
-const elCount  = document.getElementById('phase-count');
-const elName   = document.getElementById('phase-name');
-const elRound  = document.getElementById('round-info');
-const btnStart = document.getElementById('btn-start');
-const btnReset = document.getElementById('btn-reset');
-const dot      = document.getElementById('dot');
-const doneMsg  = document.getElementById('done-msg');
+const elLabel   = document.getElementById('phase-label');
+const elCount   = document.getElementById('phase-count');
+const elName    = document.getElementById('phase-name');
+const elRound   = document.getElementById('round-info');
+const btnStart  = document.getElementById('btn-start');
+const overlay   = document.getElementById('done-overlay');
+const dot       = document.getElementById('dot');
 
-function setSecVal(v){ secs = Math.max(2,Math.min(8,v)); document.getElementById('sec-val').textContent = secs; }
-function setRoundVal(v){ totalRounds = Math.max(1,Math.min(12,v)); document.getElementById('round-val').textContent = totalRounds; }
-document.getElementById('sec-minus').onclick  = ()=>setSecVal(secs-1);
-document.getElementById('sec-plus').onclick   = ()=>setSecVal(secs+1);
-document.getElementById('round-minus').onclick = ()=>setRoundVal(totalRounds-1);
-document.getElementById('round-plus').onclick  = ()=>setRoundVal(totalRounds+1);
+document.getElementById('sec-minus').onclick   = ()=>setSec(secs-1);
+document.getElementById('sec-plus').onclick    = ()=>setSec(secs+1);
+document.getElementById('round-minus').onclick  = ()=>setRound(totalRounds-1);
+document.getElementById('round-plus').onclick   = ()=>setRound(totalRounds+1);
+document.getElementById('btn-reset').onclick    = reset;
+document.getElementById('btn-again').onclick    = ()=>{ overlay.classList.remove('show'); start(); };
+btnStart.onclick = ()=>{ running ? stop() : start(); };
+
+function setSec(v){ secs = Math.max(2,Math.min(8,v)); document.getElementById('sec-val').textContent = secs; }
+function setRound(v){ totalRounds = Math.max(1,Math.min(12,v)); document.getElementById('round-val').textContent = totalRounds; }
 
 function resetSides(){
-  ['top','right','bottom','left'].forEach(s=>{
-    document.getElementById('side-'+s).style.strokeDashoffset = '200';
+  ['left','top','right','bottom'].forEach(s=>{
+    const el = document.getElementById('side-'+s);
+    el.style.transition = 'none';
+    el.style.strokeDashoffset = '200';
   });
   dot.setAttribute('opacity','0');
   dot.setAttribute('cx', 30);
@@ -233,90 +189,64 @@ function resetSides(){
 }
 
 function activateLabel(idx){
-  PHASES.forEach((p,i)=>{
-    document.getElementById(p.lbl).classList.toggle('active', i===idx);
-  });
+  PHASES.forEach((p,i)=>document.getElementById(p.lbl).classList.toggle('active', i===idx));
 }
 
-function animateSide(phaseIdx, duration, onDone){
-  const side  = document.getElementById('side-'+PHASES[phaseIdx].side);
-  const from  = CORNERS[phaseIdx];
-  const to    = CORNERS[(phaseIdx+1)%4];
+function animateSide(phaseIdx, duration){
+  const side = document.getElementById('side-'+PHASES[phaseIdx].side);
+  const from = CORNERS[phaseIdx];
+  const to   = CORNERS[(phaseIdx+1)%4];
+  side.style.transition = 'none';
+  side.style.strokeDashoffset = '200';
   dot.setAttribute('opacity','1');
   dot.setAttribute('cx', from.x);
   dot.setAttribute('cy', from.y);
-
-  // reset this side
-  side.style.transition = 'none';
-  side.style.strokeDashoffset = '200';
-
   let start = null;
   function step(ts){
     if (!running) return;
     if (!start) start = ts;
     const p = Math.min((ts-start)/duration, 1);
-    side.style.transition = 'none';
     side.style.strokeDashoffset = String(200 - 200*p);
     dot.setAttribute('cx', from.x + (to.x-from.x)*p);
     dot.setAttribute('cy', from.y + (to.y-from.y)*p);
     if (p < 1) animFrame = requestAnimationFrame(step);
-    else { side.style.strokeDashoffset = '0'; onDone(); }
+    else side.style.strokeDashoffset = '0';
   }
   animFrame = requestAnimationFrame(step);
 }
 
-function startTick(phaseIdx, onDone){
-  countdown = secs;
-  elCount.textContent = countdown;
+function runPhase(phaseIdx){
+  if (!running) return;
+  curPhase = phaseIdx;
   const p = PHASES[phaseIdx];
   elLabel.textContent = p.label;
   elLabel.classList.add('active');
+  elName.textContent  = PHASE_NAMES[phaseIdx];
   activateLabel(phaseIdx);
-
-  const names = ['หายใจเข้า ช้าๆ', 'กลั้นลมหายใจ', 'หายใจออก ช้าๆ', 'กลั้นลมหายใจ'];
-  elName.textContent = names[phaseIdx];
-
+  animateSide(phaseIdx, secs*1000);
+  let cd = secs;
+  elCount.textContent = cd;
   ticker = setInterval(()=>{
-    countdown--;
-    elCount.textContent = Math.max(countdown, 1);
-    if (countdown <= 0){ clearInterval(ticker); onDone(); }
+    if (!running){ clearInterval(ticker); return; }
+    cd--;
+    elCount.textContent = Math.max(cd, 1);
+    if (cd <= 0){
+      clearInterval(ticker);
+      const next = (phaseIdx+1)%4;
+      if (next === 0){
+        curRound++;
+        elRound.textContent = curRound + ' / ' + totalRounds + ' รอบ';
+        if (curRound >= totalRounds){ finish(); return; }
+      }
+      runPhase(next);
+    }
   }, 1000);
 }
 
-function runPhase(phaseIdx){
-  if (!running) return;
-  animateSide(phaseIdx, secs*1000, ()=>{});
-  startTick(phaseIdx, ()=>{
-    if (!running) return;
-    const next = (phaseIdx+1)%4;
-    if (next === 0){
-      round++;
-      elRound.textContent = round + ' / ' + totalRounds + ' รอบ';
-      if (round >= totalRounds){ finish(); return; }
-    }
-    runPhase(next);
-  });
-}
-
-function finish(){
-  running = false;
-  btnStart.textContent = 'เริ่ม';
-  btnStart.classList.remove('running');
-  elLabel.textContent  = 'เสร็จแล้ว';
-  elCount.textContent  = '✓';
-  elName.textContent   = '';
-  activateLabel(-1);
-  document.getElementById('done-sub').textContent =
-    totalRounds + ' รอบ · ' + secs + ' วินาทีต่อด้าน · รวม ' + (totalRounds*secs*4) + ' วินาที';
-  doneMsg.classList.add('show');
-}
-
 function start(){
-  running = true;
-  round   = 0;
-  phase   = 0;
+  running = true; curRound = 0; curPhase = 0;
   resetSides();
-  doneMsg.classList.remove('show');
+  overlay.classList.remove('show');
   btnStart.textContent = 'หยุด';
   btnStart.classList.add('running');
   elRound.textContent  = '0 / ' + totalRounds + ' รอบ';
@@ -342,12 +272,39 @@ function reset(){
   elCount.textContent = '—';
   elName.textContent  = '';
   elRound.textContent = '— / — รอบ';
-  doneMsg.classList.remove('show');
+  overlay.classList.remove('show');
 }
 
-btnStart.onclick = ()=>{ running ? stop() : start(); };
-btnReset.onclick  = reset;
-document.getElementById('btn-again').onclick = ()=>{ doneMsg.classList.remove('show'); start(); };
+function finish(){
+  running = false;
+  clearInterval(ticker);
+  btnStart.textContent = 'เริ่ม';
+  btnStart.classList.remove('running');
+  elLabel.textContent  = 'เสร็จแล้ว';
+  elCount.textContent  = '✓';
+  elName.textContent   = '';
+  activateLabel(-1);
+
+  const totalSecs = totalRounds * secs * 4;
+  const mins = (totalSecs/60).toFixed(1);
+  const benefits = [
+    [2, 'เริ่มต้นดี — ระบบประสาทเริ่มสงบลง ความเครียดเริ่มคลายตัว'],
+    [4, 'ดีมาก — cortisol ลดลง โฟกัสและสมาธิดีขึ้น'],
+    [6, 'ยอดเยี่ยม — เข้าสู่โหมด deep calm ร่างกายและใจพักผ่อนเต็มที่'],
+    [99,'ระดับมืออาชีพ — ระบบประสาทพาราซิมพาเธติกทำงานเต็มที่'],
+  ];
+  let benefit = benefits[benefits.length-1][1];
+  for (const [minR, text] of benefits){
+    if (totalRounds <= minR){ benefit = text; break; }
+  }
+
+  document.getElementById('stat-rounds').textContent  = totalRounds;
+  document.getElementById('stat-time').textContent    = mins;
+  document.getElementById('stat-breaths').textContent = totalRounds;
+  document.getElementById('stat-secs').textContent    = secs;
+  document.getElementById('stat-benefit').textContent = benefit;
+  overlay.classList.add('show');
+}
 </script>
 </body>
 </html>
