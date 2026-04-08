@@ -430,7 +430,7 @@ renderVotes();
 
 /* ── VIDEOS FROM GOOGLE SHEETS ── */
 const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSOt-dH97iM6e76OmBADe-t_eh5st50z5DNhsWxo9mQMJBcCSB6NinsU80Uimb-vYchwT2Q2nxVrF-t/pub?output=csv';
-const PROXY = 'https://corsproxy.io/?';
+const PROXY = 'https://api.allorigins.win/raw?url=';
 
 function parseCSV(text) {
   const lines = text.trim().split('\n');
@@ -455,12 +455,12 @@ function parseCSV(text) {
 
 function badgeHtml(type) {
   const t = (type || '').trim();
-  if (!t || t.toLowerCase() === 'free' || t === 'ฟรี')
+  if (!t || t.toLowerCase() === 'free' || t === 'ฟรี' || t === '')
     return `<span class="free-badge">ฟรี</span>`;
-  if (t === 'ผีเสื้อ' || t.includes('ผีเสื้อ'))
-    return `<span class="butterfly-badge">ผีเสื้อ</span>`;
-  if (t === 'แมลงปอ' || t.includes('แมลงปอ'))
+  if (t.includes('แมลงปอ'))
     return `<span class="dragonfly-badge">แมลงปอ</span>`;
+  if (t.includes('ผีเสื้อ'))
+    return `<span class="butterfly-badge">ผีเสื้อ</span>`;
   return `<span class="free-badge">${t}</span>`;
 }
 
