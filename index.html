@@ -1,25 +1,382 @@
-community & resource library
-ห้องสมุดเพื่อนโยคะ
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ห้องสมุดเพื่อนโยคะ — Yoga with Jib</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'FabfeltScript';
+  src:url('fonts/FabfeltScript-Bold.woff2') format('woff2'),
+      url('fonts/FabfeltScript-Bold.woff') format('woff');
+  font-weight:bold;font-style:normal;font-display:swap;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px}
+body{font-family:'IBM Plex Sans Thai',sans-serif;background:#fff;color:#0d0d0d;min-height:100vh;-webkit-font-smoothing:antialiased}
 
+/* ── HEADER ── */
+header{border-bottom:1.5px solid #0d0d0d;padding:1.25rem 1.5rem 1rem}
+.header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:1rem}
+.site-label{font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:none;color:#fb2a7b;margin-bottom:5px}
+.site-title{font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1}
+.pink-bar{display:flex;align-items:center;gap:6px;margin-top:8px}
+.pink-bar span{display:block;height:2px;background:#fb2a7b}
+.pink-bar .bar-long{width:36px}
+.pink-bar .bar-short{width:12px;opacity:.4}
+.site-meta{font-size:11px;color:#999;text-align:right;line-height:1.7}
+.site-meta a{color:#fb2a7b;text-decoration:none;font-weight:500}
+.site-meta a:hover{text-decoration:underline}
+.brand-name{display:block;font-family:'FabfeltScript','Dancing Script',cursive;font-weight:bold;font-size:28px;color:#0d0d0d;line-height:1.1;letter-spacing:.01em;margin-bottom:4px}
 
-Yoga with Jib
-community-sourced · living and evolving
-youtube.com/yogawithjib ↗
-คอมมูนิตี้คนรักโยคะ
-แหล่งรวมข้อมูลออนไลน์จากครูโยคะเพื่อครูโยคะ
-แหล่งรวมข้อมูลออนไลน์เพื่อคนที่รักการฝึกโยคะและการสอนโยคะ เราเชื่อว่าความรู้และประสบการณ์ที่แต่ละคนสะสมมานั้นมีคุณค่ามาก และควรได้รับการแบ่งปัน ไม่ว่าจะเป็นเรื่องการฝึก การสอน การเงิน การจัดการสตูดิโอ หรือชีวิตของครูโยคะในแบบที่ไม่มีใครพูดถึง
-เนื้อหาที่คุยกันแล้ว
+/* ── INTRO ── */
+.intro-banner{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 1.5rem;border-bottom:0.5px solid #e8e8e8}
+.intro-inner{max-width:560px}
+.intro-eyebrow{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fb2a7b;margin-bottom:10px}
+.intro-heading{font-size:19px;font-weight:600;line-height:1.45;letter-spacing:-.02em;color:#0d0d0d;margin-bottom:12px}
+.intro-body{font-size:13px;font-weight:300;color:#666;line-height:1.85}
+.intro-body strong{font-weight:500;color:#0d0d0d}
+.intro-rule{display:flex;align-items:center;gap:10px;margin-top:20px}
+.intro-rule span{font-size:11px;font-weight:400;color:#bbb;letter-spacing:.04em;white-space:nowrap}
+.intro-rule::after{content:'';flex:1;height:0.5px;background:#e8e8e8}
 
-ทั้งหมด
-ธุรกิจ & การเงิน
-ทักษะการสอน
-สตูดิโอ
-ชีวิตครูโยคะ
-วิดีโอ
+/* ── TOOLBAR ── */
+.toolbar{max-width:1100px;margin:0 auto;padding:1rem 1.5rem .75rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:0.5px solid #e0e0e0}
+.search-wrap{flex:1;min-width:150px}
+.search-wrap input{width:100%;padding:7px 12px;font-size:13px;font-family:'IBM Plex Sans Thai',sans-serif;border:1px solid #d0d0d0;border-radius:2px;background:#fff;color:#0d0d0d;outline:none;transition:border-color .12s}
+.search-wrap input:focus{border-color:#fb2a7b;box-shadow:0 0 0 2px rgba(251,42,123,.08)}
+.search-wrap input::placeholder{color:#bbb}
+.tabs{display:flex;gap:5px;flex-wrap:wrap}
+.tab{padding:5px 13px;font-size:12px;font-weight:500;font-family:'IBM Plex Sans Thai',sans-serif;letter-spacing:.03em;border:1px solid #d0d0d0;border-radius:2px;cursor:pointer;background:#fff;color:#666;transition:all .12s;user-select:none}
+.tab:hover{border-color:#fb2a7b;color:#fb2a7b}
+.tab.active{background:#fb2a7b;border-color:#fb2a7b;color:#fff}
 
-ร่วม VOTE
-อยากคุยเรื่องอะไรในการพบกันครั้งถัดไป?
-ตัวอย่างหัวข้อที่เราคุยกันได้ — กด vote หัวข้อที่สนใจ แล้วเราจะเลือกอันที่ได้รับความสนใจสูงสุดมาพูดคุยกัน
-* vote ใช้ได้ 1 ครั้งต่อเบราว์เซอร์ · ขณะนี้บันทึกในเครื่องของคุณ · จะอัปเดตเป็น real-time เร็วๆ นี้
-คลังความรู้รวบรวมโดยคอมมูนิตี้คนรักโยคะ — เนื้อหาเป็นข้อมูลทั่วไป ไม่ใช่คำแนะนำทางกฎหมายหรือการเงิน
-Yoga with Jib on YouTube ↗
+/* ── MAIN ── */
+main{max-width:1100px;margin:0 auto;padding:1.25rem 1.5rem 1rem}
+.count-bar{font-size:11px;color:#aaa;letter-spacing:.06em;margin-bottom:1.1rem;display:flex;align-items:center;gap:8px}
+.count-bar::after{content:'';flex:1;height:0.5px;background:#e8e8e8}
+
+/* ── GALLERY ── */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid #0d0d0d;background:#0d0d0d}
+@media(max-width:740px){.gallery{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:440px){.gallery{grid-template-columns:1fr}}
+
+/* ── CARD ── */
+.card{background:#fff;padding:18px 18px 14px;cursor:pointer;display:flex;flex-direction:column;gap:9px;position:relative;transition:background .1s;border-top:3px solid transparent}
+.card:hover{background:#fff8fb;border-top-color:#fb2a7b}
+.card.open{background:#fff5f9;border-top-color:#fb2a7b}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.card-num{font-size:10px;font-weight:300;color:#ddd;letter-spacing:.06em;flex-shrink:0;margin-top:2px}
+.cat-label{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#bbb;margin-bottom:4px}
+.card-title{font-size:14px;font-weight:600;line-height:1.4;color:#0d0d0d;letter-spacing:-.01em}
+.card-sub{font-size:12px;font-weight:300;color:#777;line-height:1.55;margin-top:2px}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:auto;padding-top:4px}
+.tag{font-size:10px;font-weight:500;letter-spacing:.03em;padding:2px 7px;border:0.5px solid #e0e0e0;border-radius:2px;color:#999;transition:all .1s}
+.card:hover .tag,.card.open .tag{border-color:#faa8c8;color:#fb2a7b}
+.chev{flex-shrink:0;width:14px;height:14px;color:#ccc;transition:transform .18s,color .12s;margin-top:2px}
+.card:hover .chev,.card.open .chev{color:#fb2a7b}
+.card.open .chev{transform:rotate(180deg)}
+.card-body{display:none;border-top:0.5px solid #f0e0e8;padding-top:14px;margin-top:2px}
+.card.open .card-body{display:block}
+
+/* filled content styles */
+.filled-label{display:inline-flex;align-items:center;gap:5px;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fb2a7b;margin-bottom:10px}
+.filled-label::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:#fb2a7b;flex-shrink:0}
+.filled-intro{font-size:12.5px;font-weight:300;color:#444;line-height:1.8;margin-bottom:14px}
+.filled-points{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.filled-points li{font-size:12.5px;font-weight:400;color:#222;line-height:1.65;padding-left:16px;position:relative}
+.filled-points li::before{content:"—";position:absolute;left:0;color:#fb2a7b;font-weight:300}
+.source-note{font-size:11px;font-weight:300;color:#bbb;border-top:0.5px solid #f0f0f0;padding-top:10px;font-style:italic}
+
+/* video badges */
+.member-badge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:#fb2a7b;border-radius:2px;padding:2px 8px;margin-left:auto}
+.butterfly-badge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:600;letter-spacing:.06em;color:#b0426a;background:#fde8f1;border:0.5px solid #fb2a7b;border-radius:2px;padding:2px 8px;margin-left:auto}
+.dragonfly-badge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:600;letter-spacing:.06em;color:#fff;background:#0d0d0d;border-radius:2px;padding:2px 8px;margin-left:auto}
+.free-badge{font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#bbb;border:0.5px solid #e0e0e0;border-radius:2px;padding:2px 8px;margin-left:auto}
+.video-link{display:flex;align-items:center;gap:8px;margin-top:10px;padding:9px 12px;border:1px solid #e0e0e0;border-radius:2px;font-size:12px;font-weight:500;color:#0d0d0d;text-decoration:none;transition:border-color .12s,background .12s}
+.video-link:hover{border-color:#fb2a7b;background:#fff5f9;color:#fb2a7b}
+.video-link:hover .play-icon{fill:#fb2a7b}
+
+.empty{grid-column:1/-1;padding:3rem;text-align:center;color:#ccc;font-size:14px;font-weight:300;background:#fff}
+
+/* ── VOTE SECTION ── */
+.vote-section{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem 1rem}
+.vote-eyebrow{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#bbb;margin-bottom:8px}
+.vote-heading{font-size:16px;font-weight:600;letter-spacing:-.01em;color:#0d0d0d;margin-bottom:4px}
+.vote-sub{font-size:12px;font-weight:300;color:#999;margin-bottom:1.5rem;line-height:1.7}
+.vote-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:740px){.vote-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:440px){.vote-grid{grid-template-columns:1fr}}
+.vote-card{background:#fff;border:0.5px solid #e0e0e0;border-radius:2px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;transition:border-color .12s}
+.vote-card:hover{border-color:#d0d0d0}
+.vote-cat{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#ccc;margin-bottom:2px}
+.vote-title{font-size:13px;font-weight:600;color:#0d0d0d;line-height:1.4;letter-spacing:-.01em}
+.vote-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
+.vote-tag{font-size:10px;padding:2px 7px;border:0.5px solid #eee;border-radius:2px;color:#bbb}
+.vote-bar-wrap{margin-top:4px}
+.vote-bar-track{height:3px;background:#f0f0f0;border-radius:2px;overflow:hidden;margin-bottom:6px}
+.vote-bar-fill{height:100%;background:#fb2a7b;border-radius:2px;transition:width .4s ease}
+.vote-meta{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.vote-count{font-size:11px;color:#bbb;font-weight:300}
+.vote-btn{padding:5px 14px;font-size:11px;font-weight:600;font-family:'IBM Plex Sans Thai',sans-serif;letter-spacing:.04em;border:1px solid #d0d0d0;border-radius:2px;cursor:pointer;background:#fff;color:#666;transition:all .12s;user-select:none}
+.vote-btn:hover{border-color:#fb2a7b;color:#fb2a7b}
+.vote-btn.voted{background:#fb2a7b;border-color:#fb2a7b;color:#fff;cursor:default}
+.vote-note{max-width:1100px;margin:0 auto;padding:.75rem 1.5rem 2.5rem;font-size:11px;color:#ccc;font-style:italic}
+
+/* ── FOOTER ── */
+.footer-wrap{border-top:1.5px solid #0d0d0d}
+footer{max-width:1100px;margin:0 auto;padding:1.1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;font-size:11px;color:#aaa;flex-wrap:wrap}
+footer a{color:#fb2a7b;text-decoration:none;font-weight:500}
+footer a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <div class="site-label">community & resource library</div>
+      <div class="site-title">ห้องสมุดเพื่อนโยคะ</div>
+      <div class="pink-bar"><span class="bar-long"></span><span class="bar-short"></span></div>
+    </div>
+    <div class="site-meta">
+      <span class="brand-name">Yoga with Jib</span>
+      community-sourced · living and evolving<br>
+      <a href="https://youtube.com/yogawithjib" target="_blank">youtube.com/yogawithjib ↗</a>
+    </div>
+  </div>
+</header>
+
+<div class="intro-banner">
+  <div class="intro-inner">
+    <div class="intro-eyebrow">คอมมูนิตี้คนรักโยคะ</div>
+    <h2 class="intro-heading">แหล่งรวมข้อมูลออนไลน์จากครูโยคะเพื่อครูโยคะ</h2>
+    <p class="intro-body">
+      แหล่งรวมข้อมูลออนไลน์เพื่อคนที่รักการฝึกโยคะและการสอนโยคะ เราเชื่อว่าความรู้และประสบการณ์ที่แต่ละคนสะสมมานั้นมีคุณค่ามาก และควรได้รับการแบ่งปัน ไม่ว่าจะเป็นเรื่องการฝึก การสอน การเงิน การจัดการสตูดิโอ หรือชีวิตของครูโยคะในแบบที่ไม่มีใครพูดถึง
+    </p>
+    <div class="intro-rule"><span>เนื้อหาที่คุยกันแล้ว</span></div>
+  </div>
+</div>
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="ค้นหา..." oninput="render()">
+  </div>
+  <div class="tabs">
+    <div class="tab active" data-cat="all"       onclick="setTab(this)">ทั้งหมด</div>
+    <div class="tab"        data-cat="finance"   onclick="setTab(this)">ธุรกิจ & การเงิน</div>
+    <div class="tab"        data-cat="teaching"  onclick="setTab(this)">ทักษะการสอน</div>
+    <div class="tab"        data-cat="studio"    onclick="setTab(this)">สตูดิโอ</div>
+    <div class="tab"        data-cat="wellbeing" onclick="setTab(this)">ชีวิตครูโยคะ</div>
+    <div class="tab"        data-cat="video"     onclick="setTab(this)">วิดีโอ</div>
+  </div>
+</div>
+
+<main>
+  <div class="count-bar" id="count"></div>
+  <div class="gallery"   id="gallery"></div>
+</main>
+
+<div class="vote-section">
+  <div class="vote-eyebrow">ร่วม vote</div>
+  <div class="vote-heading">อยากคุยเรื่องอะไรในการพบกันครั้งถัดไป?</div>
+  <p class="vote-sub">ตัวอย่างหัวข้อที่เราคุยกันได้ — กด vote หัวข้อที่สนใจ แล้วเราจะเลือกอันที่ได้รับความสนใจสูงสุดมาพูดคุยกัน</p>
+  <div class="vote-grid" id="vote-grid"></div>
+</div>
+<p class="vote-note">* vote ใช้ได้ 1 ครั้งต่อเบราว์เซอร์ · ขณะนี้บันทึกในเครื่องของคุณ · จะอัปเดตเป็น real-time เร็วๆ นี้</p>
+
+<div class="footer-wrap">
+  <footer>
+    <span>คลังความรู้รวบรวมโดยคอมมูนิตี้คนรักโยคะ — เนื้อหาเป็นข้อมูลทั่วไป ไม่ใช่คำแนะนำทางกฎหมายหรือการเงิน</span>
+    <a href="https://youtube.com/yogawithjib" target="_blank">Yoga with Jib on YouTube ↗</a>
+  </footer>
+</div>
+
+<script>
+const CATS = {
+  finance:   'ธุรกิจ & การเงิน',
+  teaching:  'ทักษะการสอน',
+  studio:    'สตูดิโอ',
+  wellbeing: 'ชีวิตครูโยคะ',
+  video:     'วิดีโอ',
+};
+
+/* ================================================================
+   TOPICS — หัวข้อที่มีเนื้อหาแล้ว (จะแสดงใน gallery)
+   เพิ่ม points + intro หลังพูดคุยแต่ละครั้ง
+   ================================================================ */
+const TOPICS = [
+
+  {
+    cat: 'wellbeing',
+    title: 'การสอนโยคะแบบ full time เลยยังเป็นไปได้ไหม',
+    sub: 'ครูโยคะมีอาชีพเสริมอะไรบ้าง และโยคะคิดเป็นกี่เปอร์เซ็นต์ของรายได้',
+    tags: ['full-time', 'รายได้', 'อาชีพเสริม', 'Facebook discussion'],
+    intro: 'จากการแลกเปลี่ยนใน Facebook ภาพรวมชัดเจนว่าไม่มีคำตอบเดียว — ครูโยคะในคอมมูนิตี้มีรูปแบบการทำงานที่หลากหลายมาก ตั้งแต่สอน full-time 100% มากว่าสิบปี ไปจนถึงสอนเพียง 5% ของรายได้ทั้งหมด สิ่งที่น่าสนใจคือปัจจัยที่ทำให้อยู่รอดได้ไม่ใช่แค่ความพยายาม แต่คือการปรับตัวและการ diversify',
+    points: [
+      '<strong>Full-time เป็นไปได้</strong> — ครูหลายท่านสอนโยคะ 100% มากกว่า 8–10 ปีแล้ว โดยไม่มีอาชีพเสริม บางท่านปรับวิธีเดินทางตามสถานการณ์ เช่น ใช้มอเตอร์ไซค์เมื่อค่าน้ำมันแพง เพื่อรักษา margin',
+      '<strong>Diversify ภายในสาขา</strong> — ครูที่ประสบความสำเร็จหลายท่านเพิ่ม discipline อื่นควบคู่ เช่น Pilates Reformer และ Aerial Yoga โดยเฉพาะในพื้นที่ที่มีการแข่งขันสูงอย่างปาย การมีตัวเลือกให้นักเรียนช่วยสร้างรายได้ที่มั่นคงกว่า',
+      '<strong>บริบทพื้นที่มีผลมาก</strong> — สตูดิโอในปายที่หนาแน่น ทำให้ครูต้องสร้างจุดแตกต่าง สัดส่วนรายได้จากโยคะอย่างเดียวจึงต่ำลง ในขณะที่ครูในเมืองใหญ่อาจอยู่ได้กับโยคะ full-time',
+      '<strong>Part-time มีเหตุผลที่ดี</strong> — ครูบางท่านสอนเพียง 5% ของรายได้ แต่ยังคงสอนต่อเพราะคุณค่าที่ไม่ใช่ตัวเงิน เช่น การฝึกทักษะการสื่อสาร การ calibrate ให้เหมาะกับนักเรียนทุกระดับ และความรู้สึก belong ใน community',
+      '<strong>Burnout เป็นสัญญาณสำคัญ</strong> — ผู้ที่ทำงานประจำควบคู่กับสอนโยคะพบว่าเสี่ยง burnout สูง การรู้จักขีดจำกัดของตัวเองและตัดสินใจปรับรูปแบบ คือทักษะที่จำเป็น',
+    ],
+    source: 'รวบรวมจาก comment ใน Facebook คอมมูนิตี้ — ขอบคุณทุกท่านที่แบ่งปันประสบการณ์ · <a href="https://www.facebook.com/share/p/176iKfFb2x/" target="_blank" rel="noopener" style="color:#fb2a7b;text-decoration:none;border-bottom:0.5px solid #fb2a7b">ดูโพสต์ต้นฉบับ ↗</a>',
+  },
+
+  {
+    cat: 'video',
+    title: 'วิดีโอจาก Yoga with Jib',
+    sub: 'คลิปฟรีและสำหรับสมาชิก — รายการกำลังจะมา',
+    tags: ['YouTube', 'ฟรี', 'สมาชิก'],
+    isVideoTopic: true,
+  },
+
+  /* ── เพิ่มหัวข้อที่มีเนื้อหาแล้วที่นี่ ── */
+
+];
+
+/* ================================================================
+   VOTE_TOPICS — หัวข้อที่ยังรอการพูดคุย (แสดงในส่วน vote)
+   ================================================================ */
+const VOTE_TOPICS = [
+  { id:'v01', cat:'finance',   title:'ภาษีสำหรับครูโยคะอิสระ',               tags:['ภาษี','ฟรีแลนซ์','การเงิน'] },
+  { id:'v02', cat:'finance',   title:'การตั้งราคาคลาสและแพ็กเกจ',              tags:['ราคา','แพ็กเกจ','รายได้'] },
+  { id:'v03', cat:'finance',   title:'การออมและวางแผนการเงินระยะยาว',           tags:['ออม','ลงทุน','เกษียณ'] },
+  { id:'v04', cat:'finance',   title:'ประกันสุขภาพและสวัสดิการตัวเอง',          tags:['ประกัน','สวัสดิการ'] },
+  { id:'v05', cat:'teaching',  title:'งานวิจัยใหม่ด้านโยคะและสุขภาพ',           tags:['วิจัย','วิทยาศาสตร์'] },
+  { id:'v06', cat:'teaching',  title:'กรณีศึกษาจากนักเรียน',                   tags:['กรณีศึกษา','ประสบการณ์'] },
+  { id:'v07', cat:'teaching',  title:'เทคนิคการพูดอธิบายท่าและปรับท่า',         tags:['cueing','adjustment'] },
+  { id:'v08', cat:'teaching',  title:'การดัดแปลงท่าสำหรับผู้เรียนพิเศษ',        tags:['modifications','ผู้สูงอายุ'] },
+  { id:'v09', cat:'teaching',  title:'Trauma-informed teaching',               tags:['trauma','safe space'] },
+  { id:'v10', cat:'studio',    title:'รีวิวซอฟต์แวร์จัดการคลาส',               tags:['software','ระบบจอง'] },
+  { id:'v11', cat:'studio',    title:'อุปกรณ์และ props ที่แนะนำ',               tags:['อุปกรณ์','props'] },
+  { id:'v12', cat:'studio',    title:'การตลาดออนไลน์สำหรับครูโยคะ',             tags:['การตลาด','โซเชียล'] },
+  { id:'v13', cat:'studio',    title:'สัญญาและเอกสารที่ควรมี',                  tags:['สัญญา','กฎหมาย'] },
+  { id:'v14', cat:'wellbeing', title:'การป้องกันและรับมือกับภาวะหมดไฟ',          tags:['burnout','self-care'] },
+  { id:'v15', cat:'wellbeing', title:'การวางเส้นทางอาชีพ',                      tags:['อาชีพ','เติบโต'] },
+  { id:'v16', cat:'wellbeing', title:'การกำหนดขอบเขตกับนักเรียนและสตูดิโอ',      tags:['ขอบเขต','professional'] },
+  { id:'v17', cat:'wellbeing', title:'Self-practice ของครูโยคะ',               tags:['self-practice','ครู'] },
+  { id:'v18', cat:'finance',   title:'การออกใบเสร็จและเรียกเก็บเงิน',           tags:['ใบเสร็จ','บัญชี'] },
+];
+
+/* ── VOTE STORAGE (localStorage — สลับ Firebase ได้ทีหลัง) ── */
+function getVotes() {
+  try { return JSON.parse(localStorage.getItem('yogaVotes') || '{}'); } catch { return {}; }
+}
+function getMyVote() {
+  try { return localStorage.getItem('yogaMyVote') || null; } catch { return null; }
+}
+function castVote(id) {
+  const my = getMyVote();
+  if (my) return;
+  const votes = getVotes();
+  votes[id] = (votes[id] || 0) + 1;
+  localStorage.setItem('yogaVotes', JSON.stringify(votes));
+  localStorage.setItem('yogaMyVote', id);
+  renderVotes();
+}
+
+/* ── GALLERY RENDER ── */
+let activeCat = 'all';
+function setTab(el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  activeCat = el.dataset.cat;
+  render();
+}
+function render() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  const items = TOPICS.filter(d => {
+    const matchCat = activeCat === 'all' || d.cat === activeCat;
+    const matchQ = !q || d.title.toLowerCase().includes(q) || d.sub.toLowerCase().includes(q) ||
+      (d.tags && d.tags.some(t => t.toLowerCase().includes(q)));
+    return matchCat && matchQ;
+  });
+  document.getElementById('count').textContent = items.length + ' หัวข้อ';
+  const wrap = document.getElementById('gallery');
+  if (!items.length) { wrap.innerHTML = '<div class="empty">ไม่พบหัวข้อที่ตรงกัน</div>'; return; }
+
+  wrap.innerHTML = items.map((d, i) => {
+    const num = String(i + 1).padStart(2, '0');
+    const catLabel = CATS[d.cat] || '';
+    const tagsHtml = (d.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
+    let bodyHtml;
+    if (d.isVideoTopic) {
+      bodyHtml = `<div class="card-body">
+        <p class="filled-intro">วิดีโอจาก <strong>Yoga with Jib</strong> จะถูกจัดเรียงที่นี่<br>
+        แบ่งเป็น 3 ประเภท — <strong>ฟรี</strong> · <strong>ผีเสื้อ</strong> (สมาชิก ≤30 นาที) · <strong>แมลงปอ</strong> (สมาชิก &gt;30 นาที)</p>
+        <a class="video-link" href="https://youtube.com/yogawithjib" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x=".5" y=".5" width="12" height="12" rx="2" stroke="#ddd"/><path class="play-icon" d="M5 3.8l4 2.7-4 2.7V3.8z" fill="#0d0d0d"/></svg>
+          ดูบน YouTube <span class="free-badge">ทุกคน</span>
+        </a></div>`;
+    } else {
+      const ptsHtml = (d.points || []).map(p => `<li>${p}</li>`).join('');
+      bodyHtml = `<div class="card-body">
+        <div class="filled-label">พูดคุยแล้ว</div>
+        <p class="filled-intro">${d.intro}</p>
+        <ul class="filled-points">${ptsHtml}</ul>
+        ${d.source ? `<p class="source-note">${d.source}</p>` : ''}
+      </div>`;
+    }
+    const filledMark = d.points ? ` · <span style="color:#fb2a7b">พูดคุยแล้ว</span>` : '';
+    return `<div class="card${d.points ? ' filled' : ''}" id="c${i}" onclick="toggle(${i})">
+      <div class="card-top">
+        <div style="flex:1;min-width:0">
+          <div class="cat-label">${catLabel}${filledMark}</div>
+          <div class="card-title">${d.title}</div>
+          <div class="card-sub">${d.sub}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0">
+          <span class="card-num">${num}</span>
+          <svg class="chev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5l4 4 4-4"/></svg>
+        </div>
+      </div>
+      <div class="tags">${tagsHtml}</div>
+      ${bodyHtml}
+    </div>`;
+  }).join('');
+}
+function toggle(i) { document.getElementById('c' + i).classList.toggle('open'); }
+
+/* ── VOTE RENDER ── */
+function renderVotes() {
+  const votes = getVotes();
+  const myVote = getMyVote();
+  const total = Object.values(votes).reduce((a, b) => a + b, 0);
+  const maxVotes = Math.max(...VOTE_TOPICS.map(t => votes[t.id] || 0), 1);
+
+  document.getElementById('vote-grid').innerHTML = VOTE_TOPICS.map(t => {
+    const count = votes[t.id] || 0;
+    const pct = Math.round((count / maxVotes) * 100);
+    const voted = myVote === t.id;
+    const hasVoted = !!myVote;
+    const catLabel = CATS[t.cat] || '';
+    const tagsHtml = (t.tags || []).map(g => `<span class="vote-tag">${g}</span>`).join('');
+    const btnLabel = voted ? 'voted ✓' : 'vote';
+    const btnClass = voted ? 'vote-btn voted' : 'vote-btn';
+    const btnAttr = hasVoted ? 'disabled' : `onclick="castVote('${t.id}')"`;
+    return `<div class="vote-card">
+      <div>
+        <div class="vote-cat">${catLabel}</div>
+        <div class="vote-title">${t.title}</div>
+        <div class="vote-tags">${tagsHtml}</div>
+      </div>
+      <div class="vote-bar-wrap">
+        <div class="vote-bar-track"><div class="vote-bar-fill" style="width:${pct}%"></div></div>
+        <div class="vote-meta">
+          <span class="vote-count">${count} vote${count !== 1 ? 's' : ''}</span>
+          <button class="${btnClass}" ${btnAttr}>${btnLabel}</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+render();
+renderVotes();
+</script>
+</body>
+</html>
