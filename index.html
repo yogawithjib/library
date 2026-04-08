@@ -266,6 +266,10 @@ footer a:hover{text-decoration:underline}
 <div class="footer-wrap">
   <footer>
     <span>คลังความรู้รวบรวมโดยคอมมูนิตี้คนรักโยคะ — เนื้อหาเป็นข้อมูลทั่วไป ไม่ใช่คำแนะนำทางกฎหมายหรือการเงิน</span>
+    <span style="font-size:11px;color:#ccc;display:flex;align-items:center;gap:5px">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#ccc" stroke-width="1"/><circle cx="5" cy="5" r="1.5" fill="#ccc"/></svg>
+      <span id="visit-count">—</span> visits
+    </span>
     <a href="https://youtube.com/yogawithjib" target="_blank">Yoga with Jib on YouTube ↗</a>
   </footer>
 </div>
@@ -651,6 +655,14 @@ onValue(votesRef, (snap) => {
   const data = snap.val() || {};
   window._fbVotes = data;
   if (typeof renderVotes === 'function') renderVotes();
+});
+
+// Visit counter
+const visitsRef = ref(db, 'visits');
+runTransaction(visitsRef, (current) => (current || 0) + 1);
+onValue(visitsRef, (snap) => {
+  const el = document.getElementById('visit-count');
+  if (el) el.textContent = (snap.val() || 0).toLocaleString();
 });
 
 // Override castVote to use Firebase
