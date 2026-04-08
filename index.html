@@ -195,7 +195,7 @@ footer a:hover{text-decoration:underline}
   <p class="vote-sub">กด vote หัวข้อที่สนใจ แล้วเราจะเลือกอันที่ได้รับความสนใจสูงสุดมาพูดคุยกัน</p>
   <div class="vote-list" id="vote-grid"></div>
 </div>
-<p class="vote-note">* vote ใช้ได้ 1 ครั้งต่อเบราว์เซอร์ · ขณะนี้บันทึกในเครื่องของคุณ · จะอัปเดตเป็น real-time เร็วๆ นี้</p>
+<p class="vote-note">* vote ใช้ได้ 1 ครั้งต่อเบราว์เซอร์ · อัปเดต real-time ทุกคนเห็นพร้อมกัน</p>
 <div style="background:#fafafa;border-top:1.5px solid #0d0d0d;border-bottom:1.5px solid #0d0d0d;margin:2rem 0">
   <div style="max-width:1100px;margin:0 auto;padding:2rem 1.5rem">
 
@@ -346,6 +346,7 @@ const VOTE_TOPICS = [
 
 /* ── VOTE STORAGE (localStorage — สลับ Firebase ได้ทีหลัง) ── */
 function getVotes() {
+  if (window._fbVotes) return window._fbVotes;
   try { return JSON.parse(localStorage.getItem('yogaVotes') || '{}'); } catch { return {}; }
 }
 function getMyVote() {
@@ -354,11 +355,15 @@ function getMyVote() {
 function castVote(id) {
   const my = getMyVote();
   if (my) return;
-  const votes = getVotes();
-  votes[id] = (votes[id] || 0) + 1;
-  localStorage.setItem('yogaVotes', JSON.stringify(votes));
-  localStorage.setItem('yogaMyVote', id);
-  renderVotes();
+  if (window.castVoteFirebase) {
+    window.castVoteFirebase(id);
+  } else {
+    const votes = getVotes();
+    votes[id] = (votes[id] || 0) + 1;
+    localStorage.setItem('yogaVotes', JSON.stringify(votes));
+    localStorage.setItem('yogaMyVote', id);
+    renderVotes();
+  }
 }
 
 /* ── GALLERY RENDER ── */
@@ -619,5 +624,41 @@ async function loadVideos() {
 
 loadVideos();
 </script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+import { getDatabase, ref, runTransaction, onValue } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB0vsyL3-cMz4ma6HSdHZe3DlvBSam4HoE",
+  authDomain: "yoga-library-2496c.firebaseapp.com",
+  databaseURL: "https://yoga-library-2496c-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "yoga-library-2496c",
+  storageBucket: "yoga-library-2496c.firebasestorage.app",
+  messagingSenderId: "410011266162",
+  appId: "1:410011266162:web:b2bf8c41a01159e86626eb"
+};
+
+const app = initializeApp(firebaseConfig);
+const db  = getDatabase(app);
+const votesRef = ref(db, 'votes');
+
+// Listen for real-time updates
+onValue(votesRef, (snap) => {
+  const data = snap.val() || {};
+  window._fbVotes = data;
+  if (typeof renderVotes === 'function') renderVotes();
+});
+
+// Override castVote to use Firebase
+window.castVoteFirebase = function(id) {
+  const myVote = localStorage.getItem('yogaMyVote');
+  if (myVote) return;
+  localStorage.setItem('yogaMyVote', id);
+  const voteRef = ref(db, 'votes/' + id);
+  runTransaction(voteRef, (current) => (current || 0) + 1);
+};
+</script>
+
 </body>
 </html>
