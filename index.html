@@ -691,8 +691,21 @@ function filterVideos() {
       (activeVType === 'แมลงปอ'  && type.includes('แมลงปอ'));
     return matchQ && matchT;
   }).sort(() => Math.random() - 0.5);
-  document.getElementById('video-count').textContent = filtered.length + ' วิดีโอ';
-  renderVideos(filtered);
+  const total = filtered.length;
+  const shown = filtered.slice(0, 9);
+  document.getElementById('video-count').textContent = `แสดง ${shown.length} จาก ${total} วิดีโอ`;
+  renderVideos(shown);
+
+  // see all link
+  const existing = document.getElementById('see-all-link');
+  if (existing) existing.remove();
+  if (total > 9) {
+    const link = document.createElement('div');
+    link.id = 'see-all-link';
+    link.style.cssText = 'text-align:center;padding:1.5rem 0 0';
+    link.innerHTML = `<a href="videos.html" style="font-size:13px;font-weight:500;color:#fb2a7b;text-decoration:none;border-bottom:0.5px solid #fb2a7b;padding-bottom:1px">ดูวิดีโอทั้งหมด ${total} คลิป ↗</a>`;
+    document.getElementById('video-gallery').after(link);
+  }
 }
 
 async function loadVideos() {
