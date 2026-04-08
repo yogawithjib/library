@@ -750,15 +750,36 @@ function filterVideos() {
   }).sort(() => Math.random() - 0.5);
   const total = allVideoRows.length;
 
-  // pick 1 random from each type
-  function pickRandom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-  const free = allVideoRows.filter(r => { const t = (r['ใครดูได้บ้าง (สมาชิกระดับไหน / ฟรี)']||r['type']||'').toLowerCase(); return !t || t.includes('free') || t.includes('ฟรี'); });
-  const butterfly = allVideoRows.filter(r => { const t = r['ใครดูได้บ้าง (สมาชิกระดับไหน / ฟรี)']||r['type']||''; return t.includes('ผีเสื้อ') && !t.includes('แมลงปอ'); });
-  const dragonfly = allVideoRows.filter(r => { const t = r['ใครดูได้บ้าง (สมาชิกระดับไหน / ฟรี)']||r['type']||''; return t.includes('แมลงปอ'); });
+  function shuffle3(arr) {
+    const a = [...arr].sort(()=>Math.random()-.5);
+    return a.slice(0,3);
+  }
+  function byType(type) {
+    return allVideoRows.filter(r => {
+      const t = r['ใครดูได้บ้าง (สมาชิกระดับไหน / ฟรี)']||r['type']||'';
+      if (type==='ฟรี')     return !t || t.toLowerCase().includes('free') || t.includes('ฟรี');
+      if (type==='ผีเสื้อ') return t.includes('ผีเสื้อ') && !t.includes('แมลงปอ');
+      if (type==='แมลงปอ') return t.includes('แมลงปอ');
+      return true;
+    });
+  }
 
-  const picks = [free.length ? pickRandom(free) : null, butterfly.length ? pickRandom(butterfly) : null, dragonfly.length ? pickRandom(dragonfly) : null].filter(Boolean);
+  let picks, label;
+  if (activeVType === 'all') {
+    const free  = byType('ฟรี');
+    const butt  = byType('ผีเสื้อ');
+    const drag  = byType('แมลงปอ');
+    const f = free.length  ? free[Math.floor(Math.random()*free.length)]   : null;
+    const b = butt.length  ? butt[Math.floor(Math.random()*butt.length)]   : null;
+    const d = drag.length  ? drag[Math.floor(Math.random()*drag.length)]   : null;
+    picks = [f,b,d].filter(Boolean);
+    label = 'ตัวอย่างวิดีโอ · ฟรี · ผีเสื้อ · แมลงปอ';
+  } else {
+    picks = shuffle3(byType(activeVType));
+    label = `${activeVType} · ${picks.length} คลิป`;
+  }
 
-  document.getElementById('video-count').textContent = `ตัวอย่างวิดีโอ · ฟรี · ผีเสื้อ · แมลงปอ`;
+  document.getElementById('video-count').textContent = label;
   renderVideos(picks);
 
   // see all link
