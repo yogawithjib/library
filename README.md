@@ -1,4 +1,4 @@
-# คลังความรู้เพื่อนโยคะ
+# ห้องสมุดเพื่อนโยคะ
 ### by Yoga with Jib
 
 ---
@@ -28,7 +28,7 @@
 คลังความรู้นี้ต้องการข้อมูลที่หลากหลาย ไม่ว่าคุณจะสอนโยคะมากี่ปี มีสตูดิโอหรือสอนอิสระ สอน full-time หรือควบคู่กับงานอื่น — ประสบการณ์ของคุณมีความหมายและมีคนที่อยากฟังแน่นอน
 
 **วิธีร่วม:**
-- เข้าร่วมการพูดคุยผ่าน Facebook page: **Yoga with Jib** · กลุ่มเฟสบุก **"เพื่อนโยคะ"** · หรือ LINE Open Chat **"เพื่อนโยคะ"** → [เข้าร่วมที่นี่](https://line.me/ti/g2/PkvBLtmfIKAy5y75i6hPFZlYYmCt4g4fqD4FHQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default)
+- เข้าร่วมการพูดคุยผ่าน [Facebook page: Yoga with Jib](https://www.facebook.com/yogawithjib/) · [กลุ่มเฟสบุก "เพื่อนโยคะ"](https://www.facebook.com/groups/2805338106391131) · หรือ [LINE Open Chat "เพื่อนโยคะ"](https://line.me/ti/g2/PkvBLtmfIKAy5y75i6hPFZlYYmCt4g4fqD4FHQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default)
 - Vote หัวข้อที่อยากพูดถึงในการพบกันครั้งถัดไป
 - แชร์ประสบการณ์ กรณีศึกษา หรือสิ่งที่ได้เรียนรู้จากการสอนและการเรียน
 
