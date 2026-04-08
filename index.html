@@ -457,12 +457,13 @@ function render() {
     const newBadge = isNew ? '<span class="new-badge">ใหม่</span>' : '';
     return `<div class="card${d.points ? ' filled' : ''}" id="c${i}" onclick="toggle(${i})">
       <div class="card-top">
-        <div style="flex:1;min-width:0">
+        <div style="flex:1;min-width:0;overflow:hidden">
           <div class="cat-label">${catLabel}${filledMark}</div>
           <div class="card-title">${d.title}${newBadge}</div>
           <div class="card-sub">${d.sub}</div>
-          ${d.date ? `<div style="font-size:10px;font-weight:300;color:#bbb;margin-top:4px">${d.date}</div>` : ''}
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0">
+          ${d.date ? `<div style="font-size:10px;font-weight:300;color:#bbb;margin-top:4px;white-space:nowrap">${d.date}</div>` : ''}
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;margin-left:8px">
           <span class="card-num">${num}</span>
           <svg class="chev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5l4 4 4-4"/></svg>
         </div>
