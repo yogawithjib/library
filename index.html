@@ -595,11 +595,7 @@ function filterVideos() {
       (activeVType === 'ผีเสื้อ' && type.includes('ผีเสื้อ') && !type.includes('แมลงปอ')) ||
       (activeVType === 'แมลงปอ'  && type.includes('แมลงปอ'));
     return matchQ && matchT;
-  }).sort((a, b) => {
-    const da = new Date(a['date'] || 0);
-    const db = new Date(b['date'] || 0);
-    return db - da;
-  });
+  }).sort(() => Math.random() - 0.5);
   document.getElementById('video-count').textContent = filtered.length + ' วิดีโอ';
   renderVideos(filtered);
 }
