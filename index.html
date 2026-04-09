@@ -120,6 +120,12 @@ main{max-width:1100px;margin:0 auto;padding:1.25rem 1.5rem 1rem}
 #video-gallery .card:hover{border-top-color:#fb2a7b}
 #video-gallery .card .chev{display:none}
 #video-gallery .card .card-body{display:block;border-top:none;padding-top:0}
+#video-gallery{grid-template-columns:repeat(3,1fr);grid-template-rows:auto}
+#video-gallery .card.main-card{grid-row:auto;border-top:3px solid transparent;font-size:inherit}
+#video-gallery .card.main-card .card-title{font-size:1rem}
+#video-gallery .card.main-card .card-sub{font-size:.86rem}
+@media(max-width:740px){#video-gallery{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){#video-gallery{grid-template-columns:1fr}}
 .vf-btn{padding:5px 13px;font-size:12px;font-weight:500;font-family:'IBM Plex Sans Thai',sans-serif;letter-spacing:.03em;border:1px solid #d0d0d0;border-radius:2px;cursor:pointer;background:#fff;color:#666;transition:all .12s;user-select:none}
 .vf-btn:hover{border-color:#fb2a7b;color:#fb2a7b}
 .vf-btn.active{background:#fb2a7b;border-color:#fb2a7b;color:#fff}
