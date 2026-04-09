@@ -26,6 +26,7 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:15px}
+html{font-size:14px}
 body{font-family:'IBM Plex Sans Thai',sans-serif;background:#fff;color:#0d0d0d;min-height:100vh;-webkit-font-smoothing:antialiased}
 
 /* ── HEADER ── */
@@ -47,7 +48,7 @@ header{border-bottom:1.5px solid #0d0d0d;padding:1.25rem 1.5rem 1rem}
 .intro-inner{max-width:560px}
 .intro-eyebrow{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fb2a7b;margin-bottom:10px}
 .intro-heading{font-size:19px;font-weight:600;line-height:1.45;letter-spacing:-.02em;color:#0d0d0d;margin-bottom:12px}
-.intro-body{font-size:13px;font-weight:300;color:#666;line-height:1.85}
+.intro-body{font-size:.93rem;font-weight:300;color:#666;line-height:1.85}
 .intro-body strong{font-weight:500;color:#0d0d0d}
 .intro-rule{display:flex;align-items:center;gap:10px;margin-top:20px}
 .intro-rule span{font-size:11px;font-weight:400;color:#bbb;letter-spacing:.04em;white-space:nowrap}
@@ -66,7 +67,7 @@ header{border-bottom:1.5px solid #0d0d0d;padding:1.25rem 1.5rem 1rem}
 
 /* ── MAIN ── */
 main{max-width:1100px;margin:0 auto;padding:1.25rem 1.5rem 1rem}
-.count-bar{font-size:11px;color:#aaa;letter-spacing:.06em;margin-bottom:1.1rem;display:flex;align-items:center;gap:8px}
+.count-bar{font-size:.78rem;color:#aaa;letter-spacing:.06em;margin-bottom:1.1rem;display:flex;align-items:center;gap:8px}
 .count-bar::after{content:'';flex:1;height:0.5px;background:#e8e8e8}
 
 /* ── GALLERY ── */
@@ -81,10 +82,10 @@ main{max-width:1100px;margin:0 auto;padding:1.25rem 1.5rem 1rem}
 .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
 .card-num{font-size:10px;font-weight:300;color:#ddd;letter-spacing:.06em;flex-shrink:0;margin-top:2px}
 .cat-label{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#bbb;margin-bottom:4px}
-.card-title{font-size:14px;font-weight:600;line-height:1.4;color:#0d0d0d;letter-spacing:-.01em;overflow-wrap:break-word;word-break:break-word}
-.card-sub{font-size:12px;font-weight:300;color:#777;line-height:1.55;margin-top:2px;overflow-wrap:break-word;word-break:break-word}
+.card-title{font-size:1rem;font-weight:600;line-height:1.4;color:#0d0d0d;letter-spacing:-.01em;overflow-wrap:break-word;word-break:break-word}
+.card-sub{font-size:.86rem;font-weight:300;color:#777;line-height:1.55;margin-top:2px;overflow-wrap:break-word;word-break:break-word}
 .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:auto;padding-top:4px}
-.tag{font-size:10px;font-weight:500;letter-spacing:.03em;padding:2px 7px;border:0.5px solid #e0e0e0;border-radius:2px;color:#999;transition:all .1s}
+.tag{font-size:.72rem;font-weight:500;letter-spacing:.03em;padding:2px 7px;border:0.5px solid #e0e0e0;border-radius:2px;color:#999;transition:all .1s}
 .card:hover .tag,.card.open .tag{border-color:#faa8c8;color:#fb2a7b}
 .chev{flex-shrink:0;width:14px;height:14px;color:#ccc;transition:transform .18s,color .12s;margin-top:2px}
 .card:hover .chev,.card.open .chev{color:#fb2a7b}
@@ -93,13 +94,13 @@ main{max-width:1100px;margin:0 auto;padding:1.25rem 1.5rem 1rem}
 .card.open .card-body{display:block}
 
 /* filled content styles */
-.filled-label{display:inline-flex;align-items:center;gap:5px;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fb2a7b;margin-bottom:10px}
+.filled-label{display:inline-flex;align-items:center;gap:5px;font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fb2a7b;margin-bottom:10px}
 .filled-label::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:#fb2a7b;flex-shrink:0}
-.filled-intro{font-size:12.5px;font-weight:300;color:#444;line-height:1.8;margin-bottom:14px}
+.filled-intro{font-size:.9rem;font-weight:300;color:#444;line-height:1.8;margin-bottom:14px}
 .filled-points{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
-.filled-points li{font-size:12.5px;font-weight:400;color:#222;line-height:1.65;padding-left:16px;position:relative}
+.filled-points li{font-size:.9rem;font-weight:400;color:#222;line-height:1.65;padding-left:16px;position:relative}
 .filled-points li::before{content:"—";position:absolute;left:0;color:#fb2a7b;font-weight:300}
-.source-note{font-size:11px;font-weight:300;color:#bbb;border-top:0.5px solid #f0f0f0;padding-top:10px;font-style:italic}
+.source-note{font-size:.78rem;font-weight:300;color:#bbb;border-top:0.5px solid #f0f0f0;padding-top:10px;font-style:italic}
 
 /* video badges */
 .member-badge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:#fb2a7b;border-radius:2px;padding:2px 8px;margin-left:auto}
@@ -131,14 +132,14 @@ main{max-width:1100px;margin:0 auto;padding:1.25rem 1.5rem 1rem}
 .vote-rank{width:52px;flex-shrink:0;text-align:center;font-size:18px;font-weight:300;color:#e0e0e0;letter-spacing:-.02em;padding:14px 0;border-right:0.5px solid #e8e8e8}
 .vote-body{flex:1;padding:14px 16px;min-width:0}
 .vote-cat{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#ccc;margin-bottom:3px}
-.vote-title{font-size:13px;font-weight:600;color:#0d0d0d;line-height:1.4;letter-spacing:-.01em;overflow-wrap:break-word;word-break:break-word}
-.vote-desc{font-size:12px;font-weight:300;color:#999;line-height:1.7;margin-top:5px;max-width:480px}
+.vote-title{font-size:.93rem;font-weight:600;color:#0d0d0d;line-height:1.4;letter-spacing:-.01em;overflow-wrap:break-word;word-break:break-word}
+.vote-desc{font-size:.86rem;font-weight:300;color:#999;line-height:1.7;margin-top:5px;max-width:480px}
 .vote-bar-wrap{flex-shrink:0;width:150px;padding:14px 16px 14px 0;display:flex;flex-direction:column;gap:6px;align-items:flex-end}
 .vote-bar-track{width:100%;height:4px;background:#f0f0f0;border-radius:2px;overflow:hidden}
 .vote-bar-fill{height:100%;background:#fb2a7b;border-radius:2px;transition:width .4s ease}
 .vote-meta-row{display:flex;align-items:center;gap:8px}
-.vote-count{font-size:22px;font-weight:600;color:#0d0d0d;letter-spacing:-.02em;line-height:1;white-space:nowrap}
-.vote-count-label{font-size:10px;font-weight:300;color:#bbb;letter-spacing:.04em}
+.vote-count{font-size:1.57rem;font-weight:600;color:#0d0d0d;letter-spacing:-.02em;line-height:1;white-space:nowrap}
+.vote-count-label{font-size:.72rem;font-weight:300;color:#bbb;letter-spacing:.04em}
 .vote-btn{padding:4px 12px;font-size:10px;font-weight:600;font-family:'IBM Plex Sans Thai',sans-serif;letter-spacing:.04em;border:1px solid #d0d0d0;border-radius:2px;cursor:pointer;background:#fff;color:#888;transition:all .12s;user-select:none;white-space:nowrap}
 .vote-btn:hover{border-color:#fb2a7b;color:#fb2a7b}
 .vote-btn.voted{background:#fb2a7b;border-color:#fb2a7b;color:#fff;cursor:default}
@@ -153,8 +154,8 @@ footer a:hover{text-decoration:underline}
 /* question of the day */
 .tip-bar{max-width:1100px;margin:0 auto;padding:1rem 1.5rem;display:flex;align-items:flex-start;gap:14px;border-bottom:0.5px solid #e8e8e8}
 .tip-dot{width:6px;height:6px;border-radius:50%;background:#fb2a7b;flex-shrink:0;margin-top:5px}
-.tip-label{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#fb2a7b;margin-bottom:4px}
-.tip-text{font-size:14px;font-weight:400;color:#0d0d0d;line-height:1.65}
+.tip-label{font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#fb2a7b;margin-bottom:4px}
+.tip-text{font-size:1rem;font-weight:400;color:#0d0d0d;line-height:1.65}
 
 /* new badge */
 .new-badge{display:inline-block;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:#fb2a7b;border-radius:2px;padding:1px 6px;margin-left:6px;vertical-align:middle}
@@ -186,21 +187,10 @@ footer a:hover{text-decoration:underline}
 
 
 /* font size control */
-.font-ctrl{display:flex;align-items:center;gap:2px;border-left:0.5px solid #e8e8e8;padding-left:12px;margin-left:4px}
-.font-btn{border:none;background:transparent;cursor:pointer;font-family:'IBM Plex Sans Thai',sans-serif;font-weight:500;color:#ccc;transition:color .12s;padding:2px 4px;user-select:none;line-height:1}
-.font-btn:hover{color:#999}
-.font-btn.active{color:#0d0d0d}
-body.font-md{font-size:16px}
-body.font-lg{font-size:18px}
-body.font-lg .card-title{font-size:16px}
-body.font-lg .card-sub{font-size:14px}
-body.font-lg .filled-intro{font-size:15px}
-body.font-lg .filled-points li{font-size:14px}
-body.font-lg .vote-title{font-size:15px}
-body.font-lg .vote-desc{font-size:14px}
-body.font-lg .tip-text{font-size:16px}
-body.font-lg .tab{font-size:13px}
-body.font-lg .cat-label{font-size:11px}
+.font-ctrl{position:fixed;bottom:1.25rem;right:1.25rem;z-index:50;display:flex;align-items:center;gap:4px;background:#fff;border:0.5px solid #e0e0e0;border-radius:20px;padding:5px 12px;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.font-btn{border:none;background:transparent;cursor:pointer;font-family:'IBM Plex Sans Thai',sans-serif;font-weight:600;color:#ccc;transition:color .12s;padding:2px 6px;user-select:none;line-height:1}
+.font-btn:hover{color:#888}
+.font-btn.active{color:#fb2a7b}
 
 </style>
 </head>
@@ -256,11 +246,7 @@ body.font-lg .cat-label{font-size:11px}
     <div class="tab"        data-cat="studio"    onclick="setTab(this)">สตูดิโอ</div>
     <div class="tab"        data-cat="wellbeing" onclick="setTab(this)">ชีวิตครูโยคะ</div>
     <div class="tab"        data-cat="video"     onclick="setTab(this)">วิดีโอ</div>
-    <div class="font-ctrl">
-    <button class="font-btn active" id="font-sm" onclick="setFont('sm')" style="font-size:11px">A</button>
-    <button class="font-btn" id="font-md" onclick="setFont('md')" style="font-size:14px">A</button>
-    <button class="font-btn" id="font-lg" onclick="setFont('lg')" style="font-size:18px">A</button>
-  </div>
+  
 </div>
 </div>
 
@@ -652,14 +638,16 @@ function launchConfetti() {
 }
 
 /* ── FONT SIZE ── */
+const FONT_SIZES = { sm: '14px', md: '16px', lg: '19px' };
 function setFont(size) {
-  document.body.classList.remove('font-md','font-lg');
-  if (size === 'md') document.body.classList.add('font-md');
-  if (size === 'lg') document.body.classList.add('font-lg');
-  ['sm','md','lg'].forEach(s => document.getElementById('font-'+s).classList.toggle('active', s===size));
+  document.documentElement.style.fontSize = FONT_SIZES[size];
+  ['sm','md','lg'].forEach(s => {
+    const el = document.getElementById('font-'+s);
+    if (el) el.classList.toggle('active', s===size);
+  });
   localStorage.setItem('yogaFontSize', size);
 }
-(function(){ const saved = localStorage.getItem('yogaFontSize'); if (saved) setFont(saved); })();
+(function(){ const saved = localStorage.getItem('yogaFontSize'); if (saved && FONT_SIZES[saved]) { document.documentElement.style.fontSize = FONT_SIZES[saved]; document.addEventListener('DOMContentLoaded', ()=>setFont(saved)); } })();
 
 render();
 renderVotes();
@@ -959,5 +947,10 @@ window.castVoteFirebase = function(id) {
 };
 </script>
 
+<div class="font-ctrl">
+  <button class="font-btn active" id="font-sm" onclick="setFont('sm')" style="font-size:11px">A</button>
+  <button class="font-btn" id="font-md" onclick="setFont('md')" style="font-size:14px">A</button>
+  <button class="font-btn" id="font-lg" onclick="setFont('lg')" style="font-size:18px">A</button>
+</div>
 </body>
 </html>
