@@ -32,11 +32,12 @@ header{border-bottom:1.5px solid #0d0d0d;padding:1.25rem 1.5rem 1rem}
 main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem}
 
 /* featured entry */
-.featured{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#0d0d0d;border:1.5px solid #0d0d0d;margin-bottom:1px}
+.featured{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#0d0d0d;border:1.5px solid #0d0d0d;margin-bottom:1px;align-items:stretch}
 @media(max-width:680px){.featured{grid-template-columns:1fr}}
-.featured-img{aspect-ratio:4/3;background:#f0f0f0;overflow:hidden}
-.featured-img img{width:100%;height:100%;object-fit:cover;display:block}
-.featured-img .no-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f5f0e8;font-size:48px}
+.featured-img{background:#f0f0f0;overflow:hidden;min-height:300px}
+.featured-img img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
+.featured-img .no-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f5f0e8;font-size:48px;position:absolute;inset:0}
+.featured-img-wrap{position:relative;width:100%;height:100%;min-height:300px}
 .featured-body{background:#fff;padding:2rem;display:flex;flex-direction:column;gap:12px}
 .entry-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .entry-date{font-size:.77rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#bbb}
@@ -117,7 +118,7 @@ footer a{color:#fb2a7b;text-decoration:none;font-weight:500}
 
 <div class="footer-wrap">
   <footer>
-    <span>บันทึกโดย Jib Aksorndee · Yoga with Jib</span>
+    <span>เขียนโดยครูจิ๊บ · Yoga with Jib</span>
     <a href="https://www.facebook.com/yogawithjib/" target="_blank">Facebook ↗</a>
   </footer>
 </div>
@@ -163,7 +164,7 @@ function renderFeatured(entry) {
   const wrap = document.getElementById('featured-wrap');
   wrap.className = 'featured';
   wrap.innerHTML = `
-    <div class="featured-img">${entryImg(entry.image, '🧘‍♀️')}</div>
+    <div class="featured-img"><div class="featured-img-wrap">${entryImg(entry.image, '🧘‍♀️')}</div></div>
     <div class="featured-body">
       <div class="entry-meta">
         <span class="entry-date">${formatDate(entry.date)}</span>
