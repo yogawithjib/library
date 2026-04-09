@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Yoga with Jib</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px}
+body{font-family:'IBM Plex Sans Thai',sans-serif;background:#fafafa;color:#0d0d0d;min-height:100vh;-webkit-font-smoothing:antialiased}
+
+/* login screen */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem}
+.login-box{background:#fff;border:1.5px solid #0d0d0d;padding:2.5rem 2rem;width:100%;max-width:360px}
+.login-eyebrow{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fb2a7b;margin-bottom:8px}
+.login-title{font-size:20px;font-weight:600;letter-spacing:-.02em;margin-bottom:24px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11px;font-weight:500;color:#888;letter-spacing:.06em;margin-bottom:5px}
+.field input{width:100%;padding:9px 12px;font-size:13px;font-family:'IBM Plex Sans Thai',sans-serif;border:0.5px solid #d0d0d0;border-radius:2px;background:#fff;color:#0d0d0d;outline:none;transition:border-color .12s}
+.field input:focus{border-color:#fb2a7b;box-shadow:0 0 0 2px rgba(251,42,123,.08)}
+.login-btn{width:100%;padding:11px;font-size:13px;font-weight:600;font-family:'IBM Plex Sans Thai',sans-serif;border:1px solid #0d0d0d;border-radius:2px;cursor:pointer;background:#0d0d0d;color:#fff;transition:all .12s;margin-top:8px}
+.login-btn:hover{background:#333}
+.login-error{font-size:12px;color:#fb2a7b;margin-top:10px;display:none}
+
+/* admin screen */
+.admin-wrap{display:none;max-width:900px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.admin-header{display:flex;align-items:center;justify-content:space-between;padding-bottom:1.25rem;border-bottom:1.5px solid #0d0d0d;margin-bottom:2rem}
+.admin-title{font-size:18px;font-weight:600;letter-spacing:-.02em}
+.admin-sub{font-size:11px;color:#bbb;margin-top:3px}
+.logout-btn{font-size:11px;font-weight:500;color:#bbb;background:none;border:0.5px solid #e0e0e0;border-radius:2px;padding:5px 12px;cursor:pointer;font-family:'IBM Plex Sans Thai',sans-serif;transition:all .12s}
+.logout-btn:hover{border-color:#0d0d0d;color:#0d0d0d}
+
+/* sections */
+.section{margin-bottom:2.5rem}
+.section-title{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fb2a7b;margin-bottom:12px}
+.link-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:600px){.link-grid{grid-template-columns:1fr}}
+.link-card{display:flex;flex-direction:column;gap:6px;padding:16px;border:0.5px solid #e0e0e0;border-radius:2px;text-decoration:none;color:#0d0d0d;background:#fff;transition:all .12s}
+.link-card:hover{border-color:#fb2a7b;background:#fff8fb}
+.link-label{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#bbb}
+.link-name{font-size:14px;font-weight:600;color:#0d0d0d}
+.link-desc{font-size:11px;font-weight:300;color:#888;line-height:1.6}
+.link-url{font-size:10px;color:#fb2a7b;margin-top:2px;word-break:break-all}
+.link-arrow{font-size:11px;font-weight:500;color:#fb2a7b;margin-top:auto;padding-top:6px}
+
+/* notes */
+.note-box{background:#f5f5f5;border-radius:2px;padding:14px 16px;font-size:12px;font-weight:300;color:#555;line-height:1.8;margin-bottom:10px}
+.note-box strong{font-weight:500;color:#0d0d0d}
+
+/* quick links row */
+.quick-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem}
+.quick-btn{font-size:12px;font-weight:500;padding:7px 14px;border:0.5px solid #e0e0e0;border-radius:2px;text-decoration:none;color:#555;background:#fff;transition:all .12s}
+.quick-btn:hover{border-color:#fb2a7b;color:#fb2a7b}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="login-screen">
+  <div class="login-box">
+    <div class="login-eyebrow">Yoga with Jib</div>
+    <div class="login-title">เข้าสู่ระบบหลังบ้าน</div>
+    <div class="field">
+      <label>รหัสผ่าน</label>
+      <input type="password" id="pw-input" placeholder="••••••••" onkeydown="if(event.key==='Enter')login()">
+    </div>
+    <button class="login-btn" onclick="login()">เข้าสู่ระบบ</button>
+    <div class="login-error" id="login-error">รหัสผ่านไม่ถูกต้อง</div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin-wrap" id="admin-screen">
+  <div class="admin-header">
+    <div>
+      <div class="admin-title">🔐 หลังบ้าน — Yoga with Jib</div>
+      <div class="admin-sub">ลิงก์และข้อมูลสำหรับจัดการเว็บไซต์</div>
+    </div>
+    <button class="logout-btn" onclick="logout()">ออกจากระบบ</button>
+  </div>
+
+  <!-- Quick links -->
+  <div class="quick-row">
+    <a class="quick-btn" href="index.html" target="_blank">🏠 หน้าหลัก ↗</a>
+    <a class="quick-btn" href="videos.html" target="_blank">📺 วิดีโอ ↗</a>
+    <a class="quick-btn" href="diary.html" target="_blank">📝 ไดอารี่ ↗</a>
+    <a class="quick-btn" href="quiz.html" target="_blank">💁‍♀️ Quiz ↗</a>
+    <a class="quick-btn" href="pranayama.html" target="_blank">📦 Pranayama ↗</a>
+  </div>
+
+  <!-- Google Sheets -->
+  <div class="section">
+    <div class="section-title">Google Sheets — ฐานข้อมูล</div>
+    <div class="link-grid">
+
+      <a class="link-card" href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOt-dH97iM6e76OmBADe-t_eh5st50z5DNhsWxo9mQMJBcCSB6NinsU80Uimb-vYchwT2Q2nxVrF-t/pubhtml" target="_blank">
+        <div class="link-label">Videos</div>
+        <div class="link-name">📺 Sheet วิดีโอ</div>
+        <div class="link-desc">รายการวิดีโอทั้งหมด — date, title, level, type, description, tags, duration, url, thumbnail</div>
+        <div class="link-arrow">เปิด Sheet ↗</div>
+      </a>
+
+      <a class="link-card" href="#" target="_blank" id="diary-sheet-link">
+        <div class="link-label">Diary</div>
+        <div class="link-name">📝 Sheet ไดอารี่</div>
+        <div class="link-desc">บันทึกจากเสื่อ — date, title, excerpt, image, fb_link, tag</div>
+        <div class="link-arrow">เปิด Sheet ↗</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Firebase -->
+  <div class="section">
+    <div class="section-title">Firebase — Real-time Data</div>
+    <div class="link-grid">
+
+      <a class="link-card" href="https://console.firebase.google.com/project/yoga-library-2496c/database/yoga-library-2496c-default-rtdb/data" target="_blank">
+        <div class="link-label">Realtime Database</div>
+        <div class="link-name">🔥 ดู Vote & Visits</div>
+        <div class="link-desc">ดูผล vote แบบ real-time และจำนวนผู้เยี่ยมชม</div>
+        <div class="link-arrow">เปิด Firebase ↗</div>
+      </a>
+
+      <a class="link-card" href="https://console.firebase.google.com/project/yoga-library-2496c/database/yoga-library-2496c-default-rtdb/rules" target="_blank">
+        <div class="link-label">Security Rules</div>
+        <div class="link-name">🛡️ Firebase Rules</div>
+        <div class="link-desc">ตั้งค่า read/write permissions สำหรับ database</div>
+        <div class="link-arrow">เปิด Rules ↗</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- GitHub -->
+  <div class="section">
+    <div class="section-title">GitHub — โค้ดและ Deployment</div>
+    <div class="link-grid">
+
+      <a class="link-card" href="https://github.com/yogawithjib/library" target="_blank">
+        <div class="link-label">Repository</div>
+        <div class="link-name">💻 GitHub Repo</div>
+        <div class="link-desc">อัปโหลดไฟล์ HTML ใหม่และจัดการโค้ดทั้งหมด</div>
+        <div class="link-arrow">เปิด GitHub ↗</div>
+      </a>
+
+      <a class="link-card" href="https://yogawithjib.github.io/library" target="_blank">
+        <div class="link-label">Live Website</div>
+        <div class="link-name">🌐 เว็บไซต์จริง</div>
+        <div class="link-desc">yogawithjib.github.io/library — เว็บที่ผู้ใช้เห็น</div>
+        <div class="link-arrow">เปิดเว็บ ↗</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Notes -->
+  <div class="section">
+    <div class="section-title">หมายเหตุ / วิธีใช้</div>
+    <div class="note-box">
+      <strong>เพิ่มวิดีโอ:</strong> เพิ่มแถวใน Sheet วิดีโอ → refresh เว็บ จะเห็นทันที
+    </div>
+    <div class="note-box">
+      <strong>เพิ่ม diary entry:</strong> เพิ่มแถวใน Sheet ไดอารี่ → refresh เว็บ ใส่รูปใน <code>images/</code> บน GitHub
+    </div>
+    <div class="note-box">
+      <strong>เพิ่มหัวข้อ gallery:</strong> แก้ไฟล์ <code>index.html</code> ในส่วน <code>const TOPICS</code> แล้วอัปโหลดขึ้น GitHub
+    </div>
+    <div class="note-box">
+      <strong>เปลี่ยน vote topics:</strong> แก้ไฟล์ <code>index.html</code> ในส่วน <code>const VOTE_TOPICS</code> → vote เก่าจะ reset อัตโนมัติ
+    </div>
+  </div>
+
+</div>
+
+<script>
+const PASSWORD = 'yogawithjib2026'; // เปลี่ยนรหัสผ่านได้ตรงนี้
+
+function login() {
+  const pw = document.getElementById('pw-input').value;
+  const err = document.getElementById('login-error');
+  if (pw === PASSWORD) {
+    sessionStorage.setItem('ywj-admin', '1');
+    showAdmin();
+    err.style.display = 'none';
+  } else {
+    err.style.display = 'block';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+  }
+}
+
+function logout() {
+  sessionStorage.removeItem('ywj-admin');
+  document.getElementById('admin-screen').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('pw-input').value = '';
+}
+
+function showAdmin() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('admin-screen').style.display = 'block';
+}
+
+// Auto-login if session exists
+if (sessionStorage.getItem('ywj-admin') === '1') showAdmin();
+else document.getElementById('pw-input').focus();
+</script>
+</body>
+</html>
