@@ -32,9 +32,12 @@ header{border-bottom:1.5px solid #0d0d0d;padding:1.25rem 1.5rem 1rem}
 .search-wrap input{width:100%;padding:7px 12px;font-size:13px;font-family:'IBM Plex Sans Thai',sans-serif;border:1px solid #d0d0d0;border-radius:2px;background:#fff;color:#0d0d0d;outline:none;transition:border-color .12s}
 .search-wrap input:focus{border-color:#fb2a7b;box-shadow:0 0 0 2px rgba(251,42,123,.08)}
 .search-wrap input::placeholder{color:#bbb}
-.vf-btn{padding:5px 13px;font-size:12px;font-weight:500;font-family:'IBM Plex Sans Thai',sans-serif;letter-spacing:.03em;border:1px solid #d0d0d0;border-radius:2px;cursor:pointer;background:#fff;color:#666;transition:all .12s;user-select:none}
+.vf-btn{padding:5px 16px;font-size:12px;font-weight:500;font-family:'IBM Plex Sans Thai',sans-serif;border:1px solid #e0e0e0;border-radius:20px;cursor:pointer;background:#fff;color:#888;transition:all .12s;user-select:none}
 .vf-btn:hover{border-color:#fb2a7b;color:#fb2a7b}
 .vf-btn.active{background:#fb2a7b;border-color:#fb2a7b;color:#fff}
+.dur-btn{padding:5px 14px;font-size:11px;font-weight:500;font-family:'IBM Plex Sans Thai',sans-serif;border:1px solid #e0e0e0;border-radius:20px;cursor:pointer;background:#fff;color:#aaa;transition:all .12s;user-select:none}
+.dur-btn:hover{border-color:#0d0d0d;color:#0d0d0d}
+.dur-btn.active{background:#0d0d0d;border-color:#0d0d0d;color:#fff}
 
 /* main */
 main{max-width:1100px;margin:0 auto;padding:1.25rem 1.5rem 4rem}
@@ -99,10 +102,10 @@ footer a{color:#fb2a7b;text-decoration:none;font-weight:500}
     <button class="vf-btn"        data-type="แมลงปอ"  onclick="setVFilter(this)">แมลงปอ</button>
       </div>
       <div style="display:flex;gap:5px;flex-wrap:wrap">
-        <button class="vf-btn active" data-dur="all"  onclick="setDurFilter(this)">ทุกความยาว</button>
-        <button class="vf-btn"        data-dur="15"   onclick="setDurFilter(this)">≤15 นาที</button>
-        <button class="vf-btn"        data-dur="30"   onclick="setDurFilter(this)">≤30 นาที</button>
-        <button class="vf-btn"        data-dur="30+"  onclick="setDurFilter(this)">30+ นาที</button>
+        <button class="dur-btn active" data-dur="all"  onclick="setDurFilter(this)">ทุกความยาว</button>
+        <button class="dur-btn"        data-dur="15"   onclick="setDurFilter(this)">≤15 นาที</button>
+        <button class="dur-btn"        data-dur="30"   onclick="setDurFilter(this)">≤30 นาที</button>
+        <button class="dur-btn"        data-dur="30+"  onclick="setDurFilter(this)">30+ นาที</button>
   </div>
 </div>
 
@@ -166,7 +169,7 @@ function badgeHtml(type) {
 }
 
 function setDurFilter(el) {
-  document.querySelectorAll('[data-dur]').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.dur-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
   activeDur = el.dataset.dur;
   filterVideos();
