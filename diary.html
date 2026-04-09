@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>บันทึกจากเสื่อ — Yoga with Jib</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'FabfeltScript';src:url('fonts/FabfeltScript-Bold.woff2') format('woff2'),url('fonts/FabfeltScript-Bold.woff') format('woff');font-weight:bold;font-style:normal;font-display:swap}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px}
+body{font-family:'IBM Plex Sans Thai',sans-serif;background:#fff;color:#0d0d0d;min-height:100vh;-webkit-font-smoothing:antialiased}
+
+/* header */
+header{border-bottom:1.5px solid #0d0d0d;padding:1.25rem 1.5rem 1rem}
+.header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
+.back-link{font-size:11px;font-weight:500;color:#bbb;text-decoration:none;letter-spacing:.04em;transition:color .12s;display:block;margin-bottom:5px}
+.back-link:hover{color:#0d0d0d}
+.site-label{font-size:10px;font-weight:500;letter-spacing:.14em;color:#fb2a7b;margin-bottom:5px}
+.site-title{font-size:20px;font-weight:600;letter-spacing:-.02em}
+.pink-bar{display:flex;align-items:center;gap:6px;margin-top:8px}
+.pink-bar span{display:block;height:2px;background:#fb2a7b}
+.bar-long{width:36px}.bar-short{width:12px;opacity:.4}
+.brand-name{display:block;font-family:'FabfeltScript','Dancing Script',cursive;font-weight:bold;font-size:26px;color:#0d0d0d;line-height:1.1;margin-bottom:4px}
+.site-meta{font-size:11px;color:#999;text-align:right;line-height:1.7}
+.site-meta a{color:#fb2a7b;text-decoration:none;font-weight:500}
+
+/* main */
+main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem}
+
+/* featured entry */
+.featured{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#0d0d0d;border:1.5px solid #0d0d0d;margin-bottom:1px}
+@media(max-width:680px){.featured{grid-template-columns:1fr}}
+.featured-img{aspect-ratio:4/3;background:#f0f0f0;overflow:hidden}
+.featured-img img{width:100%;height:100%;object-fit:cover;display:block}
+.featured-img .no-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f5f0e8;font-size:48px}
+.featured-body{background:#fff;padding:2rem;display:flex;flex-direction:column;gap:12px}
+.entry-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.entry-date{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#bbb}
+.entry-tag{font-size:10px;padding:2px 8px;border:0.5px solid #e0e0e0;border-radius:20px;color:#bbb}
+.featured-title{font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.4;color:#0d0d0d}
+.featured-excerpt{font-size:14px;font-weight:300;color:#555;line-height:1.85}
+.read-btn{display:inline-flex;align-items:center;gap:8px;margin-top:auto;padding:10px 20px;font-size:12px;font-weight:600;font-family:'IBM Plex Sans Thai',sans-serif;letter-spacing:.04em;border:1px solid #0d0d0d;border-radius:2px;text-decoration:none;color:#0d0d0d;transition:all .12s;background:#fff;width:fit-content}
+.read-btn:hover{background:#0d0d0d;color:#fff}
+.read-btn svg{transition:transform .12s}
+.read-btn:hover svg{transform:translateX(3px)}
+
+/* grid */
+.grid-section{margin-top:0}
+.grid-header{display:flex;align-items:center;gap:10px;padding:1rem 0;border-bottom:0.5px solid #e8e8e8;margin-bottom:1px}
+.grid-label{font-size:11px;color:#aaa;letter-spacing:.06em}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#e0e0e0;border:1px solid #e0e0e0}
+@media(max-width:740px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.grid{grid-template-columns:1fr}}
+
+.entry-card{background:#fff;display:flex;flex-direction:column;text-decoration:none;color:#0d0d0d;transition:background .1s;border-top:3px solid transparent}
+.entry-card:hover{background:#fff8fb;border-top-color:#fb2a7b}
+.entry-card-img{aspect-ratio:3/2;background:#f0f0f0;overflow:hidden;flex-shrink:0}
+.entry-card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.entry-card:hover .entry-card-img img{transform:scale(1.03)}
+.entry-card-img .no-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f5f0e8;font-size:32px}
+.entry-card-body{padding:14px 16px;flex:1;display:flex;flex-direction:column;gap:6px}
+.card-date{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#bbb}
+.card-title{font-size:14px;font-weight:600;line-height:1.4;color:#0d0d0d;letter-spacing:-.01em;overflow-wrap:break-word}
+.card-excerpt{font-size:12px;font-weight:300;color:#777;line-height:1.6;overflow-wrap:break-word}
+.card-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:auto;padding-top:8px}
+.card-tag{font-size:10px;padding:2px 7px;border:0.5px solid #e0e0e0;border-radius:20px;color:#bbb}
+.card-fb{font-size:11px;font-weight:500;color:#fb2a7b;margin-top:6px}
+
+/* loading / empty */
+.loading{text-align:center;padding:3rem;color:#bbb;font-size:13px;font-weight:300}
+.empty-grid{grid-column:1/-1;padding:3rem;text-align:center;color:#ccc;font-size:13px;background:#fff}
+
+/* footer */
+.footer-wrap{border-top:1.5px solid #0d0d0d}
+footer{max-width:1100px;margin:0 auto;padding:1.1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;font-size:11px;color:#aaa;flex-wrap:wrap}
+footer a{color:#fb2a7b;text-decoration:none;font-weight:500}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <a class="back-link" href="index.html">← ห้องสมุดเพื่อนโยคะ</a>
+      <div class="site-label">บันทึกจากเสื่อ</div>
+      <div class="site-title">ไดอารี่ครูโยคะ</div>
+      <div class="pink-bar"><span class="bar-long"></span><span class="bar-short"></span></div>
+    </div>
+    <div class="site-meta">
+      <span class="brand-name">Yoga with Jib</span>
+      <a href="https://www.facebook.com/yogawithjib/" target="_blank">Yoga with Jib ↗</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div id="featured-wrap" class="loading">กำลังโหลด...</div>
+
+  <div class="grid-section">
+    <div class="grid-header">
+      <span class="grid-label" id="grid-label"></span>
+    </div>
+    <div class="grid" id="diary-grid"></div>
+  </div>
+</main>
+
+<div class="footer-wrap">
+  <footer>
+    <span>บันทึกโดย Jib Aksorndee · Yoga with Jib</span>
+    <a href="https://www.facebook.com/yogawithjib/" target="_blank">Facebook ↗</a>
+  </footer>
+</div>
+
+<script>
+const SHEET_URL = 'YOUR_DIARY_APPS_SCRIPT_URL';
+// คอลัมน์ใน Sheet: date | title | excerpt | image | fb_link | tag
+
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g,'').replace(/\uFEFF/g,''));
+  return lines.slice(1).filter(l => l.trim()).map(line => {
+    const vals = []; let cur = '', inQ = false;
+    for (let ch of line) {
+      if (ch === '"') { inQ = !inQ; }
+      else if (ch === ',' && !inQ) { vals.push(cur.trim()); cur = ''; }
+      else { cur += ch; }
+    }
+    vals.push(cur.trim());
+    const obj = {};
+    headers.forEach((h, i) => obj[h] = (vals[i]||'').replace(/^"|"$/g,'').trim());
+    return obj;
+  }).filter(r => r.title || r.Title);
+}
+
+function entryImg(url, emoji='📖') {
+  if (url) return `<img src="${url}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'no-img\\'>${emoji}</div>'">`;
+  return `<div class="no-img">${emoji}</div>`;
+}
+
+function tagHtml(tag, cls='entry-tag') {
+  return (tag||'').split(',').map(t=>t.trim()).filter(t=>t).map(t=>`<span class="${cls}">${t}</span>`).join('');
+}
+
+function renderFeatured(entry) {
+  const wrap = document.getElementById('featured-wrap');
+  wrap.className = 'featured';
+  wrap.innerHTML = `
+    <div class="featured-img">${entryImg(entry.image, '🧘‍♀️')}</div>
+    <div class="featured-body">
+      <div class="entry-meta">
+        <span class="entry-date">${entry.date||''}</span>
+        ${tagHtml(entry.tag)}
+      </div>
+      <div class="featured-title">${entry.title||''}</div>
+      <div class="featured-excerpt">${entry.excerpt||''}</div>
+      ${entry.fb_link ? `<a class="read-btn" href="${entry.fb_link}" target="_blank" rel="noopener">
+        อ่านต่อบน Facebook
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M8 4l3 3-3 3"/></svg>
+      </a>` : ''}
+    </div>`;
+}
+
+function renderGrid(entries) {
+  const grid = document.getElementById('diary-grid');
+  const label = document.getElementById('grid-label');
+  if (!entries.length) {
+    grid.innerHTML = '<div class="empty-grid">ยังไม่มี entry เก่า</div>';
+    label.textContent = '';
+    return;
+  }
+  label.textContent = entries.length + ' entry ก่อนหน้า';
+  grid.innerHTML = entries.map(e => `
+    <a href="${e.fb_link||'#'}" target="_blank" rel="noopener" class="entry-card">
+      <div class="entry-card-img">${entryImg(e.image)}</div>
+      <div class="entry-card-body">
+        <div class="card-date">${e.date||''}</div>
+        <div class="card-title">${e.title||''}</div>
+        ${e.excerpt ? `<div class="card-excerpt">${e.excerpt.substring(0,80)}${e.excerpt.length>80?'...':''}</div>` : ''}
+        <div class="card-tags">${tagHtml(e.tag,'card-tag')}</div>
+        ${e.fb_link ? `<div class="card-fb">อ่านต่อ →</div>` : ''}
+      </div>
+    </a>`).join('');
+}
+
+async function loadDiary() {
+  // ถ้ายังไม่ได้ตั้ง Apps Script URL ให้แสดง placeholder
+  if (!SHEET_URL || SHEET_URL === 'YOUR_DIARY_APPS_SCRIPT_URL') {
+    document.getElementById('featured-wrap').className = 'featured';
+    document.getElementById('featured-wrap').innerHTML = `
+      <div class="featured-img"><div class="no-img">🧘‍♀️</div></div>
+      <div class="featured-body">
+        <div class="entry-meta"><span class="entry-date">เร็วๆ นี้</span></div>
+        <div class="featured-title">บันทึกจากเสื่อ — coming soon</div>
+        <div class="featured-excerpt">ไดอารี่ครูโยคะโดยจิ๊บ — เรื่องราวจากชั้นเรียน ความคิด และชีวิตของครูโยคะในแบบที่ไม่มีใครพูดถึง</div>
+        <a class="read-btn" href="https://www.facebook.com/yogawithjib/" target="_blank" rel="noopener">
+          ติดตามบน Facebook
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M8 4l3 3-3 3"/></svg>
+        </a>
+      </div>`;
+    document.getElementById('grid-label').textContent = '';
+    return;
+  }
+
+  try {
+    const res = await fetch(SHEET_URL);
+    const text = await res.text();
+    const rows = parseCSV(text);
+    if (!rows.length) return;
+    // newest first
+    rows.sort((a,b) => new Date(b.date||0) - new Date(a.date||0));
+    renderFeatured(rows[0]);
+    renderGrid(rows.slice(1));
+  } catch(e) {
+    document.getElementById('featured-wrap').className = 'loading';
+    document.getElementById('featured-wrap').textContent = 'ไม่สามารถโหลดข้อมูลได้';
+  }
+}
+
+loadDiary();
+</script>
+</body>
+</html>
