@@ -299,6 +299,12 @@ footer a:hover{text-decoration:underline}
         <button class="vf-btn"        data-type="ผีเสื้อ"  onclick="setVFilter(this)">ผีเสื้อ</button>
         <button class="vf-btn"        data-type="แมลงปอ"   onclick="setVFilter(this)">แมลงปอ</button>
       </div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap" id="dur-filters">
+        <button class="vf-btn active" data-dur="all"  onclick="setDurFilter(this)">ทุกความยาว</button>
+        <button class="vf-btn"        data-dur="15"   onclick="setDurFilter(this)">≤15 นาที</button>
+        <button class="vf-btn"        data-dur="30"   onclick="setDurFilter(this)">≤30 นาที</button>
+        <button class="vf-btn"        data-dur="30+"  onclick="setDurFilter(this)">30+ นาที</button>
+      </div>
     </div>
 
     <div style="font-size:11px;color:#aaa;letter-spacing:.06em;margin-bottom:1rem" id="video-count"></div>
@@ -783,9 +789,17 @@ function toggleV(i) { document.getElementById('vc' + i).classList.toggle('open')
 
 let allVideoRows = [];
 let activeVType = 'all';
+let activeDur = 'all';
 
+
+function setDurFilter(el) {
+  document.querySelectorAll('[data-dur]').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  activeDur = el.dataset.dur;
+  filterVideos();
+}
 function setVFilter(el) {
-  document.querySelectorAll('.vf-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('[data-type]').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
   activeVType = el.dataset.type;
   filterVideos();
@@ -803,7 +817,9 @@ function filterVideos() {
       (activeVType === 'ฟรี'     && (!type || type.toLowerCase().includes('free') || type.includes('ฟรี'))) ||
       (activeVType === 'ผีเสื้อ' && type.includes('ผีเสื้อ') && !type.includes('แมลงปอ')) ||
       (activeVType === 'แมลงปอ'  && type.includes('แมลงปอ'));
-    return matchQ && matchT;
+    const durNum = parseFloat((r['duration (mins)'] || r['duration'] || '0').toString().replace(/[^0-9.]/g,'')) || 0;
+    const matchD = activeDur === 'all' || (activeDur === '15' && durNum <= 15) || (activeDur === '30' && durNum <= 30) || (activeDur === '30+' && durNum > 30);
+    return matchQ && matchT && matchD;
   }).sort(() => Math.random() - 0.5);
   const total = allVideoRows.length;
 
