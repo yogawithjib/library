@@ -79,6 +79,13 @@ main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem}
 .footer-wrap{border-top:1.5px solid #0d0d0d}
 footer{max-width:1100px;margin:0 auto;padding:1.1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;font-size:11px;color:#aaa;flex-wrap:wrap}
 footer a{color:#fb2a7b;text-decoration:none;font-weight:500}
+
+/* font size control */
+.font-ctrl{position:fixed;bottom:1.25rem;right:1.25rem;z-index:50;display:flex;align-items:center;gap:4px;background:#fff;border:0.5px solid #e0e0e0;border-radius:20px;padding:5px 12px;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.font-btn{border:none;background:transparent;cursor:pointer;font-family:'IBM Plex Sans Thai',sans-serif;font-weight:600;color:#ccc;transition:color .12s;padding:2px 6px;user-select:none;line-height:1}
+.font-btn:hover{color:#888}
+.font-btn.active{color:#fb2a7b}
+
 </style>
 </head>
 <body>
@@ -120,6 +127,13 @@ footer a{color:#fb2a7b;text-decoration:none;font-weight:500}
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbws5j0eoSnDbZAq2wTq2u8Az0Bh1Urx5joMk20gKEtRyrD7DjFmdhfNOLmMEU914Qjm/exec';
 // คอลัมน์ใน Sheet: date | title | excerpt | image | fb_link | tag
 
+function formatDate(raw) {
+  if (!raw) return '';
+  const d = new Date(raw);
+  if (isNaN(d)) return String(raw).split(' ')[0]; // fallback: just first word
+  return d.toLocaleDateString('th-TH', {day:'numeric', month:'short', year:'numeric'});
+}
+
 function parseCSV(text) {
   const lines = text.trim().split('\n');
   const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g,'').replace(/\uFEFF/g,''));
@@ -153,7 +167,7 @@ function renderFeatured(entry) {
     <div class="featured-img">${entryImg(entry.image, '🧘‍♀️')}</div>
     <div class="featured-body">
       <div class="entry-meta">
-        <span class="entry-date">${entry.date||''}</span>
+        <span class="entry-date">${formatDate(entry.date)}</span>
         ${tagHtml(entry.tag)}
       </div>
       <div class="featured-title">${entry.title||''}</div>
@@ -178,7 +192,7 @@ function renderGrid(entries) {
     <a href="${e.fb_link||'#'}" target="_blank" rel="noopener" class="entry-card">
       <div class="entry-card-img">${entryImg(e.image)}</div>
       <div class="entry-card-body">
-        <div class="card-date">${e.date||''}</div>
+        <div class="card-date">${formatDate(e.date)}</div>
         <div class="card-title">${e.title||''}</div>
         ${e.excerpt ? `<div class="card-excerpt">${e.excerpt.substring(0,80)}${e.excerpt.length>80?'...':''}</div>` : ''}
         <div class="card-tags">${tagHtml(e.tag,'card-tag')}</div>
@@ -222,6 +236,24 @@ async function loadDiary() {
 }
 
 loadDiary();
+</script>
+<div class="font-ctrl">
+  <button class="font-btn active" id="font-sm" onclick="setFont('sm')" style="font-size:11px">A</button>
+  <button class="font-btn" id="font-md" onclick="setFont('md')" style="font-size:14px">A</button>
+  <button class="font-btn" id="font-lg" onclick="setFont('lg')" style="font-size:18px">A</button>
+</div>
+
+<script>
+const FONT_SIZES = { sm: '14px', md: '16px', lg: '19px' };
+function setFont(size) {
+  document.documentElement.style.fontSize = FONT_SIZES[size];
+  ['sm','md','lg'].forEach(s => {
+    const el = document.getElementById('font-'+s);
+    if (el) el.classList.toggle('active', s===size);
+  });
+  localStorage.setItem('yogaFontSize', size);
+}
+(function(){ const saved = localStorage.getItem('yogaFontSize'); if (saved && FONT_SIZES[saved]) { document.documentElement.style.fontSize = FONT_SIZES[saved]; document.addEventListener('DOMContentLoaded', ()=>setFont(saved)); } })();
 </script>
 </body>
 </html>
