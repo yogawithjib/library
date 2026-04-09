@@ -830,8 +830,8 @@ function filterVideos() {
     const a = [...arr].sort(()=>Math.random()-.5);
     return a.slice(0,3);
   }
-  function byType(type) {
-    return allVideoRows.filter(r => {
+  function byType(pool, type) {
+    return pool.filter(r => {
       const t = r['ใครดูได้บ้าง (สมาชิกระดับไหน / ฟรี)']||r['type']||'';
       if (type==='ฟรี')     return !t || t.toLowerCase().includes('free') || t.includes('ฟรี');
       if (type==='ผีเสื้อ') return t.includes('ผีเสื้อ') && !t.includes('แมลงปอ');
@@ -842,16 +842,16 @@ function filterVideos() {
 
   let picks, label;
   if (activeVType === 'all') {
-    const free  = byType('ฟรี');
-    const butt  = byType('ผีเสื้อ');
-    const drag  = byType('แมลงปอ');
+    const free  = byType(filtered, 'ฟรี');
+    const butt  = byType(filtered, 'ผีเสื้อ');
+    const drag  = byType(filtered, 'แมลงปอ');
     const f = free.length  ? free[Math.floor(Math.random()*free.length)]   : null;
     const b = butt.length  ? butt[Math.floor(Math.random()*butt.length)]   : null;
     const d = drag.length  ? drag[Math.floor(Math.random()*drag.length)]   : null;
     picks = [f,b,d].filter(Boolean);
-    label = 'ตัวอย่างวิดีโอ · ฟรี · ผีเสื้อ · แมลงปอ';
+    label = activeDur === 'all' ? 'ตัวอย่างวิดีโอ · ฟรี · ผีเสื้อ · แมลงปอ' : `ตัวอย่างวิดีโอ · ${picks.length} คลิป`;
   } else {
-    picks = shuffle3(byType(activeVType));
+    picks = shuffle3(byType(filtered, activeVType));
     label = `${activeVType} · ${picks.length} คลิป`;
   }
 
