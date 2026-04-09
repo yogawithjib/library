@@ -184,6 +184,24 @@ footer a:hover{text-decoration:underline}
 @keyframes monkey-fly{0%{transform:translateX(0)}100%{transform:translateX(110vw)}}
 .egg-counter{position:fixed;bottom:1rem;right:1rem;font-size:10px;color:transparent;pointer-events:none}
 
+
+/* font size control */
+.font-ctrl{display:flex;align-items:center;gap:2px;border-left:0.5px solid #e8e8e8;padding-left:12px;margin-left:4px}
+.font-btn{border:none;background:transparent;cursor:pointer;font-family:'IBM Plex Sans Thai',sans-serif;font-weight:500;color:#ccc;transition:color .12s;padding:2px 4px;user-select:none;line-height:1}
+.font-btn:hover{color:#999}
+.font-btn.active{color:#0d0d0d}
+body.font-md{font-size:16px}
+body.font-lg{font-size:18px}
+body.font-lg .card-title{font-size:16px}
+body.font-lg .card-sub{font-size:14px}
+body.font-lg .filled-intro{font-size:15px}
+body.font-lg .filled-points li{font-size:14px}
+body.font-lg .vote-title{font-size:15px}
+body.font-lg .vote-desc{font-size:14px}
+body.font-lg .tip-text{font-size:16px}
+body.font-lg .tab{font-size:13px}
+body.font-lg .cat-label{font-size:11px}
+
 </style>
 </head>
 <body>
@@ -238,7 +256,12 @@ footer a:hover{text-decoration:underline}
     <div class="tab"        data-cat="studio"    onclick="setTab(this)">สตูดิโอ</div>
     <div class="tab"        data-cat="wellbeing" onclick="setTab(this)">ชีวิตครูโยคะ</div>
     <div class="tab"        data-cat="video"     onclick="setTab(this)">วิดีโอ</div>
+    <div class="font-ctrl">
+    <button class="font-btn active" id="font-sm" onclick="setFont('sm')" style="font-size:11px">A</button>
+    <button class="font-btn" id="font-md" onclick="setFont('md')" style="font-size:14px">A</button>
+    <button class="font-btn" id="font-lg" onclick="setFont('lg')" style="font-size:18px">A</button>
   </div>
+</div>
 </div>
 
 <main>
@@ -627,6 +650,16 @@ function launchConfetti() {
     }, i * 250);
   }
 }
+
+/* ── FONT SIZE ── */
+function setFont(size) {
+  document.body.classList.remove('font-md','font-lg');
+  if (size === 'md') document.body.classList.add('font-md');
+  if (size === 'lg') document.body.classList.add('font-lg');
+  ['sm','md','lg'].forEach(s => document.getElementById('font-'+s).classList.toggle('active', s===size));
+  localStorage.setItem('yogaFontSize', size);
+}
+(function(){ const saved = localStorage.getItem('yogaFontSize'); if (saved) setFont(saved); })();
 
 render();
 renderVotes();
