@@ -1,218 +1,993 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>The Good Chat Playbook</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ห้องสมุดเพื่อนโยคะ — Yoga with Jib</title>
+<meta name="description" content="แหล่งรวมข้อมูลออนไลน์เพื่อคนที่รักการฝึกโยคะและการสอนโยคะ รวบรวมโดยคอมมูนิตี้คนรักโยคะ">
+<meta property="og:title" content="ห้องสมุดเพื่อนโยคะ — Yoga with Jib">
+<meta property="og:description" content="แหล่งรวมข้อมูลออนไลน์เพื่อคนที่รักการฝึกโยคะและการสอนโยคะ รวบรวมโดยคอมมูนิตี้คนรักโยคะ">
+<meta property="og:image" content="https://yogawithjib.github.io/library/images/og.jpg">
+<meta property="og:url" content="https://yogawithjib.github.io/library">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Yoga with Jib">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤍</text></svg>">
+<link rel="alternate icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23fb2a7b'/><path d='M16 24s-9-5.5-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-9 12-9 12z' fill='white'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,700;0,800;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--kp:#0b442b;--ks:#fb8b24;--cp:#0f4c5c;--cs:#5f0f40;--b:rgba(0,0,0,.12)}
-body{font-family:'Raleway',sans-serif;max-width:720px;margin:0 auto;padding:2rem 1.25rem 4rem;color:#111}
-a{text-decoration:none;color:inherit}
+@font-face{
+  font-family:'FabfeltScript';
+  src:url('fonts/FabfeltScript-Bold.woff2') format('woff2'),
+      url('fonts/FabfeltScript-Bold.woff') format('woff');
+  font-weight:bold;font-style:normal;font-display:swap;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px}
+html{font-size:14px}
+body{font-family:'IBM Plex Sans Thai',sans-serif;background:#fff;color:#0d0d0d;min-height:100vh;-webkit-font-smoothing:antialiased}
 
-nav{display:flex;align-items:center;justify-content:space-between;padding-bottom:1.25rem;border-bottom:.5px solid var(--b);margin-bottom:2rem}
-.logo{font-size:13px;font-weight:800;color:var(--kp)}
-nav a{font-size:12px;font-weight:600;color:#555;margin-left:16px}
-nav a:hover{color:var(--kp)}
-nav a.on{color:var(--ks)}
+/* ── HEADER ── */
+header{border-bottom:1.5px solid #0d0d0d;padding:1.25rem 1.5rem 1rem}
+.header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
+.site-label{font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:none;color:#fb2a7b;margin-bottom:5px}
+.site-title{font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1}
+.pink-bar{display:flex;align-items:center;gap:6px;margin-top:8px}
+.pink-bar span{display:block;height:2px;background:#fb2a7b}
+.pink-bar .bar-long{width:36px}
+.pink-bar .bar-short{width:12px;opacity:.4}
+.site-meta{font-size:11px;color:#999;text-align:right;line-height:1.7}
+.site-meta a{color:#fb2a7b;text-decoration:none;font-weight:500}
+.site-meta a:hover{text-decoration:underline}
+.brand-name{display:block;font-family:'FabfeltScript','Dancing Script',cursive;font-weight:bold;font-size:28px;color:#0d0d0d;line-height:1.1;letter-spacing:.01em;margin-bottom:4px}
 
-.eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ks);margin-bottom:.7rem}
-h1{font-size:26px;font-weight:800;color:var(--kp);line-height:1.2;letter-spacing:-.02em;margin-bottom:.9rem}
-h1 em{font-style:italic}
-.sub{font-size:14px;color:#555;line-height:1.7;max-width:500px;margin-bottom:.4rem}
-.nudge{font-size:13px;color:#999;font-style:italic;margin-bottom:1.5rem}
-.slabel{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#999;margin-bottom:1rem}
+/* ── INTRO ── */
+.intro-banner{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 1.5rem;border-bottom:0.5px solid #e8e8e8}
+.intro-inner{max-width:560px}
+.intro-eyebrow{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fb2a7b;margin-bottom:10px}
+.intro-heading{font-size:19px;font-weight:600;line-height:1.45;letter-spacing:-.02em;color:#0d0d0d;margin-bottom:12px}
+.intro-body{font-size:.93rem;font-weight:300;color:#666;line-height:1.85}
+.intro-body strong{font-weight:500;color:#0d0d0d}
+.intro-rule{display:flex;align-items:center;gap:10px;margin-top:20px}
+.intro-rule span{font-size:11px;font-weight:400;color:#bbb;letter-spacing:.04em;white-space:nowrap}
+.intro-rule::after{content:'';flex:1;height:0.5px;background:#e8e8e8}
 
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:2rem}
-.card{border:.5px solid var(--b);border-radius:10px;overflow:hidden;cursor:pointer;transition:border-color .15s}
-.card:hover{border-color:#c2d9cc}
-.card img{width:100%;height:220px;object-fit:cover;display:block}
-.ct{padding:1rem 1.1rem}
-.ct-k{background:var(--kp)}
-.ct-c{background:#e4f0f3}
-.cpill{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:.6rem}
-.cpill-k{background:rgba(255,255,255,.15);color:rgba(255,255,255,.9)}
-.cpill-c{background:#b6d4db;color:#073340}
-.cq{font-size:15px;font-weight:800;line-height:1.25;margin-bottom:4px}
-.cq-k{color:#fff}
-.cq-c{color:var(--cp)}
-.cf{font-size:12px;line-height:1.55}
-.cf-k{color:rgba(255,255,255,.72)}
-.cf-c{color:#555}
-.cb{padding:.65rem 1.1rem;background:#fff;display:flex;align-items:center;justify-content:space-between;border-top:.5px solid var(--b)}
+/* ── TOOLBAR ── */
+.toolbar{max-width:1100px;margin:0 auto;padding:1rem 1.5rem .75rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:0.5px solid #e0e0e0}
+.search-wrap{flex:1;min-width:150px}
+.search-wrap input{width:100%;padding:7px 12px;font-size:13px;font-family:'IBM Plex Sans Thai',sans-serif;border:1px solid #d0d0d0;border-radius:2px;background:#fff;color:#0d0d0d;outline:none;transition:border-color .12s}
+.search-wrap input:focus{border-color:#fb2a7b;box-shadow:0 0 0 2px rgba(251,42,123,.08)}
+.search-wrap input::placeholder{color:#bbb}
+.tabs{display:flex;gap:5px;flex-wrap:wrap}
+.tab{padding:5px 13px;font-size:12px;font-weight:500;font-family:'IBM Plex Sans Thai',sans-serif;letter-spacing:.03em;border:1px solid #d0d0d0;border-radius:2px;cursor:pointer;background:#fff;color:#666;transition:all .12s;user-select:none}
+.tab:hover{border-color:#fb2a7b;color:#fb2a7b}
+.tab.active{background:#fb2a7b;border-color:#fb2a7b;color:#fff}
 
-hr{border:none;border-top:.5px solid var(--b);margin:1.75rem 0}
-.alabel{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#999;margin-bottom:1rem}
-.acc{border:.5px solid var(--b);border-radius:10px;overflow:hidden;margin-bottom:1.5rem}
-.aitem{border-bottom:.5px solid var(--b)}
-.aitem:last-child{border-bottom:none}
-.atrig{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.2rem;cursor:pointer;gap:12px;list-style:none}
-.atrig:hover{background:#f7f7f5}
-.atl{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700}
-.ach{font-size:10px;color:#999;transition:transform .2s}
-.abod{display:none;padding:.1rem 1.2rem 1rem 3rem}
-.abod p{font-size:13px;color:#555;line-height:1.7;margin-top:.6rem}
-.abod strong{font-weight:700;color:#111}
-.abod em{font-style:italic}
-.open .ach{transform:rotate(180deg)}
-.open .abod{display:block}
+/* ── MAIN ── */
+main{max-width:1100px;margin:0 auto;padding:1.25rem 1.5rem 1rem}
+.count-bar{font-size:.78rem;color:#aaa;letter-spacing:.06em;margin-bottom:1.1rem;display:flex;align-items:center;gap:8px}
+.count-bar::after{content:'';flex:1;height:0.5px;background:#e8e8e8}
 
-.qbar{background:#fff5ec;border:.5px solid #fcd4a8;border-radius:10px;padding:1rem 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:1.5rem}
-.qt{font-size:13px;font-weight:600;color:var(--kp)}
-.qt span{font-weight:400;color:#777;font-size:12px;display:block;margin-top:2px}
-.qbtn{padding:8px 16px;background:var(--ks);color:#fff;font-size:12px;font-weight:700;font-family:'Raleway',sans-serif;border:none;border-radius:8px;cursor:pointer;white-space:nowrap}
+/* ── GALLERY ── */
+.gallery{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:auto auto;gap:1px;border:1.5px solid #0d0d0d;background:#0d0d0d}
+.card.main-card{grid-row:1/3;border-top:4px solid transparent}
+.card.main-card:hover{border-top-color:#fb2a7b}
+.card.main-card.open{border-top-color:#fb2a7b}
+.card.main-card .card-title{font-size:1.25rem}
+.card.main-card .card-sub{font-size:.95rem}
+@media(max-width:680px){.gallery{grid-template-columns:1fr;grid-template-rows:auto}.card.main-card{grid-row:auto}}
 
-footer{margin-top:1.75rem;padding-top:1rem;border-top:.5px solid var(--b);display:flex;align-items:center;gap:6px}
-.fdot{width:6px;height:6px;border-radius:50%;background:var(--ks);flex-shrink:0}
-footer span{font-size:11px;color:#999;font-weight:500}
+/* ── CARD ── */
+.card{background:#fff;padding:18px 18px 14px;cursor:pointer;display:flex;flex-direction:column;gap:9px;position:relative;transition:background .1s;border-top:3px solid transparent}
+.card:hover{background:#fff8fb;border-top-color:#fb2a7b}
+.card.open{background:#fff5f9;border-top-color:#fb2a7b}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.card-num{font-size:10px;font-weight:300;color:#ddd;letter-spacing:.06em;flex-shrink:0;margin-top:2px}
+.cat-label{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#bbb;margin-bottom:4px}
+.card-title{font-size:1rem;font-weight:600;line-height:1.4;color:#0d0d0d;letter-spacing:-.01em;overflow-wrap:break-word;word-break:break-word}
+.card-sub{font-size:.86rem;font-weight:300;color:#777;line-height:1.55;margin-top:2px;overflow-wrap:break-word;word-break:break-word}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:auto;padding-top:4px}
+.tag{font-size:.72rem;font-weight:500;letter-spacing:.03em;padding:2px 7px;border:0.5px solid #e0e0e0;border-radius:2px;color:#999;transition:all .1s}
+.card:hover .tag,.card.open .tag{border-color:#faa8c8;color:#fb2a7b}
+.chev{flex-shrink:0;width:14px;height:14px;color:#ccc;transition:transform .18s,color .12s;margin-top:2px}
+.card:hover .chev,.card.open .chev{color:#fb2a7b}
+.card.open .chev{transform:rotate(180deg)}
+.card-body{display:none;border-top:0.5px solid #f0e0e8;padding-top:14px;margin-top:2px}
+.card.open .card-body{display:block}
 
-.visit-bar{margin-top:2rem;padding:1rem 1.25rem;border:.5px solid var(--b);border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.vb-left{display:flex;align-items:center;gap:10px}
-.vb-icon{font-size:20px}
-.vb-num{font-size:22px;font-weight:800;color:var(--kp);letter-spacing:-.02em;line-height:1}
-.vb-label{font-size:11px;font-weight:600;color:#aaa;letter-spacing:.04em;text-transform:uppercase;margin-top:2px}
-.vb-note{font-size:12px;color:#aaa;font-weight:500;font-style:italic}
+/* filled content styles */
+.filled-label{display:inline-flex;align-items:center;gap:5px;font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fb2a7b;margin-bottom:10px}
+.filled-label::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:#fb2a7b;flex-shrink:0}
+.filled-intro{font-size:.9rem;font-weight:300;color:#444;line-height:1.8;margin-bottom:14px}
+.filled-points{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.filled-points li{font-size:.9rem;font-weight:400;color:#222;line-height:1.65;padding-left:16px;position:relative}
+.filled-points li::before{content:"—";position:absolute;left:0;color:#fb2a7b;font-weight:300}
+.source-note{font-size:.78rem;font-weight:300;color:#bbb;border-top:0.5px solid #f0f0f0;padding-top:10px;font-style:italic}
 
-#search-bar{position:relative}
-#search-input{font-family:'Raleway',sans-serif;font-size:12px;font-weight:600;padding:5px 10px 5px 28px;border:.5px solid var(--b);border-radius:20px;outline:none;width:160px;color:#111;background:#f7f7f5 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2.5'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") no-repeat 9px center;transition:border-color .15s,width .2s}
-#search-input:focus{border-color:var(--kp);width:200px;background-color:#fff}
-#search-input::placeholder{color:#aaa}
-#search-box{display:none;position:absolute;top:calc(100% + 6px);right:0;width:300px;background:#fff;border:.5px solid var(--b);border-radius:10px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.08);z-index:100}
-.sr-item{display:flex;flex-direction:column;gap:2px;padding:.7rem 1rem;border-bottom:.5px solid var(--b);text-decoration:none;transition:background .1s}
-.sr-item:last-child{border-bottom:none}
-.sr-item:hover{background:#f7f7f5}
-.sr-path{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--kp)}
-.sr-title{font-size:13px;font-weight:700;color:#111}
-.sr-empty{padding:.9rem 1rem;font-size:13px;color:#999}
+/* video badges */
+.member-badge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:#fb2a7b;border-radius:2px;padding:2px 8px;margin-left:auto}
+.butterfly-badge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:600;letter-spacing:.06em;color:#fb2a7b;background:#fff;border:0.5px solid #fb2a7b;border-radius:2px;padding:2px 8px;margin-left:auto}
+.dragonfly-badge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:600;letter-spacing:.06em;color:#fff;background:#fb2a7b;border:0.5px solid #fb2a7b;border-radius:2px;padding:2px 8px;margin-left:auto}
+.free-badge{font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#999;border:0.5px solid #ccc;border-radius:2px;padding:2px 8px;margin-left:auto;background:#fff}
+.video-link{display:flex;align-items:center;gap:8px;margin-top:10px;padding:9px 12px;border:1px solid #e0e0e0;border-radius:2px;font-size:12px;font-weight:500;color:#0d0d0d;text-decoration:none;transition:border-color .12s,background .12s}
+.video-link:hover{border-color:#fb2a7b;background:#fff5f9;color:#fb2a7b}
+.video-link:hover .play-icon{fill:#fb2a7b}
+
+.empty{grid-column:1/-1;padding:3rem;text-align:center;color:#ccc;font-size:14px;font-weight:300;background:#fff}
+#video-gallery .card{cursor:pointer;border-top:3px solid transparent}
+#video-gallery .card:hover{border-top-color:#fb2a7b}
+#video-gallery .card .chev{display:none}
+#video-gallery .card .card-body{display:block;border-top:none;padding-top:0}
+#video-gallery{grid-template-columns:repeat(3,1fr);grid-template-rows:auto}
+#video-gallery .card.main-card{grid-row:auto;border-top:3px solid transparent;font-size:inherit}
+#video-gallery .card.main-card .card-title{font-size:1rem}
+#video-gallery .card.main-card .card-sub{font-size:.86rem}
+@media(max-width:740px){#video-gallery{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){#video-gallery{grid-template-columns:1fr}}
+.vf-btn{padding:5px 16px;font-size:12px;font-weight:500;font-family:'IBM Plex Sans Thai',sans-serif;border:1px solid #e0e0e0;border-radius:20px;cursor:pointer;background:#fff;color:#888;transition:all .12s;user-select:none}
+.vf-btn:hover{border-color:#fb2a7b;color:#fb2a7b}
+.vf-btn.active{background:#fb2a7b;border-color:#fb2a7b;color:#fff}
+.dur-btn{padding:5px 14px;font-size:11px;font-weight:500;font-family:'IBM Plex Sans Thai',sans-serif;border:1px solid #e0e0e0;border-radius:20px;cursor:pointer;background:#fff;color:#aaa;transition:all .12s;user-select:none}
+.dur-btn:hover{border-color:#0d0d0d;color:#0d0d0d}
+.dur-btn.active{background:#0d0d0d;border-color:#0d0d0d;color:#fff}
+
+/* ── VOTE SECTION ── */
+.vote-section{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem 1rem}
+.vote-eyebrow{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fb2a7b;margin-bottom:8px}
+.vote-heading{font-size:16px;font-weight:600;letter-spacing:-.01em;color:#0d0d0d;margin-bottom:4px}
+.vote-sub{font-size:12px;font-weight:300;color:#999;margin-bottom:1.5rem;line-height:1.7}
+.vote-list{display:flex;flex-direction:column;gap:0;border:1.5px solid #0d0d0d}
+.vote-row{display:flex;align-items:center;gap:0;border-bottom:0.5px solid #e8e8e8;background:#fff;transition:background .1s}
+.vote-row:last-child{border-bottom:none}
+.vote-row:hover{background:#fafafa}
+.vote-rank{width:52px;flex-shrink:0;text-align:center;font-size:18px;font-weight:300;color:#e0e0e0;letter-spacing:-.02em;padding:14px 0;border-right:0.5px solid #e8e8e8}
+.vote-body{flex:1;padding:14px 16px;min-width:0}
+.vote-cat{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#ccc;margin-bottom:3px}
+.vote-title{font-size:.93rem;font-weight:600;color:#0d0d0d;line-height:1.4;letter-spacing:-.01em;overflow-wrap:break-word;word-break:break-word}
+.vote-desc{font-size:.86rem;font-weight:300;color:#999;line-height:1.7;margin-top:5px;max-width:480px}
+.vote-bar-wrap{flex-shrink:0;width:150px;padding:14px 16px 14px 0;display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.vote-bar-track{width:100%;height:4px;background:#f0f0f0;border-radius:2px;overflow:hidden}
+.vote-bar-fill{height:100%;background:#fb2a7b;border-radius:2px;transition:width .4s ease}
+.vote-meta-row{display:flex;align-items:center;gap:8px}
+.vote-count{font-size:1.57rem;font-weight:600;color:#0d0d0d;letter-spacing:-.02em;line-height:1;white-space:nowrap}
+.vote-count-label{font-size:.72rem;font-weight:300;color:#bbb;letter-spacing:.04em}
+.vote-btn{padding:4px 12px;font-size:10px;font-weight:600;font-family:'IBM Plex Sans Thai',sans-serif;letter-spacing:.04em;border:1px solid #d0d0d0;border-radius:2px;cursor:pointer;background:#fff;color:#888;transition:all .12s;user-select:none;white-space:nowrap}
+.vote-btn:hover{border-color:#fb2a7b;color:#fb2a7b}
+.vote-btn.voted{background:#fb2a7b;border-color:#fb2a7b;color:#fff;cursor:default}
+.vote-note{max-width:1100px;margin:0 auto;padding:.75rem 1.5rem 2.5rem;font-size:11px;color:#ccc;font-style:italic}
+
+/* ── FOOTER ── */
+.footer-wrap{border-top:1.5px solid #0d0d0d}
+footer{max-width:1100px;margin:0 auto;padding:1.1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;font-size:11px;color:#aaa;flex-wrap:wrap}
+footer a{color:#fb2a7b;text-decoration:none;font-weight:500}
+footer a:hover{text-decoration:underline}
+
+/* question of the day */
+.tip-bar{max-width:1100px;margin:0 auto;padding:1rem 1.5rem;display:flex;align-items:flex-start;gap:14px;border-bottom:0.5px solid #e8e8e8}
+.tip-dot{width:6px;height:6px;border-radius:50%;background:#fb2a7b;flex-shrink:0;margin-top:5px}
+.tip-label{font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#fb2a7b;margin-bottom:4px}
+.tip-text{font-size:1rem;font-weight:400;color:#0d0d0d;line-height:1.65}
+
+/* new badge */
+.new-badge{display:inline-block;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:#fb2a7b;border-radius:2px;padding:1px 6px;margin-left:6px;vertical-align:middle}
+
+/* share button */
+.share-btn{display:inline-flex;align-items:center;gap:5px;margin-top:12px;padding:5px 12px;font-size:11px;font-weight:500;font-family:'IBM Plex Sans Thai',sans-serif;border:1px solid #e0e0e0;border-radius:2px;cursor:pointer;background:#fff;color:#555;text-decoration:none;transition:all .12s}
+.share-btn:hover{border-color:#1877f2;color:#1877f2}
+
+@media(max-width:600px){
+  .card-top{gap:6px}
+  .vote-row{flex-wrap:wrap}
+  .vote-bar-wrap{width:100%;padding:0 16px 14px;border-top:0.5px solid #f0f0f0;margin-top:4px}
+  .tip-bar{flex-wrap:wrap;gap:8px}
+  header .header-inner{flex-direction:column;align-items:flex-start}
+  .site-meta{text-align:left}
+}
+
+/* easter egg */
+.egg-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center;flex-direction:column;gap:16px}
+.egg-overlay.show{display:flex}
+.egg-box{background:#fff;border-radius:4px;padding:2.5rem 2rem;text-align:center;max-width:320px;position:relative}
+.egg-title{font-size:22px;font-weight:600;letter-spacing:-.02em;margin-bottom:8px}
+.egg-sub{font-size:13px;font-weight:300;color:#888;line-height:1.75}
+.egg-close{margin-top:20px;padding:10px 28px;font-size:12px;font-weight:600;font-family:'IBM Plex Sans Thai',sans-serif;border:1px solid #0d0d0d;border-radius:2px;cursor:pointer;background:#0d0d0d;color:#fff;transition:all .12s}
+.egg-close:hover{background:#333}
+@keyframes monkey-bounce{0%{transform:translateY(0) rotate(-10deg)}100%{transform:translateY(-16px) rotate(10deg)}}
+@keyframes monkey-fly{0%{transform:translateX(0)}100%{transform:translateX(110vw)}}
+.egg-counter{position:fixed;bottom:1rem;right:1rem;font-size:10px;color:transparent;pointer-events:none}
+
+
+/* font size control */
+.font-ctrl{position:fixed;bottom:1.25rem;right:1.25rem;z-index:50;display:flex;align-items:center;gap:4px;background:#fff;border:0.5px solid #e0e0e0;border-radius:20px;padding:5px 12px;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.font-btn{border:none;background:transparent;cursor:pointer;font-family:'IBM Plex Sans Thai',sans-serif;font-weight:600;color:#ccc;transition:color .12s;padding:2px 6px;user-select:none;line-height:1}
+.font-btn:hover{color:#888}
+.font-btn.active{color:#fb2a7b}
+
 </style>
 </head>
 <body>
 
-<nav>
-  <span class="logo">The Good Chat Playbook</span>
-  <div style="display:flex;align-items:center;gap:12px">
-    <div id="search-bar">
-      <input id="search-input" type="text" placeholder="Search…" autocomplete="off">
-      <div id="search-box"><div id="search-results"></div></div>
-    </div>
-    <a href="index.html" class="on">Home</a>
-    <a href="kol-path.html">KOL Path</a>
-    <a href="cso-path.html">CSO Path</a>
-  </div>
-</nav>
-
-<p class="eyebrow">Two paths. One mission.</p>
-<h1>Your choose-your-own-adventure guide<br>to talking about energy transition<br>in ways that feel <em>honest &amp; human.</em></h1>
-<p class="sub">Mainstreaming energy-transition conversations across Southeast Asia — for creators, civil society, and everyone in between.</p>
-<p class="nudge">Choose a path below. Or wander. Wandering is encouraged.</p>
-<p class="slabel">Who are you here as?</p>
-
-<div class="grid">
-  <a class="card" href="kol-path.html">
-    <img src="https://raw.githubusercontent.com/thegoodchat/playbook/main/KOL.png" alt="KOL" style="object-position:center 30%">
-    <div class="ct ct-k">
-      <div class="cpill cpill-k">For Creators</div>
-      <p class="cq cq-k">Are you a KOL or content creator?</p>
-      <p class="cf cf-k">For storytellers &amp; community voices</p>
-    </div>
-    <div class="cb">
-      <span style="font-size:11px;font-weight:700;color:var(--kp);letter-spacing:.04em">The KOL Path →</span>
-      <span style="font-size:12px;font-weight:700;color:var(--ks)">5 Levels</span>
-    </div>
-  </a>
-  <a class="card" href="cso-path.html">
-    <img src="https://raw.githubusercontent.com/thegoodchat/playbook/main/CSO.png" alt="CSO" style="object-position:center 25%">
-    <div class="ct ct-c">
-      <div class="cpill cpill-c">For CSOs</div>
-      <p class="cq cq-c">Are you a civil society org?</p>
-      <p class="cf cf-c">For researchers &amp; advocates</p>
-    </div>
-    <div class="cb">
-      <span style="font-size:11px;font-weight:700;color:var(--cp);letter-spacing:.04em">The CSO Path →</span>
-      <span style="font-size:12px;font-weight:700;color:var(--cs)">5 Levels</span>
-    </div>
-  </a>
-</div>
-
-<hr>
-<p class="alabel">About this playbook</p>
-<div class="acc">
-  <div class="aitem">
-    <div class="atrig" onclick="tog(this)">
-      <span class="atl">🌏 How to use this playbook</span>
-      <span class="ach">▼</span>
-    </div>
-    <div class="abod">
-      <p>Think of this space like a <strong>neighborhood library where no one shushes you</strong>: wander in, pull random books off the shelf, flip through whatever sparks joy, leave the rest exactly where they are.</p>
-      <p>Everything here is meant to be <strong>skimmed, borrowed, annotated, remixed</strong>, and taken home in your metaphorical tote bag. There's no correct route. Just follow what feels useful to you.</p>
-    </div>
-  </div>
-  <div class="aitem">
-    <div class="atrig" onclick="tog(this)">
-      <span class="atl">🔓 Open-source, because gatekeeping is boring</span>
-      <span class="ach">▼</span>
-    </div>
-    <div class="abod">
-      <p>Everything here is free, accessible, and made to be passed around. Screenshots welcome. Copy-paste encouraged. If it helps someone spark a conversation or start a tiny climate uprising with their cousins, <em>perfect.</em></p>
-    </div>
-  </div>
-  <div class="aitem">
-    <div class="atrig" onclick="tog(this)">
-      <span class="atl">🥥 Rooted in Southeast Asia</span>
-      <span class="ach">▼</span>
-    </div>
-    <div class="abod">
-      <p>Born out of real conversations in <strong>the Philippines, Thailand, and Indonesia</strong>. It speaks our languages, our humor, our chaos, and our ways of taking care of each other. It's <em>glocal</em> — sweaty humidity and traffic jams baked in.</p>
-    </div>
-  </div>
-  <div class="aitem">
-    <div class="atrig" onclick="tog(this)">
-      <span class="atl">🪴 FAQs</span>
-      <span class="ach">▼</span>
-    </div>
-    <div class="abod">
-      <p><strong>Can I copy parts of this?</strong> Yes, please. Copy, paste, remix — whatever helps you and your community.</p>
-      <p><strong>I'm outside Southeast Asia. Is this for me?</strong> Totally. Just know it was built from lived experiences here. Adapt as needed.</p>
-      <p><strong>What if I'm overwhelmed?</strong> Same. Take one page at a time. Or close the tab, drink water, and return when your neurons feel less toasted.</p>
-    </div>
-  </div>
-</div>
-
-<div class="qbar">
-  <div class="qt">Take the quiz &amp; get your certificate<span>Test what you've learned and earn a certificate from The Good Chat Playbook team.</span></div>
-  <a href="https://makesense.typeform.com/to/AO0X5upD" target="_blank"><button class="qbtn">Take the quiz →</button></a>
-</div>
-
-<div class="visit-bar">
-  <div class="vb-left">
-    <div class="vb-icon">👀</div>
+<header>
+  <div class="header-inner">
     <div>
-      <div class="vb-num" id="visit-count">—</div>
-      <div class="vb-label">total visitors</div>
+      <div class="site-label">Yoga Teacher Resource Library | คลังความรู้สำหรับครูโยคะ</div>
+      <div class="site-title">Curated by teachers, for teachers.</div>
+      <div class="pink-bar"><span class="bar-long"></span><span class="bar-short"></span></div>
+    </div>
+    <div class="site-meta">
+      <span class="brand-name" id="brand-name" onclick="easterEgg()" style="cursor:default;user-select:none">Yoga with Jib</span>
+      The Community | พื้นที่แลกเปลี่ยนของคนสอนโยคะ<br>
+      <a href="https://youtube.com/yogawithjib" target="_blank">youtube.com/yogawithjib ↗</a>
     </div>
   </div>
-  <div class="vb-note">Free &amp; open resource · No ads · No paywalls</div>
+</header>
+
+<div class="intro-banner">
+  <div class="intro-inner">
+    <div class="intro-eyebrow">รวมทุกอย่างที่ครูโยคะต้องมี ไว้ในที่เดียว</div>
+    <h2 class="intro-heading">Community ความรู้ของครูโยคะ</h2>
+    <p class="intro-body">
+      แหล่งรวมข้อมูลออนไลน์เพื่อคนที่รักการสอนโยคะ เราเชื่อว่าความรู้และประสบการณ์ที่แต่ละคนสะสมมานั้นมีคุณค่ามาก และควรได้รับการแบ่งปัน ไม่ว่าจะเป็นเรื่องการฝึก การสอน การเงิน การจัดการสตูดิโอ หรือชีวิตของครูโยคะในแบบที่ไม่มีใครพูดถึง
+    </p>
+    <div class="intro-rule"><span>เนื้อหาที่คุยกันแล้ว</span></div>
+  </div>
 </div>
 
-<footer>
-  <div class="fdot"></div>
-  <span>The Good Chat Playbook · Open Resource · Philippines · Thailand · Indonesia · Free to use &amp; share</span>
-</footer>
+
+<div class="tip-bar" id="tip-bar">
+  <div style="flex-shrink:0;padding-right:20px;border-right:0.5px solid #e8e8e8;margin-right:4px">
+    <div class="tip-label" id="q-date">—</div>
+    <div style="font-size:20px;font-weight:600;color:#0d0d0d;letter-spacing:-.02em;line-height:1.1" id="q-time">--:--</div>
+  </div>
+  <div class="tip-dot"></div>
+  <div style="flex:1">
+    <div class="tip-label">question of the day</div>
+    <div class="tip-text" id="tip-text"></div>
+  </div>
+</div>
+
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="ค้นหา..." oninput="render()">
+  </div>
+  <div class="tabs">
+    <div class="tab active" data-cat="all"       onclick="setTab(this)">ทั้งหมด</div>
+    <div class="tab"        data-cat="finance"   onclick="setTab(this)">ธุรกิจ & การเงิน</div>
+    <div class="tab"        data-cat="teaching"  onclick="setTab(this)">ทักษะการสอน</div>
+    <div class="tab"        data-cat="studio"    onclick="setTab(this)">สตูดิโอ</div>
+    <div class="tab"        data-cat="wellbeing" onclick="setTab(this)">ชีวิตครูโยคะ</div>
+
+  
+</div>
+</div>
+
+<main>
+  <div class="count-bar" id="count"></div>
+  <div class="gallery"   id="gallery"></div>
+</main>
+
+<div class="vote-section">
+  <div class="vote-eyebrow">ร่วม vote</div>
+  <div class="vote-heading">อยากคุยเรื่องอะไรต่อ?</div>
+  <p class="vote-sub">กด vote หัวข้อที่สนใจ แล้วเราจะเลือกอันที่ได้รับความสนใจสูงสุดมาพูดคุยกัน</p>
+  <div class="vote-list" id="vote-grid"></div>
+</div>
+<p class="vote-note">* vote ใช้ได้ 1 ครั้งต่อเบราว์เซอร์ · อัปเดต real-time ทุกคนเห็นพร้อมกัน</p>
+<div style="background:#fafafa;border-top:1.5px solid #0d0d0d;border-bottom:1.5px solid #0d0d0d;margin:2rem 0">
+  <div style="max-width:1100px;margin:0 auto;padding:2rem 1.5rem">
+
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem">
+      <div>
+        <div style="font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fb2a7b;margin-bottom:6px">Yoga with Jib</div>
+        <div style="font-size:20px;font-weight:600;letter-spacing:-.02em;line-height:1">วิดีโอ</div>
+      </div>
+      <a href="https://youtube.com/yogawithjib" target="_blank"
+         style="font-size:11px;font-weight:500;color:#fb2a7b;text-decoration:none;border:1px solid #fb2a7b;border-radius:2px;padding:5px 14px;white-space:nowrap;transition:all .12s"
+         onmouseover="this.style.background='#fb2a7b';this.style.color='#fff'"
+         onmouseout="this.style.background='transparent';this.style.color='#fb2a7b'">
+        ดูช่อง YouTube ↗
+      </a>
+    </div>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:1.25rem">
+      <input type="text" id="video-search" placeholder="ค้นหาวิดีโอ..."
+        oninput="filterVideos()"
+        style="flex:1;min-width:160px;padding:7px 12px;font-size:13px;font-family:'IBM Plex Sans Thai',sans-serif;border:1px solid #d0d0d0;border-radius:2px;background:#fff;color:#0d0d0d;outline:none">
+      <div style="display:flex;gap:5px;flex-wrap:wrap" id="video-filters">
+        <button class="vf-btn active" data-type="all"      onclick="setVFilter(this)">ทั้งหมด</button>
+        <button class="vf-btn"        data-type="ฟรี"      onclick="setVFilter(this)">ฟรี</button>
+        <button class="vf-btn"        data-type="ผีเสื้อ"  onclick="setVFilter(this)">ผีเสื้อ</button>
+        <button class="vf-btn"        data-type="แมลงปอ"   onclick="setVFilter(this)">แมลงปอ</button>
+      </div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap" id="dur-filters">
+        <button class="dur-btn active" data-dur="all"  onclick="setDurFilter(this)">ทุกความยาว</button>
+        <button class="dur-btn"        data-dur="15"   onclick="setDurFilter(this)">≤15 นาที</button>
+        <button class="dur-btn"        data-dur="30"   onclick="setDurFilter(this)">≤30 นาที</button>
+        <button class="dur-btn"        data-dur="30+"  onclick="setDurFilter(this)">30+ นาที</button>
+      </div>
+    </div>
+
+    <div style="font-size:11px;color:#aaa;letter-spacing:.06em;margin-bottom:1rem" id="video-count"></div>
+    <div class="gallery" id="video-gallery"></div>
+  </div>
+</div>
+
+
+
+
+<div style="max-width:1100px;margin:0 auto;padding:2rem 1.5rem 1rem;border-top:0.5px solid #e8e8e8">
+  <div style="font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fb2a7b;margin-bottom:8px">เครื่องมือสำหรับครู</div>
+  <div style="font-size:16px;font-weight:600;letter-spacing:-.01em;margin-bottom:1.25rem">mini apps</div>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
+
+    <a href="diary.html"
+       style="display:flex;flex-direction:column;gap:10px;border:1.5px solid #0d0d0d;border-radius:2px;padding:18px;text-decoration:none;color:#0d0d0d;transition:all .12s;background:#fff"
+       onmouseover="this.style.borderColor='#fb2a7b';this.style.background='#fff8fb'"
+       onmouseout="this.style.borderColor='#0d0d0d';this.style.background='#fff'">
+      <div>
+        <div style="font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#bbb;margin-bottom:5px">บันทึกจากเสื่อ</div>
+        <div style="font-size:15px;font-weight:600;margin-bottom:4px">📝 ไดอารี่ของจิ๊บ</div>
+        <div style="font-size:12px;font-weight:300;color:#888;line-height:1.6">เปิดโลกหลังห้องเรียนโยคะ ผ่านมุมมอง ความคิด และชีวิตของครูโยคะคนหนึ่ง</div>
+      </div>
+      <div style="font-size:11px;font-weight:500;color:#fb2a7b;margin-top:auto">อ่าน ↗</div>
+    </a>
+
+    <a href="pranayama.html"
+       style="display:flex;flex-direction:column;gap:10px;border:1.5px solid #0d0d0d;border-radius:2px;padding:18px;text-decoration:none;color:#0d0d0d;transition:all .12s;background:#fff"
+       onmouseover="this.style.borderColor='#fb2a7b';this.style.background='#fff8fb'"
+       onmouseout="this.style.borderColor='#0d0d0d';this.style.background='#fff'">
+      <div>
+        <div style="font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#bbb;margin-bottom:5px">Pranayama</div>
+        <div style="font-size:15px;font-weight:600;margin-bottom:4px">📦 หายใจแบบกล่อง</div>
+        <div style="font-size:12px;font-weight:300;color:#888;line-height:1.6">หายใจรูปกล่อง — หายใจเข้า กลั้น หายใจออก กลั้น ตั้งเวลาและจำนวนรอบได้เอง</div>
+      </div>
+      <div style="font-size:11px;font-weight:500;color:#fb2a7b;margin-top:auto">เปิด ↗</div>
+    </a>
+
+    <a href="quiz.html"
+       style="display:flex;flex-direction:column;gap:10px;border:1.5px solid #0d0d0d;border-radius:2px;padding:18px;text-decoration:none;color:#0d0d0d;transition:all .12s;background:#fff"
+       onmouseover="this.style.borderColor='#fb2a7b';this.style.background='#fff8fb'"
+       onmouseout="this.style.borderColor='#0d0d0d';this.style.background='#fff'">
+      <div>
+        <div style="font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#bbb;margin-bottom:5px">Personality Quiz</div>
+        <div style="font-size:15px;font-weight:600;margin-bottom:4px">💁‍♀️ ครูโยคะแบบไหน?</div>
+        <div style="font-size:12px;font-weight:300;color:#888;line-height:1.6">10 คำถาม 9 ประเภท จากแนวคิด Enneagram — ค้นพบ personality ของครูในตัวคุณ</div>
+      </div>
+      <div style="font-size:11px;font-weight:500;color:#fb2a7b;margin-top:auto">เริ่ม quiz ↗</div>
+    </a>
+
+    <a href="forbeginners.html"
+       style="display:flex;flex-direction:column;gap:10px;border:1.5px solid #0d0d0d;border-radius:2px;padding:18px;text-decoration:none;color:#0d0d0d;transition:all .12s;background:#fff"
+       onmouseover="this.style.borderColor='#fb2a7b';this.style.background='#fff8fb'"
+       onmouseout="this.style.borderColor='#0d0d0d';this.style.background='#fff'">
+      <div>
+        <div style="font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#bbb;margin-bottom:5px">ข้อมูลสำหรับส่งให้นักเรียนใหม่</div>
+        <div style="font-size:15px;font-weight:600;margin-bottom:4px">🧘 คู่มือผู้ฝึกใหม่</div>
+        <div style="font-size:12px;font-weight:300;color:#888;line-height:1.6">ทุกอย่างที่ต้องรู้ก่อนฝึกโยคะ — คำแนะนำ เตรียมตัว และอุปกรณ์ที่ควรมี</div>
+      </div>
+      <div style="font-size:11px;font-weight:500;color:#fb2a7b;margin-top:auto">อ่าน ↗</div>
+    </a>
+
+  </div>
+</div>
+
+<div style="max-width:1100px;margin:0 auto;padding:2rem 1.5rem 2.5rem;border-top:0.5px solid #e8e8e8">
+  <div style="font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fb2a7b;margin-bottom:10px">ร่วมวงคุยกัน</div>
+  <div style="font-size:14px;font-weight:600;letter-spacing:-.01em;color:#0d0d0d;margin-bottom:16px">ช่องทางการพูดคุยของคอมมูนิตี้</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+    <a href="https://www.facebook.com/yogawithjib/" target="_blank" rel="noopener"
+       style="display:block;border:0.5px solid #e0e0e0;border-radius:2px;padding:16px;text-decoration:none;color:#0d0d0d;transition:border-color .12s"
+       onmouseover="this.style.borderColor='#fb2a7b'" onmouseout="this.style.borderColor='#e0e0e0'">
+      <div style="font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#bbb;margin-bottom:6px">Facebook Page</div>
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px">Yoga with Jib</div>
+      <div style="font-size:11px;font-weight:300;color:#999">โพสต์ บทความ และอัปเดตจาก Jib</div>
+      <div style="font-size:11px;color:#fb2a7b;margin-top:10px;font-weight:500">เข้าร่วม ↗</div>
+    </a>
+    <a href="https://www.facebook.com/groups/2805338106391131" target="_blank" rel="noopener"
+       style="display:block;border:0.5px solid #e0e0e0;border-radius:2px;padding:16px;text-decoration:none;color:#0d0d0d;transition:border-color .12s"
+       onmouseover="this.style.borderColor='#fb2a7b'" onmouseout="this.style.borderColor='#e0e0e0'">
+      <div style="font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#bbb;margin-bottom:6px">Facebook Group</div>
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px">เพื่อนโยคะ</div>
+      <div style="font-size:11px;font-weight:300;color:#999">พูดคุย ถามตอบ แลกเปลี่ยนประสบการณ์</div>
+      <div style="font-size:11px;color:#fb2a7b;margin-top:10px;font-weight:500">เข้าร่วม ↗</div>
+    </a>
+    <a href="https://line.me/ti/g2/PkvBLtmfIKAy5y75i6hPFZlYYmCt4g4fqD4FHQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank" rel="noopener"
+       style="display:block;border:0.5px solid #e0e0e0;border-radius:2px;padding:16px;text-decoration:none;color:#0d0d0d;transition:border-color .12s"
+       onmouseover="this.style.borderColor='#fb2a7b'" onmouseout="this.style.borderColor='#e0e0e0'">
+      <div style="font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#bbb;margin-bottom:6px">LINE Open Chat</div>
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px">เพื่อนโยคะ</div>
+      <div style="font-size:11px;font-weight:300;color:#999">แชทสดกับคอมมูนิตี้บน LINE</div>
+      <div style="font-size:11px;color:#fb2a7b;margin-top:10px;font-weight:500">เข้าร่วม ↗</div>
+    </a>
+  </div>
+</div>
+
+
+<div class="egg-overlay" id="egg-overlay" onclick="closeEgg()">
+  <div class="egg-box" onclick="event.stopPropagation()">
+    <div id="monkey-wrap" style="font-size:48px;margin-bottom:8px;display:flex;justify-content:center;gap:4px"></div>
+    <div class="egg-title">ซนเหมือนกันนะเรา</div>
+
+    <button class="egg-close" onclick="closeEgg()">ปิด</button>
+  </div>
+</div>
+
+<div class="footer-wrap">
+  <footer><a href="admin.html" style="font-size:12px;color:#e0e0e0;text-decoration:none;transition:color .12s" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#e0e0e0'">⚙️</a>
+    <span>คลังความรู้รวบรวมโดยคอมมูนิตี้คนรักโยคะ — เนื้อหาเป็นข้อมูลทั่วไป ไม่ใช่คำแนะนำทางกฎหมายหรือการเงิน</span>
+    <span style="font-size:11px;color:#ccc;display:flex;align-items:center;gap:5px">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#ccc" stroke-width="1"/><circle cx="5" cy="5" r="1.5" fill="#ccc"/></svg>
+      <span id="visit-count">—</span> visits
+    </span>
+    <a href="https://youtube.com/yogawithjib" target="_blank">Yoga with Jib on YouTube ↗</a>
+  </footer>
+</div>
 
 <script>
-function tog(t){t.parentElement.classList.toggle('open')}
+const CATS = {
+  finance:   'ธุรกิจ & การเงิน',
+  teaching:  'ทักษะการสอน',
+  studio:    'สตูดิโอ',
+  wellbeing: 'ชีวิตครูโยคะ',
+  video:     'วิดีโอ',
+};
 
-fetch('https://api.counterapi.dev/v1/thegoodchat-playbook/visits/up')
-  .then(function(r){return r.json()})
-  .then(function(d){
-    if(d && d.count) document.getElementById('visit-count').textContent = d.count.toLocaleString();
-  })
-  .catch(function(){document.getElementById('visit-count').textContent = '—'});
+/* ================================================================
+   TOPICS — หัวข้อที่มีเนื้อหาแล้ว (จะแสดงใน gallery)
+   เพิ่ม points + intro หลังพูดคุยแต่ละครั้ง
+   ================================================================ */
+const TOPICS = [
+
+  {
+    cat: 'wellbeing',
+    title: 'การสอนโยคะแบบ full time เลยยังเป็นไปได้ไหม',
+    sub: 'ครูโยคะมีอาชีพเสริมอะไรบ้าง และโยคะคิดเป็นกี่เปอร์เซ็นต์ของรายได้',
+    date: '7 เมษายน 2026',
+    tags: ['full-time', 'รายได้', 'อาชีพเสริม', 'Facebook discussion'],
+    intro: 'จากการแลกเปลี่ยนใน Facebook ภาพรวมชัดเจนว่าไม่มีคำตอบเดียว — ครูโยคะในคอมมูนิตี้มีรูปแบบการทำงานที่หลากหลายมาก ตั้งแต่สอน full-time 100% มากว่าสิบปี ไปจนถึงสอนเพียง 5% ของรายได้ทั้งหมด สิ่งที่น่าสนใจคือปัจจัยที่ทำให้อยู่รอดได้ไม่ใช่แค่ความพยายาม แต่คือการปรับตัวและการ diversify',
+    points: [
+      '<strong>Full-time เป็นไปได้</strong> — ครูหลายท่านสอนโยคะ 100% มากกว่า 8–10 ปีแล้ว โดยไม่มีอาชีพเสริม บางท่านปรับวิธีเดินทางตามสถานการณ์ เช่น ใช้มอเตอร์ไซค์เมื่อค่าน้ำมันแพง เพื่อรักษา margin',
+      '<strong>Diversify ภายในสาขา</strong> — ครูที่ประสบความสำเร็จหลายท่านเพิ่ม discipline อื่นควบคู่ เช่น Pilates Reformer และ Aerial Yoga โดยเฉพาะในพื้นที่ที่มีการแข่งขันสูงอย่างปาย การมีตัวเลือกให้นักเรียนช่วยสร้างรายได้ที่มั่นคงกว่า',
+      '<strong>บริบทพื้นที่มีผลมาก</strong> — สตูดิโอในปายที่หนาแน่น ทำให้ครูต้องสร้างจุดแตกต่าง สัดส่วนรายได้จากโยคะอย่างเดียวจึงต่ำลง ในขณะที่ครูในเมืองใหญ่อาจอยู่ได้กับโยคะ full-time',
+      '<strong>Part-time มีเหตุผลที่ดี</strong> — ครูบางท่านสอนเพียง 5% ของรายได้ แต่ยังคงสอนต่อเพราะคุณค่าที่ไม่ใช่ตัวเงิน เช่น การฝึกทักษะการสื่อสาร การ calibrate ให้เหมาะกับนักเรียนทุกระดับ และความรู้สึก belong ใน community',
+      '<strong>Burnout เป็นสัญญาณสำคัญ</strong> — ผู้ที่ทำงานประจำควบคู่กับสอนโยคะพบว่าเสี่ยง burnout สูง การรู้จักขีดจำกัดของตัวเองและตัดสินใจปรับรูปแบบ คือทักษะที่จำเป็น',
+    ],
+    source: 'รวบรวมจาก comment ใน Facebook คอมมูนิตี้ — ขอบคุณทุกท่านที่แบ่งปันประสบการณ์ · <a href="https://www.facebook.com/share/p/176iKfFb2x/" target="_blank" rel="noopener" style="color:#fb2a7b;text-decoration:none;border-bottom:0.5px solid #fb2a7b">ดูโพสต์ต้นฉบับ ↗</a>',
+  },
+
+  {
+    cat: 'wellbeing',
+    title: 'ค่าน้ำมันขึ้นแพงแบบนี้มีผลกระทบอะไรกับครูโยคะบ้าง',
+    sub: 'ครูโยคะปรับตัวอย่างไรเมื่อต้นทุนการเดินทางสูงขึ้น',
+    date: '6 เมษายน 2026',
+    tags: ['ค่าเดินทาง', 'ต้นทุน', 'Facebook discussion'],
+    intro: 'เมื่อค่าน้ำมันปรับตัวสูงขึ้น ครูโยคะที่ต้องเดินทางสอนหลายสถานที่ได้รับผลกระทบโดยตรง คอมมูนิตี้แชร์วิธีรับมือที่หลากหลาย ตั้งแต่เปลี่ยนพาหนะ ไปจนถึงเลือกรับงานเฉพาะในรัศมีใกล้บ้าน',
+    points: [
+      '<strong>เปลี่ยนพาหนะ</strong> — ครูบางท่านเปลี่ยนมาใช้รถแก๊สเพื่อลดค่าใช้จ่าย',
+      '<strong>ใช้ขนส่งสาธารณะ</strong> — BTS และรถไฟฟ้าเป็นตัวเลือกที่หลายคนหันมาใช้มากขึ้น แม้จะแน่นขึ้นตามไปด้วย',
+      '<strong>จำกัดรัศมีการสอน</strong> — ครูที่สอนในรัศมีไม่เกิน 5 กม. ใช้มอเตอร์ไซค์แทนรถยนต์ ช่วยลดต้นทุนได้มาก',
+    ],
+    source: 'รวบรวมจาก comment ใน Facebook คอมมูนิตี้ · <a href="https://www.facebook.com/share/p/1AZTjPUi31/" target="_blank" rel="noopener" style="color:#fb2a7b;text-decoration:none;border-bottom:0.5px solid #fb2a7b">ดูโพสต์ต้นฉบับ ↗</a> · <a href="https://www.facebook.com/share/p/1BSNpyUCvd/" target="_blank" rel="noopener" style="color:#fb2a7b;text-decoration:none;border-bottom:0.5px solid #fb2a7b">โพสต์เพิ่มเติม ↗</a>',
+  },
+
+  /* วิดีโอโหลดจาก Google Sheets อัตโนมัติ */
+
+];
+
+/* ================================================================
+   VOTE_TOPICS — หัวข้อที่ยังรอการพูดคุย (แสดงในส่วน vote)
+   ================================================================ */
+const VOTE_TOPICS = [
+  {
+    id: 'v01',
+    cat: 'wellbeing',
+    title: 'self-practice ของครูโยคะ',
+    desc: 'เมื่อสอนทุกวัน เราหาเวลาฝึกเพื่อตัวเองได้อย่างไร? ระหว่างการสอนกับการฝึก ต่างกันแค่ไหน และสำคัญพอๆ กันไหม?',
+  },
+  {
+    id: 'v02',
+    cat: 'finance',
+    title: 'การตั้งราคาคลาสและแพ็กเกจ',
+    desc: 'ราคาที่ "เหมาะสม" คืออะไร? เราคำนวณยังไง และรู้สึกอย่างไรกับการขึ้นราคา — มีความกลัวหรือความลังเลอะไรบ้าง?',
+  },
+  {
+    id: 'v03',
+    cat: 'teaching',
+    title: 'นักเรียนที่สอนยากที่สุดในชีวิต',
+    desc: 'เล่าสู่กันฟัง — นักเรียนแบบไหนที่ท้าทายที่สุด? เราจัดการอย่างไร และได้เรียนรู้อะไรจากประสบการณ์นั้น?',
+  },
+];
+
+/* ── VOTE STORAGE (localStorage — สลับ Firebase ได้ทีหลัง) ── */
+function getVotes() {
+  if (window._fbVotes) return window._fbVotes;
+  try { return JSON.parse(localStorage.getItem('yogaVotes') || '{}'); } catch { return {}; }
+}
+function getMyVote() {
+  try { return localStorage.getItem('yogaMyVote') || null; } catch { return null; }
+}
+function castVote(id) {
+  const my = getMyVote();
+  if (my) return;
+  if (window.castVoteFirebase) {
+    window.castVoteFirebase(id);
+  } else {
+    const votes = getVotes();
+    votes[id] = (votes[id] || 0) + 1;
+    localStorage.setItem('yogaVotes', JSON.stringify(votes));
+    localStorage.setItem('yogaMyVote', id);
+    renderVotes();
+  }
+}
+
+/* ── GALLERY RENDER ── */
+let activeCat = 'all';
+function setTab(el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  activeCat = el.dataset.cat;
+  render();
+}
+function render() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  const items = TOPICS.filter(d => {
+    const matchCat = activeCat === 'all' || d.cat === activeCat;
+    const matchQ = !q || d.title.toLowerCase().includes(q) || d.sub.toLowerCase().includes(q) ||
+      (d.tags && d.tags.some(t => t.toLowerCase().includes(q)));
+    return matchCat && matchQ;
+  });
+  document.getElementById('count').textContent = items.length + ' หัวข้อ';
+  const wrap = document.getElementById('gallery');
+  if (!items.length) { wrap.innerHTML = '<div class="empty">ไม่พบหัวข้อที่ตรงกัน</div>'; return; }
+
+  wrap.innerHTML = items.map((d, i) => {
+    const num = String(i + 1).padStart(2, '0');
+    const catLabel = CATS[d.cat] || '';
+    const tagsHtml = (d.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
+    let bodyHtml;
+    if (d.isVideoTopic) {
+      bodyHtml = `<div class="card-body">
+        <p class="filled-intro">วิดีโอจาก <strong>Yoga with Jib</strong> จะถูกจัดเรียงที่นี่<br>
+        แบ่งเป็น 3 ประเภท — <strong>ฟรี</strong> · <strong>ผีเสื้อ</strong> (สมาชิก ≤30 นาที) · <strong>แมลงปอ</strong> (สมาชิก &gt;30 นาที)</p>
+        <a class="video-link" href="https://youtube.com/yogawithjib" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x=".5" y=".5" width="12" height="12" rx="2" stroke="#ddd"/><path class="play-icon" d="M5 3.8l4 2.7-4 2.7V3.8z" fill="#0d0d0d"/></svg>
+          ดูบน YouTube <span class="free-badge">ทุกคน</span>
+        </a></div>`;
+    } else {
+      const ptsHtml = (d.points || []).map(p => `<li>${p}</li>`).join('');
+      bodyHtml = `<div class="card-body">
+        <div class="filled-label">พูดคุยแล้ว${d.date ? ` · <span style="font-weight:300;color:#bbb;letter-spacing:0">${d.date}</span>` : ''}</div>
+        <p class="filled-intro">${d.intro}</p>
+        <ul class="filled-points">${ptsHtml}</ul>
+        ${d.source ? `<p class="source-note">${d.source}</p>` : ''}
+        <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fyogawithjib.github.io%2Flibrary" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="9" cy="2" r="1.5" stroke="currentColor" stroke-width="1"/><circle cx="2" cy="6" r="1.5" stroke="currentColor" stroke-width="1"/><circle cx="9" cy="10" r="1.5" stroke="currentColor" stroke-width="1"/><path d="M3.5 5.5l4-2.5M3.5 6.5l4 2.5" stroke="currentColor" stroke-width="1"/></svg>
+          แชร์ไป Facebook
+        </a>
+      </div>`;
+    }
+    const filledMark = d.points ? ` · <span style="color:#fb2a7b">พูดคุยแล้ว</span>` : '';
+    const isNew = d.date ? (new Date() - new Date(d.date)) < 7*24*60*60*1000 : false;
+    const newBadge = isNew ? '<span class="new-badge">ใหม่</span>' : '';
+    const isMain = i === 0;
+    return `<div class="card${d.points ? ' filled' : ''}${isMain ? ' main-card' : ''}" id="c${i}" onclick="toggle(${i})">
+      <div class="card-top">
+        <div style="flex:1;min-width:0;overflow:hidden">
+          <div class="cat-label">${catLabel}${filledMark}</div>
+          <div class="card-title">${d.title}${newBadge}</div>
+          <div class="card-sub">${d.sub}</div>
+          ${d.date ? `<div style="font-size:10px;font-weight:300;color:#bbb;margin-top:4px;white-space:nowrap">${d.date}</div>` : ''}
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;margin-left:8px">
+          <span class="card-num">${num}</span>
+          <svg class="chev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5l4 4 4-4"/></svg>
+        </div>
+      </div>
+      <div class="tags">${tagsHtml}</div>
+      ${bodyHtml}
+    </div>`;
+  }).join('');
+}
+function toggle(i) { document.getElementById('c' + i).classList.toggle('open'); }
+
+/* ── VOTE RENDER ── */
+function renderVotes() {
+  const votes = getVotes();
+  const myVote = getMyVote();
+  const maxVotes = Math.max(...VOTE_TOPICS.map(t => votes[t.id] || 0), 1);
+  const sorted = [...VOTE_TOPICS].sort((a, b) => (votes[b.id] || 0) - (votes[a.id] || 0));
+
+  document.getElementById('vote-grid').innerHTML = sorted.map((t, i) => {
+    const count    = votes[t.id] || 0;
+    const pct      = Math.round((count / maxVotes) * 100);
+    const voted    = myVote === t.id;
+    const hasVoted = !!myVote;
+    const catLabel = CATS[t.cat] || '';
+    const btnLabel = voted ? 'voted ✓' : '+ vote';
+    const btnClass = voted ? 'vote-btn voted' : 'vote-btn';
+    const btnAttr  = hasVoted && !voted ? 'disabled style="opacity:.4;cursor:default"' : '';
+    const rankColor  = i === 0 && count > 0 ? '#fb2a7b' : '#e0e0e0';
+    const countColor = i === 0 && count > 0 ? '#fb2a7b' : '#0d0d0d';
+    return `<div class="vote-row">
+      <div class="vote-rank" style="color:${rankColor}">${String(i+1).padStart(2,'0')}</div>
+      <div class="vote-body">
+        <div class="vote-cat">${catLabel}</div>
+        <div class="vote-title">${t.title}</div>
+        <div class="vote-desc">${t.desc}</div>
+      </div>
+      <div class="vote-bar-wrap">
+        <div style="text-align:right;margin-bottom:4px">
+          <span class="vote-count" style="color:${countColor}">${count}</span>
+          <span class="vote-count-label"> ${count !== 1 ? 'votes' : 'vote'}</span>
+        </div>
+        <div class="vote-bar-track"><div class="vote-bar-fill" style="width:${pct}%"></div></div>
+        <button class="${btnClass}" style="margin-top:8px" ${btnAttr} onclick="castVote('${t.id}')">${btnLabel}</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ── EASTER EGG ── */
+let eggCount = 0, eggTimer = null;
+function easterEgg() {
+  eggCount++;
+  clearTimeout(eggTimer);
+  eggTimer = setTimeout(()=>{ eggCount = 0; }, 2000);
+  if (eggCount >= 7) {
+    eggCount = 0;
+    launchConfetti();
+    document.getElementById('egg-overlay').classList.add('show');
+  }
+}
+function closeEgg() {
+  document.getElementById('egg-overlay').classList.remove('show');
+}
+function launchConfetti() {
+  // 1 bouncing monkey in box
+  const wrap = document.getElementById('monkey-wrap');
+  wrap.innerHTML = '<span style="display:inline-block;font-size:52px;animation:monkey-bounce 0.4s ease-in-out infinite alternate">🐒</span>';
+  // 4 flying monkeys across screen
+  for (let i = 0; i < 10; i++) {
+    setTimeout(()=>{
+      const el = document.createElement('div');
+      const top = 10 + Math.random()*75;
+      const dur = 1.8 + Math.random()*1.4;
+      const size = 28 + Math.random()*16;
+      el.style.cssText = `position:fixed;font-size:${size}px;pointer-events:none;z-index:1001;top:${top}vh;left:-60px;animation:monkey-fly ${dur}s linear forwards`;
+      el.textContent = '🐒';
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(), (dur+0.5)*1000);
+    }, i * 250);
+  }
+}
+
+/* ── FONT SIZE ── */
+const FONT_SIZES = { sm: '13px', md: '16px', lg: '21px' };
+function setFont(size) {
+  document.documentElement.style.fontSize = FONT_SIZES[size];
+  ['sm','md','lg'].forEach(s => {
+    const el = document.getElementById('font-'+s);
+    if (el) el.classList.toggle('active', s===size);
+  });
+  localStorage.setItem('yogaFontSize', size);
+}
+(function(){ const saved = localStorage.getItem('yogaFontSize'); if (saved && FONT_SIZES[saved]) { document.documentElement.style.fontSize = FONT_SIZES[saved]; document.addEventListener('DOMContentLoaded', ()=>setFont(saved)); } })();
+
+render();
+renderVotes();
+
+/* ── VIDEOS FROM GOOGLE SHEETS ── */
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwWvPWlOE49u8tCUzflc-djPAG579QPlJNaU8WIej6TpVGAo_KrZdAdlvOV2ewvynAPXA/exec';
+
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  const rawHeaders = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').replace(/\uFEFF/g, ''));
+  return lines.slice(1).filter(l => l.trim()).map(line => {
+    const vals = [];
+    let cur = '', inQ = false;
+    for (let ch of line) {
+      if (ch === '"') { inQ = !inQ; }
+      else if (ch === ',' && !inQ) { vals.push(cur.trim()); cur = ''; }
+      else { cur += ch; }
+    }
+    vals.push(cur.trim());
+    const obj = {};
+    rawHeaders.forEach((h, i) => obj[h] = (vals[i] || '').replace(/^"|"$/g, '').trim());
+    // Find title from any column containing 'title' (case-insensitive)
+    const titleKey = rawHeaders.find(h => h.toLowerCase().includes('title')) || '';
+    obj._title = obj[titleKey] || '';
+    return obj;
+  }).filter(r => r._title);
+}
+
+function badgeHtml(type) {
+  const t = (type || '').trim();
+  if (!t || t.toLowerCase() === 'free' || t === 'ฟรี' || t === '')
+    return `<span class="free-badge">ฟรี</span>`;
+  if (t.includes('แมลงปอ'))
+    return `<span class="dragonfly-badge">แมลงปอ</span>`;
+  if (t.includes('ผีเสื้อ'))
+    return `<span class="butterfly-badge">ผีเสื้อ</span>`;
+  return `<span class="free-badge">${t}</span>`;
+}
+
+function renderVideos(rows) {
+  const wrap = document.getElementById('video-gallery');
+  if (!rows.length) {
+    wrap.innerHTML = '<p style="color:#bbb;font-size:13px;padding:1rem 0">ยังไม่มีวิดีโอในขณะนี้</p>';
+    return;
+  }
+  wrap.innerHTML = rows.map((r, i) => {
+    const title = r._title || r['Full title'] || r['title'] || '';
+    const sub   = r['description'] || '';
+    const type  = r['ใครดูได้บ้าง (สมาชิกระดับไหน / ฟรี)'] || r['type'] || '';
+    const dur   = r['duration (mins)'] || r['duration'] || '';
+    const url   = r['url'] || '';
+    const level = r['level (ระดับผู้เรียน)'] || '';
+    const date  = r['date'] || '';
+    const rawTags = r['tags'] || '';
+    const tags  = rawTags.split(',').map(t => t.trim()).filter(t => t).map(t => `<span class="tag">${t}</span>`).join('');
+    const levelHtml = level ? `<span class="tag">${level}</span>` : '';
+    const dateHtml  = date  ? `<span style="font-size:10px;font-weight:300;color:#bbb">${date}</span>` : '';
+    const durHtml   = dur   ? `<span style="font-size:11px;color:#999">${dur} นาที</span>` : '';
+    const ytId = getYTId(url);
+    const customThumb = r['Thumbnail'] || r['thumbnail'] || '';
+
+    return `
+    <a href="${url}" target="_blank" rel="noopener"
+       style="display:flex;flex-direction:column;background:#fff;text-decoration:none;color:#0d0d0d;transition:background .1s;border-top:3px solid transparent"
+       class="card"
+       onmouseover="this.style.borderTopColor='#fb2a7b';this.style.background='#fff8fb'"
+       onmouseout="this.style.borderTopColor='transparent';this.style.background='#fff'">
+
+      <div style="position:relative;aspect-ratio:16/9;background:#f0f0f0;overflow:hidden;flex-shrink:0">
+        ${thumbImg(ytId, url, customThumb)}
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.1)">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="20" fill="rgba(251,42,123,.8)"/>
+            <path d="M17 13l11 7-11 7V13z" fill="#fff"/>
+          </svg>
+        </div>
+        <div style="position:absolute;top:8px;right:8px">${badgeHtml(type)}</div>
+      </div>
+
+      <div style="padding:14px 16px;flex:1;display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#bbb">${dateHtml}</div>
+        <div style="font-size:14px;font-weight:600;line-height:1.4;color:#0d0d0d;letter-spacing:-.01em">${title}</div>
+        ${sub ? `<div style="font-size:12px;font-weight:300;color:#777;line-height:1.5">${sub}</div>` : ''}
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:auto;padding-top:6px">
+          ${tags}${levelHtml}${durHtml ? `<span style="font-size:10px;padding:2px 7px;border:0.5px solid #e0e0e0;border-radius:2px;color:#999">${durHtml}</span>` : ''}
+        </div>
+      </div>
+    </a>`;
+  }).join('');
+}
+
+function getYTId(url) {
+  if (!url) return null;
+  const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|v\/))([\w-]{11})/);
+  return m ? m[1] : null;
+}
+
+function thumbSrc(ytId, quality) {
+  return `https://img.youtube.com/vi/${ytId}/${quality}.jpg`;
+}
+
+function thumbImg(ytId, url, customThumb) {
+  if (customThumb) {
+    return `<img src="${customThumb}"
+      style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy"
+      onerror="this.src='https://img.youtube.com/vi/${ytId || ''}/hqdefault.jpg'">`;
+  }
+  if (!ytId) return `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f5f5f5"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="4" fill="#e8e8e8"/><path d="M13 10l10 6-10 6V10z" fill="#ccc"/></svg></div>`;
+  return `<img src="https://img.youtube.com/vi/${ytId}/maxresdefault.jpg"
+    style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy"
+    onerror="var q=['sddefault','hqdefault','mqdefault','default'];var qi=this.dataset.qi?parseInt(this.dataset.qi):0;if(qi<q.length){this.dataset.qi=qi+1;this.src='https://img.youtube.com/vi/${ytId}/'+q[qi]+'.jpg';}else{this.style.display='none';}">`;
+}
+
+function toggleV(i) { document.getElementById('vc' + i).classList.toggle('open'); }
+
+let allVideoRows = [];
+let activeVType = 'all';
+let activeDur = 'all';
+
+
+function setDurFilter(el) {
+  document.querySelectorAll('.dur-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  activeDur = el.dataset.dur;
+  filterVideos();
+}
+function setVFilter(el) {
+  document.querySelectorAll('[data-type]').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  activeVType = el.dataset.type;
+  filterVideos();
+}
+
+function filterVideos() {
+  const q = (document.getElementById('video-search')?.value || '').toLowerCase().trim();
+  const filtered = allVideoRows.filter(r => {
+    const title = (r._title || '').toLowerCase();
+    const desc  = (r['description'] || '').toLowerCase();
+    const tags  = (r['tags'] || '').toLowerCase();
+    const type  = r['ใครดูได้บ้าง (สมาชิกระดับไหน / ฟรี)'] || r['type'] || '';
+    const matchQ = !q || title.includes(q) || desc.includes(q) || tags.includes(q);
+    const matchT = activeVType === 'all' ||
+      (activeVType === 'ฟรี'     && (!type || type.toLowerCase().includes('free') || type.includes('ฟรี'))) ||
+      (activeVType === 'ผีเสื้อ' && type.includes('ผีเสื้อ') && !type.includes('แมลงปอ')) ||
+      (activeVType === 'แมลงปอ'  && type.includes('แมลงปอ'));
+    const durNum = parseFloat((r['duration (mins)'] || r['duration'] || '0').toString().replace(/[^0-9.]/g,'')) || 0;
+    const matchD = activeDur === 'all' || (activeDur === '15' && durNum <= 15) || (activeDur === '30' && durNum <= 30) || (activeDur === '30+' && durNum > 30);
+    return matchQ && matchT && matchD;
+  }).sort(() => Math.random() - 0.5);
+  const total = allVideoRows.length;
+
+  function shuffle3(arr) {
+    const a = [...arr].sort(()=>Math.random()-.5);
+    return a.slice(0,3);
+  }
+  function byType(pool, type) {
+    return pool.filter(r => {
+      const t = r['ใครดูได้บ้าง (สมาชิกระดับไหน / ฟรี)']||r['type']||'';
+      if (type==='ฟรี')     return !t || t.toLowerCase().includes('free') || t.includes('ฟรี');
+      if (type==='ผีเสื้อ') return t.includes('ผีเสื้อ') && !t.includes('แมลงปอ');
+      if (type==='แมลงปอ') return t.includes('แมลงปอ');
+      return true;
+    });
+  }
+
+  let picks, label;
+  if (activeVType === 'all') {
+    const free  = byType(filtered, 'ฟรี');
+    const butt  = byType(filtered, 'ผีเสื้อ');
+    const drag  = byType(filtered, 'แมลงปอ');
+    const f = free.length  ? free[Math.floor(Math.random()*free.length)]   : null;
+    const b = butt.length  ? butt[Math.floor(Math.random()*butt.length)]   : null;
+    const d = drag.length  ? drag[Math.floor(Math.random()*drag.length)]   : null;
+    picks = [f,b,d].filter(Boolean);
+    label = activeDur === 'all' ? 'ตัวอย่างวิดีโอ · ฟรี · ผีเสื้อ · แมลงปอ' : `ตัวอย่างวิดีโอ · ${picks.length} คลิป`;
+  } else {
+    picks = shuffle3(byType(filtered, activeVType));
+    label = `${activeVType} · ${picks.length} คลิป`;
+  }
+
+  document.getElementById('video-count').textContent = label;
+  renderVideos(picks);
+
+  // see all link
+  const existing = document.getElementById('see-all-link');
+  if (existing) existing.remove();
+  const link = document.createElement('div');
+  link.id = 'see-all-link';
+  link.style.cssText = 'text-align:center;padding:1.5rem 0 0';
+  link.innerHTML = `<a href="videos.html" style="font-size:13px;font-weight:500;color:#fb2a7b;text-decoration:none;border-bottom:0.5px solid #fb2a7b;padding-bottom:1px">ดูวิดีโอทั้งหมด ${total} คลิป ↗</a>`;
+  document.getElementById('video-gallery').after(link);
+}
+
+async function loadVideos() {
+  const wrap = document.getElementById('video-gallery');
+  wrap.innerHTML = '<p style="color:#bbb;font-size:13px;padding:1rem 0">กำลังโหลดวิดีโอ...</p>';
+  try {
+    const res = await fetch(SHEET_URL);
+    const text = await res.text();
+    allVideoRows = parseCSV(text);
+    if (!allVideoRows.length) {
+      wrap.innerHTML = '<p style="color:#bbb;font-size:13px;padding:1rem 0">ยังไม่มีวิดีโอในขณะนี้</p>';
+      return;
+    }
+    filterVideos();
+  } catch(e) {
+    wrap.innerHTML = '<p style="color:#bbb;font-size:13px;padding:1rem 0">ไม่สามารถโหลดวิดีโอได้ — <a href="https://youtube.com/yogawithjib" target="_blank" style="color:#fb2a7b">ดูบน YouTube แทน ↗</a></p>';
+  }
+}
+
+
+/* ── QUESTION OF THE DAY ── */
+const QUESTIONS = [
+  'ถ้าตื่นมารวยล้นฟ้า คุณยังอยากจะสอนโยคะอยู่ไหม เพราะอะไร?',
+  'นักเรียนคนไหนที่เปลี่ยนวิธีการสอนของคุณมากที่สุด?',
+  'คุณแยกแยะระหว่าง "สอนโยคะ" กับ "ฝึกโยคะ" ในชีวิตประจำวันได้ไหม?',
+  'ถ้าต้องอธิบายว่าโยคะคืออะไรให้เด็กอายุ 8 ขวบฟัง คุณจะบอกว่าอะไร?',
+  'มีท่าหรือแนวคิดในโยคะที่คุณสอนแต่ยังไม่เชื่อ 100% ไหม?',
+  'ความกลัวที่ใหญ่ที่สุดของคุณในฐานะครูโยคะคืออะไร?',
+  'คุณนิยาม "ความก้าวหน้า" ในโยคะว่าอย่างไร — สำหรับตัวเองและสำหรับนักเรียน?',
+  'มีอะไรที่คุณอยากบอกตัวเองตอนเริ่มสอนปีแรกไหม?',
+  'คุณรู้สึกอย่างไรเมื่อนักเรียนเลิกเรียนกับคุณโดยไม่บอกเหตุผล?',
+  'ถ้าวันนี้เป็นวันสุดท้ายที่คุณสอน คุณอยากให้นักเรียนจำอะไรจากคุณ?',
+  'ร่างกายของครูโยคะต้อง "สมบูรณ์แบบ" ไหม? คุณคิดอย่างไรกับคำถามนี้?',
+  'มีช่วงเวลาในคลาสที่คุณรู้สึกว่า "นั่นแหละคือโยคะ" — มันคือช่วงไหน?',
+  'คุณวัด "ความสำเร็จ" ของคลาสโยคะจากอะไร?',
+  'ถ้าต้องเลือกสอนแค่ท่าเดียวตลอดชีวิต คุณจะเลือกท่าอะไร?',
+  'ลมหายใจสอนอะไรคุณนอกเสื้อกรอบของโยคะบ้าง?',
+  'มีเส้นแบ่งระหว่าง "ครู" กับ "เพื่อน" ในความสัมพันธ์กับนักเรียนไหม?',
+  'คุณดูแล self-practice ของตัวเองเมื่อชีวิตยุ่งมากๆ อย่างไร?',
+  'โยคะเปลี่ยนวิธีที่คุณมองร่างกายตัวเองอย่างไรบ้าง?',
+  'คุณเคยปฏิเสธนักเรียนที่ไม่เหมาะกับสไตล์การสอนของคุณไหม?',
+  'โยคะทำให้คุณเป็นคนที่ดีขึ้นในชีวิตส่วนตัวไหม — หรือบางทีก็ไม่?',
+  'มีสิ่งที่โยคะสอนคุณเกี่ยวกับความเจ็บปวดทางร่างกายและทางใจบ้างไหม?',
+  'ถ้ามีครูโยคะสายอื่นวิจารณ์วิธีสอนของคุณ คุณรู้สึกและตอบสนองอย่างไร?',
+  'คุณเคยรู้สึกว่า "burnout" แล้วกลับมาได้ไหม? อะไรทำให้กลับมา?',
+  'นักเรียนที่คุณภูมิใจที่สุดไม่ใช่คนที่ท่าสวยที่สุด — แล้วคือใคร?',
+  'คุณสอนจากความกลัวหรือจากความรัก? ในวันที่ต่างกันอาจต่างกันไหม?',
+  'ถ้าโยคะถูกพิสูจน์ว่าไม่ได้มีประโยชน์ทางร่างกายเลย คุณยังสอนไหม?',
+  'สิ่งที่คุณไม่เคยบอกนักเรียนแต่อยากบอกที่สุดคืออะไร?',
+];
+
+(function() {
+  const now = new Date();
+  const days = ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+  const months = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+  const dateStr = days[now.getDay()] + ' ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+  document.getElementById('q-date').textContent = dateStr;
+
+  function updateTime() {
+    const n = new Date();
+    const h = String(n.getHours()).padStart(2,'0');
+    const m = String(n.getMinutes()).padStart(2,'0');
+    document.getElementById('q-time').textContent = h + ':' + m;
+  }
+  updateTime();
+  setInterval(updateTime, 30000);
+
+  const seed = now.toDateString().split('').reduce((a,ch) => a + ch.charCodeAt(0), 0);
+  document.getElementById('tip-text').textContent = QUESTIONS[seed % QUESTIONS.length];
+  document.getElementById('tip-bar').style.display = 'flex';
+})();
+
+loadVideos();
 </script>
-<script src="search.js"></script>
-<script src="glossary-tooltip.js"></script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+import { getDatabase, ref, runTransaction, onValue } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB0vsyL3-cMz4ma6HSdHZe3DlvBSam4HoE",
+  authDomain: "yoga-library-2496c.firebaseapp.com",
+  databaseURL: "https://yoga-library-2496c-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "yoga-library-2496c",
+  storageBucket: "yoga-library-2496c.firebasestorage.app",
+  messagingSenderId: "410011266162",
+  appId: "1:410011266162:web:b2bf8c41a01159e86626eb"
+};
+
+const app = initializeApp(firebaseConfig);
+const db  = getDatabase(app);
+const votesRef = ref(db, 'votes');
+
+// Listen for real-time updates
+onValue(votesRef, (snap) => {
+  const data = snap.val() || {};
+  window._fbVotes = data;
+  if (typeof renderVotes === 'function') renderVotes();
+});
+
+// Visit counter
+const visitsRef = ref(db, 'visits');
+runTransaction(visitsRef, (current) => (current || 0) + 1);
+onValue(visitsRef, (snap) => {
+  const el = document.getElementById('visit-count');
+  if (el) el.textContent = (snap.val() || 0).toLocaleString();
+});
+
+// Override castVote to use Firebase
+window.castVoteFirebase = function(id) {
+  const myVote = localStorage.getItem('yogaMyVote');
+  if (myVote) return;
+  localStorage.setItem('yogaMyVote', id);
+  const voteRef = ref(db, 'votes/' + id);
+  runTransaction(voteRef, (current) => (current || 0) + 1);
+};
+</script>
+
+<div class="font-ctrl">
+  <button class="font-btn active" id="font-sm" onclick="setFont('sm')" style="font-size:11px">A</button>
+  <button class="font-btn" id="font-md" onclick="setFont('md')" style="font-size:14px">A</button>
+  <button class="font-btn" id="font-lg" onclick="setFont('lg')" style="font-size:18px">A</button>
+</div>
 </body>
 </html>
