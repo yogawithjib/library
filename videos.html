@@ -102,10 +102,10 @@ footer a{color:#fb2a7b;text-decoration:none;font-weight:500}
     <button class="vf-btn"        data-type="แมลงปอ"  onclick="setVFilter(this)">แมลงปอ</button>
       </div>
       <div style="display:flex;gap:5px;flex-wrap:wrap">
-        <button class="dur-btn active" data-dur="all"  onclick="setDurFilter(this)">ทุกความยาว</button>
-        <button class="dur-btn"        data-dur="15"   onclick="setDurFilter(this)">≤15 นาที</button>
-        <button class="dur-btn"        data-dur="30"   onclick="setDurFilter(this)">≤30 นาที</button>
-        <button class="dur-btn"        data-dur="30+"  onclick="setDurFilter(this)">30+ นาที</button>
+        <button class="dur-btn active" data-dur="all"       onclick="setDurFilter(this)">ทุกระดับ</button>
+        <button class="dur-btn"        data-dur="พื้นฐาน"  onclick="setDurFilter(this)">พื้นฐาน 🌱</button>
+        <button class="dur-btn"        data-dur="ระดับรวม" onclick="setDurFilter(this)">ระดับรวม 🌱🌳</button>
+        <button class="dur-btn"        data-dur="ท่ายาก"   onclick="setDurFilter(this)">ท่ายาก 🌳</button>
   </div>
 </div>
 
@@ -193,8 +193,8 @@ function filterVideos() {
       (activeVType === 'ฟรี'     && (!type || type.toLowerCase().includes('free') || type.includes('ฟรี'))) ||
       (activeVType === 'ผีเสื้อ' && type.includes('ผีเสื้อ') && !type.includes('แมลงปอ')) ||
       (activeVType === 'แมลงปอ'  && type.includes('แมลงปอ'));
-    const durNum = parseFloat((r['duration (mins)'] || r['duration'] || '0').toString().replace(/[^0-9.]/g,'')) || 0;
-    const matchD = activeDur === 'all' || (activeDur === '15' && durNum <= 15) || (activeDur === '30' && durNum <= 30) || (activeDur === '30+' && durNum > 30);
+    const levelVal = (r['level (ระดับผู้เรียน)'] || '').trim();
+    const matchD = activeDur === 'all' || levelVal.includes(activeDur);
     return matchQ && matchT && matchD;
   }).sort(() => Math.random() - 0.5);
 
