@@ -779,7 +779,7 @@ function thumbImg(ytId, url, customThumb) {
   if (!ytId) return `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f5f5f5"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="4" fill="#e8e8e8"/><path d="M13 10l10 6-10 6V10z" fill="#ccc"/></svg></div>`;
   return `<img src="https://img.youtube.com/vi/${ytId}/maxresdefault.jpg"
     style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy"
-    onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${ytId}/hqdefault.jpg'">`;
+    onerror="this.onerror=null;var emojis=['🌸','🌺','🌷','💗','🌹','🩷','🌻','✨','🦋','🌸'];var e=emojis[Math.floor(Math.random()*emojis.length)];var d=document.createElement('div');d.style.cssText='width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;background:#fff8fb';d.textContent=e;this.parentElement.replaceChild(d,this);">`;
 }
 
 function toggleV(i) { document.getElementById('vc' + i).classList.toggle('open'); }

@@ -157,7 +157,7 @@ function thumbImg(ytId, customThumb) {
   if (customThumb) return `<img src="${customThumb}" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy" onerror="this.src='https://img.youtube.com/vi/${ytId||''}/hqdefault.jpg'">`;
   if (!ytId) return '';
   return `<img src="https://img.youtube.com/vi/${ytId}/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy"
-    onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${ytId}/hqdefault.jpg'">`;
+    onerror="this.onerror=null;var emojis=['🌸','🌺','🌷','💗','🌹','🩷','🌻','✨','🦋','🌸'];var e=emojis[Math.floor(Math.random()*emojis.length)];var d=document.createElement('div');d.style.cssText='width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;background:#fff8fb';d.textContent=e;this.parentElement.replaceChild(d,this);">`;
 }
 
 function badgeHtml(type) {
