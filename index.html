@@ -211,14 +211,8 @@ footer a:hover{text-decoration:underline}
 
 <header>
   <div class="header-inner">
-    <div>
-      <div class="site-label">Yoga Teacher Resource Library | คลังความรู้สำหรับครูโยคะ</div>
-      <div class="site-title">Curated by teachers, for teachers.</div>
-      <div class="pink-bar"><span class="bar-long"></span><span class="bar-short"></span></div>
-    </div>
     <div class="site-meta">
-      <span class="brand-name" id="brand-name" onclick="easterEgg()" style="cursor:default;user-select:none">Yoga with Jib</span>
-      The Community | พื้นที่แลกเปลี่ยนของคนสอนโยคะ<br>
+      <span class="brand-name" id="brand-name" onclick="easterEgg()" style="cursor:default;user-select:none">Yoga with Jib</span><br>
       <a href="https://youtube.com/yogawithjib" target="_blank">youtube.com/yogawithjib ↗</a>
     </div>
   </div>
@@ -226,8 +220,8 @@ footer a:hover{text-decoration:underline}
 
 <div class="intro-banner">
   <div class="intro-inner">
-    <div class="intro-eyebrow">รวมทุกอย่างที่ครูโยคะต้องมี ไว้ในที่เดียว</div>
-    <h2 class="intro-heading">Community ความรู้ของครูโยคะ</h2>
+    <div class="intro-eyebrow">พื้นที่แลกเปลี่ยนของคนสอนโยคะ</div>
+    <h2 class="intro-heading">Yoga Teacher Community</h2>
     <p class="intro-body">
       แหล่งรวมข้อมูลออนไลน์เพื่อคนที่รักการสอนโยคะ เราเชื่อว่าความรู้และประสบการณ์ที่แต่ละคนสะสมมานั้นมีคุณค่ามาก และควรได้รับการแบ่งปัน ไม่ว่าจะเป็นเรื่องการฝึก การสอน การเงิน การจัดการสตูดิโอ หรือชีวิตของครูโยคะในแบบที่ไม่มีใครพูดถึง
     </p>
@@ -785,7 +779,7 @@ function thumbImg(ytId, url, customThumb) {
   if (!ytId) return `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f5f5f5"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="4" fill="#e8e8e8"/><path d="M13 10l10 6-10 6V10z" fill="#ccc"/></svg></div>`;
   return `<img src="https://img.youtube.com/vi/${ytId}/maxresdefault.jpg"
     style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy"
-    onerror="var q=['sddefault','hqdefault','mqdefault','default'];var qi=this.dataset.qi?parseInt(this.dataset.qi):0;if(qi<q.length){this.dataset.qi=qi+1;this.src='https://img.youtube.com/vi/${ytId}/'+q[qi]+'.jpg';}else{this.style.display='none';}">`;
+    onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${ytId}/hqdefault.jpg'">`;
 }
 
 function toggleV(i) { document.getElementById('vc' + i).classList.toggle('open'); }
