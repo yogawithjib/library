@@ -86,7 +86,10 @@ footer a{color:#fb2a7b;text-decoration:none;font-weight:500}
     </div>
     <div class="site-meta">
       <span class="brand-name">Yoga with Jib</span>
-      <a href="https://youtube.com/yogawithjib" target="_blank">youtube.com/yogawithjib ↗</a>
+      <a href="https://youtube.com/yogawithjib" target="_blank">youtube.com/yogawithjib ↗</a><br>
+      <a href="https://www.youtube.com/@YogawithJib/join" target="_blank" rel="noopener"
+         style="display:inline-block;margin-top:6px;padding:6px 14px;font-size:11px;font-weight:600;background:#fb2a7b;color:#fff;text-decoration:none;border-radius:2px;letter-spacing:.03em;transition:background .12s"
+         onmouseover="this.style.background='#d4206a'" onmouseout="this.style.background='#fb2a7b'">สมัครสมาชิก ↗</a>
     </div>
   </div>
 </header>
@@ -170,6 +173,11 @@ function badgeHtml(type) {
   return `<span class="free-badge">${t}</span>`;
 }
 
+
+function filterByTag(tag) {
+  const input = document.getElementById('video-search') || document.getElementById('search');
+  if (input) { input.value = tag; input.dispatchEvent(new Event('input')); input.scrollIntoView({behavior:'smooth',block:'center'}); }
+}
 function setDurFilter(el) {
   document.querySelectorAll('.dur-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
@@ -198,7 +206,7 @@ function filterVideos() {
     const levelVal = (r['level (ระดับผู้เรียน)'] || '').trim();
     const matchD = activeDur === 'all' || levelVal.includes(activeDur);
     return matchQ && matchT && matchD;
-  }).sort(() => Math.random() - 0.5);
+  }).sort((a, b) => new Date(b['date']||0) - new Date(a['date']||0));
 
   document.getElementById('video-count').textContent = filtered.length + ' วิดีโอ';
   const wrap = document.getElementById('video-gallery');
@@ -216,7 +224,7 @@ function filterVideos() {
     const rawTags = r['tags'] || '';
     const customThumb = r['Thumbnail'] || r['thumbnail'] || '';
     const ytId   = getYTId(url);
-    const tags   = rawTags.split(',').map(t => t.trim()).filter(t => t).map(t => `<span class="tag">${t}</span>`).join('');
+    const tags   = rawTags.split(',').map(t => t.trim()).filter(t => t).map(t => `<span class="tag" style="cursor:pointer" onclick="filterByTag('${t.replace(/'/g,'\\'')}')">  ${t}</span>`).join('');
     const levelHtml = level ? `<span class="tag">${level}</span>` : '';
     const durHtml   = dur   ? `<span class="dur-tag">${dur} นาที</span>` : '';
     return `<a href="${url}" target="_blank" rel="noopener" class="vcard">

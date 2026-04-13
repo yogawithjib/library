@@ -213,7 +213,10 @@ footer a:hover{text-decoration:underline}
   <div class="header-inner">
     <div class="site-meta">
       <span class="brand-name" id="brand-name" onclick="easterEgg()" style="cursor:default;user-select:none">Yoga with Jib</span><br>
-      <a href="https://youtube.com/yogawithjib" target="_blank">youtube.com/yogawithjib ↗</a>
+      <a href="https://youtube.com/yogawithjib" target="_blank">youtube.com/yogawithjib ↗</a><br>
+      <a href="https://www.youtube.com/@YogawithJib/join" target="_blank" rel="noopener"
+         style="display:inline-block;margin-top:6px;padding:6px 14px;font-size:11px;font-weight:600;background:#fb2a7b;color:#fff;text-decoration:none;border-radius:2px;letter-spacing:.03em;transition:background .12s"
+         onmouseover="this.style.background='#d4206a'" onmouseout="this.style.background='#fb2a7b'">สมัครสมาชิก ↗</a>
     </div>
   </div>
 </header>
@@ -789,6 +792,11 @@ let activeVType = 'all';
 let activeDur = 'all';
 
 
+
+function filterByTag(tag) {
+  const input = document.getElementById('video-search') || document.getElementById('search');
+  if (input) { input.value = tag; input.dispatchEvent(new Event('input')); input.scrollIntoView({behavior:'smooth',block:'center'}); }
+}
 function setDurFilter(el) {
   document.querySelectorAll('.dur-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
