@@ -142,6 +142,11 @@ footer a{color:#fb2a7b;text-decoration:none;font-weight:500}
         <button class="dur-btn"        data-dur="ระดับรวม" onclick="setDurFilter(this)">ระดับรวม 🌱🌳</button>
         <button class="dur-btn"        data-dur="ท่ายาก"   onclick="setDurFilter(this)">ท่ายาก 🌳</button>
   </div>
+  <div class="time-filter-wrap">
+    <div class="time-label">⏱️ ฉันมีเวลา <span id="time-val">ทุกความยาว</span></div>
+    <input type="range" class="time-slider" id="time-slider" min="0" max="65" step="5" value="0"
+      oninput="activeTime=parseInt(this.value);document.getElementById('time-val').textContent=activeTime===0?'ทุกความยาว':activeTime>=65?'60+ นาที':activeTime+' นาที';filterVideos()">
+  </div>
 </div>
 
 <main>
@@ -161,6 +166,7 @@ const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwWvPWlOE49u8tCUzflc-
 let allVideoRows = [];
 let activeVType = 'all';
 let activeDur = 'all';
+let activeTime = 0;
 
 let activeTime = 0;
 function updateTimeSlider(val) {
@@ -248,7 +254,7 @@ function filterVideos() {
     const levelVal = (r['level (ระดับผู้เรียน)'] || '').trim();
     const matchD = activeDur === 'all' || levelVal.includes(activeDur);
     const durNum = parseFloat((r['duration (mins)'] || r['duration'] || '0').toString().replace(/[^0-9.]/g,'')) || 0;
-    const matchTime = activeTime === 0 || durNum <= activeTime;
+    const matchTime = activeTime === 0 || activeTime >= 65 || durNum <= activeTime;
     return matchQ && matchT && matchD && matchTime;
   }).sort((a, b) => new Date(b['date']||0) - new Date(a['date']||0));
 
@@ -290,7 +296,7 @@ function filterVideos() {
         <div class="vcard-title">${title}</div>
         ${sub ? `<div class="vcard-sub">${sub}</div>` : ''}
         <div class="vcard-tags">${tags}${levelHtml}${durHtml}</div>
-        <div style="font-size:10px;font-weight:500;color:#fb2a7b;margin-top:6px;cursor:pointer" onclick="event.preventDefault();toggleRelated(${idx},'${rawTags.replace(/'/g,"\'")}')">วิดีโอที่คล้ายกัน ↓</div>
+        <div style="font-size:10px;font-weight:500;color:#fb2a7b;margin-top:6px;cursor:pointer" onclick="event.preventDefault();toggleRelated(${idx},'${rawTags.replace(/'/g,\"\'\")}',' ${url.replace(/'/g,\"\'\")}'  )">วิดีโอที่คล้ายกัน ↓</div>
       </div>
       </a>
       <div class="related-wrap" id="related-${idx}" style="display:none"></div>
@@ -298,17 +304,20 @@ function filterVideos() {
   }).join('');
 }
 
-function toggleRelated(idx, rawTags) {
+function toggleRelated(idx, rawTags, ownUrl) {
   const wrap = document.getElementById('related-'+idx);
   if (wrap.style.display !== 'none') { wrap.style.display='none'; return; }
   const tags = rawTags.split(',').map(t=>t.trim().toLowerCase()).filter(t=>t);
   if (!tags.length) return;
+  const seen = new Set();
   const related = allVideoRows.filter(r => {
-    const rt = (r._title||'');
-    const rtags = (r['tags']||'').toLowerCase();
     const rurl = r['url']||'';
-    const sameUrl = rurl === (allVideoRows[idx]||{})['url'];
-    return !sameUrl && tags.some(t => rtags.includes(t));
+    if (rurl === ownUrl) return false;
+    if (seen.has(rurl)) return false;
+    const rtags = (r['tags']||'').toLowerCase();
+    if (!tags.some(t => rtags.includes(t))) return false;
+    seen.add(rurl);
+    return true;
   }).slice(0, 4);
   if (!related.length) { wrap.innerHTML='<div class="related-label">ไม่พบวิดีโอที่คล้ายกัน</div>'; wrap.style.display='block'; return; }
   wrap.innerHTML = `<div class="related-label">วิดีโอในธีมเดียวกัน</div><div class="related-grid">`+related.map(r => {
