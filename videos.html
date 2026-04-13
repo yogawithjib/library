@@ -163,8 +163,10 @@ function thumbImg(ytId, customThumb) {
 function badgeHtml(type) {
   const t = (type||'').trim();
   if (!t || t.toLowerCase().includes('free') || t.includes('ฟรี')) return `<span class="free-badge">ฟรี</span>`;
-  if (t.includes('แมลงปอ')) return `<span class="dragonfly-badge">แมลงปอ</span>`;
-  if (t.includes('ผีเสื้อ')) return `<span class="butterfly-badge">ผีเสื้อ</span>`;
+  let badges = '';
+  if (t.includes('แมลงปอ')) badges += `<span class="dragonfly-badge">แมลงปอ</span>`;
+  if (t.includes('ผีเสื้อ')) badges += `<span class="butterfly-badge">ผีเสื้อ</span>`;
+  if (badges) return badges;
   return `<span class="free-badge">${t}</span>`;
 }
 
