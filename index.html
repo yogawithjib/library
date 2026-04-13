@@ -206,13 +206,6 @@ footer a:hover{text-decoration:underline}
 .font-btn.active{color:#fb2a7b}
 
 
-.time-filter-wrap{padding:10px 0 4px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.time-label{font-size:12px;font-weight:300;color:#888;white-space:nowrap;flex-shrink:0}
-.time-label span{font-weight:600;color:#0d0d0d}
-.time-slider{flex:1;min-width:120px;accent-color:#fb2a7b;cursor:pointer}
-.time-find-btn{padding:6px 16px;font-size:12px;font-weight:600;font-family:'IBM Plex Sans Thai',sans-serif;border:1.5px solid #0d0d0d;border-radius:2px;cursor:pointer;background:#0d0d0d;color:#fff;transition:all .12s;white-space:nowrap}
-.time-find-btn:hover{background:#333}
-
 </style>
 </head>
 <body>
@@ -312,12 +305,7 @@ footer a:hover{text-decoration:underline}
         <button class="dur-btn"        data-dur="พื้นฐาน"  onclick="setDurFilter(this)">พื้นฐาน 🌱</button>
         <button class="dur-btn"        data-dur="ระดับรวม" onclick="setDurFilter(this)">ระดับรวม 🌱🌳</button>
         <button class="dur-btn"        data-dur="ท่ายาก"   onclick="setDurFilter(this)">ท่ายาก 🌳</button>
-      </div>
-      <div class="time-filter-wrap">
-        <div class="time-label">ฉันมีเวลา <span id="time-val">ทุกความยาว</span></div>
-        <input type="range" class="time-slider" id="time-slider" min="0" max="60" step="5" value="0" oninput="updateTimeSlider(this.value)">
-        <button class="time-find-btn" onclick="applyTimeFilter()">หาคลิป</button>
-      </div>
+
       </div>
     </div>
 
@@ -805,15 +793,6 @@ let allVideoRows = [];
 let activeVType = 'all';
 let activeDur = 'all';
 
-let activeTime = 0;
-function updateTimeSlider(val) {
-  activeTime = parseInt(val);
-  document.getElementById('time-val').textContent = activeTime === 0 ? 'ทุกความยาว' : activeTime + ' นาที';
-}
-function applyTimeFilter() {
-  filterVideos();
-}
-
 
 
 
@@ -852,9 +831,8 @@ function filterVideos() {
       (activeVType === 'แมลงปอ'  && type.includes('แมลงปอ'));
     const levelVal = (r['level (ระดับผู้เรียน)'] || '').trim();
     const matchD = activeDur === 'all' || levelVal.includes(activeDur);
-    const durNum = parseFloat((r['duration (mins)'] || r['duration'] || '0').toString().replace(/[^0-9.]/g,'')) || 0;
-    const matchTime = activeTime === 0 || durNum <= activeTime;
-    return matchQ && matchT && matchD && matchTime;
+
+    return matchQ && matchT && matchD;
   }).sort(() => Math.random() - 0.5);
   const total = allVideoRows.length;
 
