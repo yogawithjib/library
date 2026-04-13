@@ -55,8 +55,28 @@ main{max-width:1100px;margin:0 auto;padding:1.25rem 1.5rem 4rem}
 .vcard-thumb{position:relative;aspect-ratio:16/9;background:#f0f0f0;overflow:hidden;flex-shrink:0;cursor:pointer}
 .vcard-thumb img{transition:transform .3s ease}
 .vcard-thumb:hover img{transform:scale(1.05)}
-.vcard-thumb .dur-overlay{position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,.65);color:#fff;font-size:10px;font-weight:600;padding:2px 7px;border-radius:2px;opacity:0;transition:opacity .2s;pointer-events:none}
-.vcard-thumb:hover .dur-overlay{opacity:1}
+.vcard-thumb .related-wrap{grid-column:1/-1;background:#fff8fb;border-top:1.5px solid #fb2a7b;padding:14px 16px}
+.related-label{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#fb2a7b;margin-bottom:10px}
+.related-grid{display:flex;gap:10px;flex-wrap:wrap}
+.related-card{display:flex;gap:8px;align-items:center;border:0.5px solid #e0e0e0;border-radius:2px;padding:6px 10px;text-decoration:none;color:#0d0d0d;background:#fff;transition:all .12s;max-width:280px}
+.related-card:hover{border-color:#fb2a7b;background:#fff8fb}
+.related-thumb{width:48px;height:36px;background:#f5f0e8;border-radius:1px;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px}
+.related-thumb img{width:100%;height:100%;object-fit:cover}
+.related-info{}
+.related-title{font-size:11px;font-weight:600;color:#0d0d0d;line-height:1.35;margin-bottom:2px}
+.related-meta{font-size:10px;color:#bbb}
+.dur-overlay{position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,.65);color:#fff;font-size:10px;font-weight:600;padding:2px 7px;border-radius:2px;opacity:0;transition:opacity .2s;pointer-events:none}
+.vcard-thumb:hover .related-wrap{grid-column:1/-1;background:#fff8fb;border-top:1.5px solid #fb2a7b;padding:14px 16px}
+.related-label{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#fb2a7b;margin-bottom:10px}
+.related-grid{display:flex;gap:10px;flex-wrap:wrap}
+.related-card{display:flex;gap:8px;align-items:center;border:0.5px solid #e0e0e0;border-radius:2px;padding:6px 10px;text-decoration:none;color:#0d0d0d;background:#fff;transition:all .12s;max-width:280px}
+.related-card:hover{border-color:#fb2a7b;background:#fff8fb}
+.related-thumb{width:48px;height:36px;background:#f5f0e8;border-radius:1px;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px}
+.related-thumb img{width:100%;height:100%;object-fit:cover}
+.related-info{}
+.related-title{font-size:11px;font-weight:600;color:#0d0d0d;line-height:1.35;margin-bottom:2px}
+.related-meta{font-size:10px;color:#bbb}
+.dur-overlay{opacity:1}
 .vcard-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .vcard-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.1)}
 .vcard-badge{position:absolute;top:8px;right:8px}
@@ -231,7 +251,9 @@ function filterVideos() {
     const tags   = rawTags.split(',').map(t => t.trim()).filter(t => t).map(t => `<span class="tag" style="cursor:pointer" onclick="filterByTag('${t.replace(/'/g,"\\'")}')">${t}</span>`).join('');
     const levelHtml = level ? `<span class="tag">${level}</span>` : '';
     const durHtml   = dur   ? `<span class="dur-tag">${dur} นาที</span>` : '';
-    return `<a href="${url}" target="_blank" rel="noopener" class="vcard">
+    const idx = filtered.indexOf(r);
+    return `<div class="vcard" id="vcard-${idx}">
+      <a href="${url}" target="_blank" rel="noopener" style="display:contents;text-decoration:none;color:inherit">
       <div class="vcard-thumb">
         ${thumbImg(ytId, customThumb)}
         <div class="vcard-play">
@@ -240,6 +262,7 @@ function filterVideos() {
             <path d="M17 13l11 7-11 7V13z" fill="#fff"/>
           </svg>
         </div>
+        ${dur ? `<div class="dur-overlay">${dur} นาที</div>` : ""}
         <div class="vcard-badge">${badgeHtml(type)}</div>
       </div>
       <div class="vcard-body">
@@ -247,9 +270,38 @@ function filterVideos() {
         <div class="vcard-title">${title}</div>
         ${sub ? `<div class="vcard-sub">${sub}</div>` : ''}
         <div class="vcard-tags">${tags}${levelHtml}${durHtml}</div>
+        <div style="font-size:10px;font-weight:500;color:#fb2a7b;margin-top:6px;cursor:pointer" onclick="event.preventDefault();toggleRelated(${idx},'${rawTags.replace(/'/g,"\'")}')">วิดีโอที่คล้ายกัน ↓</div>
       </div>
-    </a>`;
+      </a>
+      <div class="related-wrap" id="related-${idx}" style="display:none"></div>
+    </div>`;
   }).join('');
+}
+
+function toggleRelated(idx, rawTags) {
+  const wrap = document.getElementById('related-'+idx);
+  if (wrap.style.display !== 'none') { wrap.style.display='none'; return; }
+  const tags = rawTags.split(',').map(t=>t.trim().toLowerCase()).filter(t=>t);
+  if (!tags.length) return;
+  const related = allVideoRows.filter(r => {
+    const rt = (r._title||'');
+    const rtags = (r['tags']||'').toLowerCase();
+    const rurl = r['url']||'';
+    const sameUrl = rurl === (allVideoRows[idx]||{})['url'];
+    return !sameUrl && tags.some(t => rtags.includes(t));
+  }).slice(0, 4);
+  if (!related.length) { wrap.innerHTML='<div class="related-label">ไม่พบวิดีโอที่คล้ายกัน</div>'; wrap.style.display='block'; return; }
+  wrap.innerHTML = `<div class="related-label">วิดีโอในธีมเดียวกัน</div><div class="related-grid">`+related.map(r => {
+    const rurl = r['url']||''; const rtitle = r._title||''; const rdur = r['duration (mins)']||'';
+    const rtype = r['ใครดูได้บ้าง (สมาชิกระดับไหน / ฟรี)']||''; const rthumb = r['Thumbnail']||r['thumbnail']||'';
+    const rytId = getYTId(rurl);
+    const thumbSrc = rthumb || (rytId ? `https://img.youtube.com/vi/${rytId}/hqdefault.jpg` : '');
+    return `<a class="related-card" href="${rurl}" target="_blank" rel="noopener">
+      <div class="related-thumb">${thumbSrc ? `<img src="${thumbSrc}" onerror="this.onerror=null;this.parentElement.innerHTML='🌸'">` : '🌸'}</div>
+      <div class="related-info"><div class="related-title">${rtitle}</div><div class="related-meta">${rdur ? rdur+' นาที · ':''} ${rtype||'ฟรี'}</div></div>
+    </a>`;
+  }).join('')+'</div>';
+  wrap.style.display='block';
 }
 
 async function loadVideos() {
