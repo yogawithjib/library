@@ -212,7 +212,7 @@ function filterVideos() {
     const matchQ = !q || title.includes(q) || desc.includes(q) || tags.includes(q);
     const matchT = activeVType === 'all' ||
       (activeVType === 'ฟรี'     && (!type || type.toLowerCase().includes('free') || type.includes('ฟรี'))) ||
-      (activeVType === 'ผีเสื้อ' && type.includes('ผีเสื้อ') && !type.includes('แมลงปอ')) ||
+      (activeVType === 'ผีเสื้อ' && type.includes('ผีเสื้อ')) ||
       (activeVType === 'แมลงปอ'  && type.includes('แมลงปอ'));
     const levelVal = (r['level (ระดับผู้เรียน)'] || '').trim();
     const matchD = activeDur === 'all' || levelVal.includes(activeDur);
