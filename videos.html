@@ -52,7 +52,11 @@ main{max-width:1100px;margin:0 auto;padding:1.25rem 1.5rem 4rem}
 /* video card */
 .vcard{display:flex;flex-direction:column;background:#fff;text-decoration:none;color:#0d0d0d;transition:background .1s;border-top:3px solid transparent}
 .vcard:hover{border-top-color:#fb2a7b;background:#fff8fb}
-.vcard-thumb{position:relative;aspect-ratio:16/9;background:#f0f0f0;overflow:hidden;flex-shrink:0}
+.vcard-thumb{position:relative;aspect-ratio:16/9;background:#f0f0f0;overflow:hidden;flex-shrink:0;cursor:pointer}
+.vcard-thumb img{transition:transform .3s ease}
+.vcard-thumb:hover img{transform:scale(1.05)}
+.vcard-thumb .dur-overlay{position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,.65);color:#fff;font-size:10px;font-weight:600;padding:2px 7px;border-radius:2px;opacity:0;transition:opacity .2s;pointer-events:none}
+.vcard-thumb:hover .dur-overlay{opacity:1}
 .vcard-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .vcard-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.1)}
 .vcard-badge{position:absolute;top:8px;right:8px}
@@ -224,7 +228,7 @@ function filterVideos() {
     const rawTags = r['tags'] || '';
     const customThumb = r['Thumbnail'] || r['thumbnail'] || '';
     const ytId   = getYTId(url);
-    const tags   = rawTags.split(',').map(t => t.trim()).filter(t => t).map(t => `<span class="tag" style="cursor:pointer" onclick="filterByTag('${t.replace(/'/g,'\\'')}')">  ${t}</span>`).join('');
+    const tags   = rawTags.split(',').map(t => t.trim()).filter(t => t).map(t => `<span class="tag" style="cursor:pointer" onclick="filterByTag('${t.replace(/'/g,"\\'")}')">${t}</span>`).join('');
     const levelHtml = level ? `<span class="tag">${level}</span>` : '';
     const durHtml   = dur   ? `<span class="dur-tag">${dur} นาที</span>` : '';
     return `<a href="${url}" target="_blank" rel="noopener" class="vcard">
